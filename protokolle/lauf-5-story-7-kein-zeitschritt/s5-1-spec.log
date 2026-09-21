@@ -1,0 +1,27 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich prüfe kurz die vorhandenen Specs, damit `specs/5-.../spec.md` im gleichen Stil und mit denselben Regel-Formulierungen landet.
+→ Read specs/4-getraenke-kosten-geld/spec.md
+✱ Glob "specs/*/spec.md" 4 matches
+Ich gleiche die Formulierungen noch an den vorhandenen Specs ab, damit die neue Story dieselbe knappe EARS-Form hat.
+→ Read specs/1-alles-umsonst/spec.md
+→ Read specs/3-guthaben-anzeigen/spec.md
+→ Read specs/2-preis-anzeigen/spec.md
+Ich lege jetzt `specs/5-wechselgeld/spec.md` an und halte mich strikt an die drei geforderten Abschnitte.
+% Patch 1 file
+Ich prüfe kurz den neuen Text auf korrekte Zeichencodierung und Formulierung, bevor ich antworte.
+✗ Read specs/5-wechselgeld/spec.md failed
+Error: Cannot read binary file: /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-5/specs/5-wechselgeld/spec.md
+Die erste Datei ist durch fehlerhafte Zeichenkodierung kaputt geraten. Ich ersetze sie jetzt sauber mit normalem UTF-8-Text.
+% Patch 1 file
+% Patch 1 file
+Ich überschreibe den Inhalt noch einmal ohne Escape-Sequenzen, damit die Datei wieder als Text lesbar ist.
+% Patch 1 file
+→ Read specs/5-wechselgeld/spec.md
+`specs/5-wechselgeld/spec.md`
+
+Regeln:
+- WHEN der Kunde Abbruch drückt, SHALL der Automat das gesamte Guthaben als Münzen in die Münzrückgabe legen.
+- WHEN der Kunde Abbruch drückt, SHALL der Automat das Guthaben als 0,00 € anzeigen.
+- WHEN die Münzrückgabe geleert wird, SHALL der Automat die Münzrückgabe leeren.

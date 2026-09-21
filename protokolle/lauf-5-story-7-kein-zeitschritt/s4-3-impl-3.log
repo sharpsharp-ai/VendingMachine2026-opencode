@@ -1,0 +1,29 @@
+### Runde 1 von 5: /implementiere Restguthaben bleibt nach dem Kauf erhalten
+[0m
+> implementierer · gpt-5.4-mini
+[0m
+Ich prüfe zuerst, ob das Szenario بالفعل schon grün ist, und wenn nicht, ergänze nur die kleinste fehlende Regel mit einem Unit-Test.
+[0m# [0mTodos
+[•] Szenario "Restguthaben bleibt nach dem Kauf erhalten" prüfen
+[ ] Kleinsten roten Unit-Test in VendingMachineTest hinzufügen
+[ ] Minimalen Produktionscode anpassen
+[ ] mvn -q verify ausführen und Ergebnis prüfen
+[0m
+[0m$ [0mmvn -q test -Dtest=RunCucumberTest -D"cucumber.filter.name=Restguthaben bleibt nach dem Kauf erhalten"
+Szenario: Restguthaben bleibt nach dem Kauf erhalten # classpath:features/getraenke_kosten_geld.feature:18
+  ✔ Angenommen der Automat ist frisch gestartet      # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich habe 2 € eingeworfen                     # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveInsertedCoin(int)
+  ✔ Wenn ich Cola wähle                              # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann ist das Guthaben 1,00 €                     # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+[0m
+Das Szenario ist schon grün; ich ändere nichts und mache deshalb keinen weiteren Eingriff.
+[0m# [0mTodos
+[✓] Szenario "Restguthaben bleibt nach dem Kauf erhalten" prüfen
+[ ] Kleinsten roten Unit-Test in VendingMachineTest hinzufügen
+[ ] Minimalen Produktionscode anpassen
+[ ] mvn -q verify ausführen und Ergebnis prüfen
+[0m
+Geändert: keine Dateien
+`mvn -q verify`: nicht ausgeführt; das Szenario `Restguthaben bleibt nach dem Kauf erhalten` ist bereits grün
+Offen: nichts
+### Grün nach Runde 1.

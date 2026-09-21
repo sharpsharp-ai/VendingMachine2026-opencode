@@ -1,0 +1,6 @@
+OK   ohne Guthaben: Zu wenig Geld
+OK   mit 2 €: Cola fällt, Rest 1,00 €
+OK   Bier kostet 2,00 €
+OK   Bier mit 1 €: Zu wenig Geld
+OK   Bier mit 2 €: fällt
+RESULT OK

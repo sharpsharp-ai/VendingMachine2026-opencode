@@ -1,0 +1,17 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich schaue mir kurz die vorhandenen Spezifikationen an, damit die neue Datei denselben Stil und die gleiche Struktur hat.
+→ Read specs/6-bier-kostet-mehr/spec.md
+→ Read specs/5-wechselgeld/spec.md
+✱ Glob "specs/*/spec.md" 6 matches
+Ich lege jetzt die neue Spec an und halte sie knapp auf die drei geforderten Abschnitte beschränkt.
+% Patch 1 file
+Die Datei ist angelegt; ich prüfe kurz den Inhalt, damit ich dir nur die fertige Spec zurückgebe.
+→ Read specs/7-kein-bier-vor-4/spec.md
+`specs/7-kein-bier-vor-4/spec.md`
+
+Regeln:
+- `WHILE es vor 16:00 Uhr ist, WHEN Bier gewählt wird, SHALL der Automat keine Dose ausgeben, "Kein Bier vor 4" melden und es laut sagen.`
+- `WHILE es 16:00 Uhr oder später ist, WHEN Bier gewählt wird, SHALL der Automat eine Dose Bier ausgeben.`
+- `WHILE es vor 16:00 Uhr ist, WHEN Bier gewählt wird, SHALL der Automat das Guthaben unverändert lassen.`

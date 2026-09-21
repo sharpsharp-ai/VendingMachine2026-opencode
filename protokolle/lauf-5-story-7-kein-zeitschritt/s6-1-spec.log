@@ -1,0 +1,22 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich prüfe kurz den Stil der vorhandenen Spezifikationen und lege dann `specs/6-.../spec.md` passend dazu an.
+✱ Glob "specs/1-*/spec.md" 1 match
+✱ Glob "specs/3-*/spec.md" 1 match
+✱ Glob "specs/2-*/spec.md" 1 match
+✱ Glob "specs/4-*/spec.md" 1 match
+✱ Glob "specs/5-*/spec.md" 1 match
+Ich schaue mir zwei bestehende Specs an, damit die neue Datei exakt zum bisherigen Format passt.
+→ Read specs/4-getraenke-kosten-geld/spec.md
+→ Read specs/5-wechselgeld/spec.md
+Die neue Spec wird im gleichen knappen Format aufgebaut: Story, drei Regeln, offene Fragen. Ich lege sie jetzt an.
+✱ Glob "specs/6-*/" in . · 0 matches
+✱ Glob "specs/6-*/spec.md" in . · 0 matches
+% Patch 1 file
+Die Spec ist angelegt. Ich prüfe kurz den Inhalt gegen das geforderte Format.
+→ Read specs/6-bier-kostet-mehr/spec.md
+`specs/6-bier-kostet-mehr/spec.md`
+
+Regel:
+- `WHEN das Guthaben mindestens dem Preis von Bier entspricht, SHALL der Automat eine Dose Bier ausgeben.`

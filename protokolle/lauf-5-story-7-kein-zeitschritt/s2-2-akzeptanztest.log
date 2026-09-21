@@ -1,0 +1,215 @@
+
+> test-autor · gpt-5.4-mini
+
+Ich prüfe jetzt die vorhandenen Szenarien und die vorhandenen Step-Definitionen, damit ich die Story 2 mit möglichst wenig neuem Vokabular ergänzen kann.
+✗ Read /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/specs/stories.md failed
+Error: The user has specified a rule which prevents you from using this specific tool call. Here are some of the relevant rules [{"permission":"*","action":"allow","pattern":"*"},{"permission":"external_directory","pattern":"*","action":"ask"},{"permission":"external_directory","pattern":"/Users/seb/.local/share/opencode/tool-output/*","action":"allow"},{"permission":"external_directory","pattern":"/var/folders/l7/kj309nh10mgcrnhprjk37_m00000gn/T/opencode/*","action":"allow"},{"permission":"external_directory","pattern":"/Users/seb/.claude/skills/product-management/*","action":"allow"},{"permission":"external_directory","pattern":"/Users/seb/.agents/skills/product-management/*","action":"allow"},{"permission":"external_directory","pattern":"/private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-5/.opencode/skills/akzeptanztest-regeln/*","action":"allow"},{"permission":"external_directory","pattern":"/private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-5/.opencode/skills/tdd-zyklus/*","action":"allow"},{"permission":"external_directory","pattern":"/private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-5/.opencode/skills/clean-code-check/*","action":"allow"},{"permission":"external_directory","pattern":"/private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-5/.opencode/skills/ears-regeln/*","action":"allow"},{"permission":"external_directory","action":"deny","pattern":"*"},{"permission":"external_directory","pattern":"/Users/seb/.local/share/opencode/tool-output/*","action":"allow"}]
+→ Read src/test/resources/features/freies_getraenk.feature
+✱ Grep "Scenario|Szenario" in src/test/resources/features · 2 matches
+✱ Grep "@ParameterType|betrag|drink" in src/test/java · 24 matches
+→ Read src/test/java/de/sharpsharp/vendingmachine/ParameterTypes.java
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+✱ Grep "preis|Preis" in specs · 9 matches
+✱ Grep "price\(|setPrice|prices|1,00|2,00|€" in . · 6 matches
+Ich habe den Hinweis auf einen Beispielpreis in `specs/stories.md` gefunden. Damit kann ich die Szenarien konkretisieren, ohne etwas zu erfinden.
+→ Read specs/stories.md [offset=12, limit=20]
+✱ Grep "class Slot|record Slot|new Slot\(" in src/main/java · 2 matches
+Ich ergänze jetzt die Feature-Datei für Story 2 und die passende Step-Definition für `price(drink)`. Danach lasse ich den Glossar-Skriptlauf und die Szenarien-Tests gegenprüfen.
+% Patch 2 files
+
+$ ./scripts/steps-glossar.sh
+specs/glossar.md erzeugt: 6 Einträge
+
+$ mvn -q test -Dtest=RunCucumberTest
+Szenario: Ein Getränk wählen                    # classpath:features/freies_getraenk.feature:6
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenariogrundriss: Jeder Knopf gibt seine Dose  # classpath:features/freies_getraenk.feature:18
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenariogrundriss: Jeder Knopf gibt seine Dose  # classpath:features/freies_getraenk.feature:19
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Orange wähle                       # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Orange im Ausgabefach  # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenariogrundriss: Jeder Knopf gibt seine Dose  # classpath:features/freies_getraenk.feature:20
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Zitrone wähle                      # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Zitrone im Ausgabefach # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenariogrundriss: Jeder Knopf gibt seine Dose  # classpath:features/freies_getraenk.feature:21
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Bier wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Bier im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenariogrundriss: Preis steht hinter dem Namen # classpath:features/preis_anzeigen.feature:11
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✘ Dann kostet Cola 1,00 €                     # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+        java.lang.AssertionError: 
+        Expected: is <100>
+             but: was null
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(VendingMachineSteps.java:37)
+        	at ✽.kostet Cola 1,00 €(classpath:features/preis_anzeigen.feature:7)
+
+Szenariogrundriss: Preis steht hinter dem Namen # classpath:features/preis_anzeigen.feature:12
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✘ Dann kostet Orange 1,00 €                   # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+        java.lang.AssertionError: 
+        Expected: is <100>
+             but: was null
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(VendingMachineSteps.java:37)
+        	at ✽.kostet Orange 1,00 €(classpath:features/preis_anzeigen.feature:7)
+
+Szenariogrundriss: Preis steht hinter dem Namen # classpath:features/preis_anzeigen.feature:13
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✘ Dann kostet Zitrone 1,00 €                  # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+        java.lang.AssertionError: 
+        Expected: is <100>
+             but: was null
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(VendingMachineSteps.java:37)
+        	at ✽.kostet Zitrone 1,00 €(classpath:features/preis_anzeigen.feature:7)
+
+Szenariogrundriss: Preis steht hinter dem Namen # classpath:features/preis_anzeigen.feature:14
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✘ Dann kostet Bier 1,00 €                     # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+        java.lang.AssertionError: 
+        Expected: is <100>
+             but: was null
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(VendingMachineSteps.java:37)
+        	at ✽.kostet Bier 1,00 €(classpath:features/preis_anzeigen.feature:7)
+[ERROR] Tests run: 9, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 0.520 s <<< FAILURE! -- in de.sharpsharp.vendingmachine.RunCucumberTest
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Preis steht hinter dem Namen #1 -- Time elapsed: 0.011 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: is <100>
+     but: was null
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(VendingMachineSteps.java:37)
+	at ✽.kostet Cola 1,00 €(classpath:features/preis_anzeigen.feature:7)
+
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Preis steht hinter dem Namen #2 -- Time elapsed: 0.003 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: is <100>
+     but: was null
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(VendingMachineSteps.java:37)
+	at ✽.kostet Orange 1,00 €(classpath:features/preis_anzeigen.feature:7)
+
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Preis steht hinter dem Namen #3 -- Time elapsed: 0.003 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: is <100>
+     but: was null
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(VendingMachineSteps.java:37)
+	at ✽.kostet Zitrone 1,00 €(classpath:features/preis_anzeigen.feature:7)
+
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Preis steht hinter dem Namen #4 -- Time elapsed: 0.003 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: is <100>
+     but: was null
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(VendingMachineSteps.java:37)
+	at ✽.kostet Bier 1,00 €(classpath:features/preis_anzeigen.feature:7)
+
+[ERROR] Failures: 
+[ERROR]   RunCucumberTest.Preis steht hinter dem Namen #1 
+Expected: is <100>
+     but: was null
+[ERROR]   RunCucumberTest.Preis steht hinter dem Namen #2 
+Expected: is <100>
+     but: was null
+[ERROR]   RunCucumberTest.Preis steht hinter dem Namen #3 
+Expected: is <100>
+     but: was null
+[ERROR]   RunCucumberTest.Preis steht hinter dem Namen #4 
+Expected: is <100>
+     but: was null
+[ERROR] Tests run: 9, Failures: 4, Errors: 0, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.6.0:test (default-test) on project getraenkeautomat: There are test failures.
+[ERROR] 
+[ERROR] See /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-5/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+
+Die neuen Szenarien sind drin. Ich prüfe noch kurz den diff, damit ich dir sauber sagen kann, was geändert wurde und warum der Cucumber-Lauf rot ist.
+$ git status --short && git diff -- src/test/resources/features/preis_anzeigen.feature src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java specs/glossar.md
+M specs/glossar.md
+ M src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java
+?? specs/2-preis-anzeigen/
+?? src/test/resources/features/preis_anzeigen.feature
+diff --git a/specs/glossar.md b/specs/glossar.md
+index 75c5b28..79562e3 100644
+--- a/specs/glossar.md
++++ b/specs/glossar.md
+@@ -35,5 +35,6 @@ die Schrittdefinitionen rufen die Methode in der letzten Spalte.
+ Wiederverwenden, bevor ein neuer Schritt entsteht. Quelle: die Step-Klassen im Paket `de.sharpsharp.vendingmachine`.
+ 
+ - Angenommen der Automat ist frisch gestartet
++- Dann kostet {drink} {betrag}
+ - Dann liegt eine Dose {drink} im Ausgabefach
+ - Wenn ich {drink} wähle
+diff --git a/src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java b/src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java
+index 56f0a82..02e2c6e 100644
+--- a/src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java
++++ b/src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java
+@@ -31,4 +31,9 @@ public class VendingMachineSteps {
+     public void oneCanLiesInTheOutputTray(Drink drink) {
+         assertThat(machine.outputTray(), contains(drink));
+     }
++
++    @Dann("kostet {drink} {betrag}")
++    public void theDrinkCosts(Drink drink, int cents) {
++        assertThat(machine.price(drink), is(cents));
++    }
+ }
+
+**Dateien**
+- `src/test/resources/features/preis_anzeigen.feature`
+- `src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java`
+- `specs/glossar.md` (regeneriert)
+
+**Szenarien**
+- `Szenariogrundriss: Preis steht hinter dem Namen`
+- Beispiele: `Cola`, `Orange`, `Zitrone`, `Bier` jeweils `1,00 €`
+
+**Skill-Regeln**
+1. ja - immer
+2. ja - deklarativ
+3. ja - Namen
+4. ja - sichtbar
+5. ja - konkret
+6. ja - Regelname
+7. ja - unabhängig
+8. ja - Glossar
+9. ja - abgedeckt
+10. ja - knapp
+11. ja - Maschine
+
+**Prüfung**
+- `scripts/steps-glossar.sh`: grün
+- `mvn -q test -Dtest=RunCucumberTest`: rot, weil `price(drink)` im Automaten noch `null` liefert

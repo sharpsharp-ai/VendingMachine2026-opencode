@@ -9,7 +9,7 @@
 
 ## Struktur
 - `src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java`: alle Fachregeln.
-- `Main.java`: nur Web und JSON, keine Fachlogik. `Drink.java`: die Fächer.
+- `Main.java`: nur Web und JSON, keine Fachlogik. `Drink.java`: die Fächer. `Clock.java`: die Uhr, kommt in den Konstruktor.
 - `src/test/resources/features/*.feature`: die Szenarien, auf Deutsch. Sie sind die Spezifikation.
 - `src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java`: die Schritte. Sie sprechen nur mit `VendingMachine`.
 - `src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java`: Unit-Tests. JUnit 4, Hamcrest, Mockito.
@@ -27,5 +27,5 @@
 - Java 17. Methoden höchstens 20 Zeilen, Dateien höchstens 200 Zeilen, eine Abstraktionsebene je Methode.
 - Namen aus `specs/glossar.md`, im Code englisch: credit, slot, can, outputTray, coinReturn, cashBox.
 - Beträge in Cent als `int`. Meldungen als Text, wörtlich wie in der Story.
-- Zeit und Zufall nie direkt aus dem System holen: Interface einführen, im Test ersetzen.
+- Zeit nie direkt aus dem System holen: der Automat fragt seine `Clock`, die Tests stellen eine `FakeClock`. Zufall und Mechanik genauso über ein Interface.
 - Fachlogik nur in `VendingMachine` und Klassen daneben. Nie in `Main`, nie in Tests.

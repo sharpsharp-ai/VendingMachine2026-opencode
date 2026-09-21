@@ -1,0 +1,18 @@
+
+> reviewer · gpt-5.4-mini
+
+Ich prüfe zuerst die betroffenen Dateien vollständig und gleiche sie dann gegen die Review-Regeln und die Akzeptanztest-Regeln ab.
+→ Read src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+→ Read src/main/java/de/sharpsharp/vendingmachine/Main.java
+→ Read .opencode/skills/akzeptanztest-regeln/SKILL.md
+Ich prüfe noch die relevanten Szenarien, weil die Review-Regeln explizit auch die Gherkin-Dateien mit abdecken.
+✱ Glob "src/test/resources/features/*.feature" in . · 4 matches
+✱ Grep "@Test|assertThat|contains\(|is\(" in src/test/java/de/sharpsharp/vendingmachine · 47 matches
+✱ Grep "coinReturn|cancel|take-coins|take-coins" in . · 0 matches
+→ Read src/test/resources/features/guthaben_anzeigen.feature
+→ Read src/test/resources/features/preis_anzeigen.feature
+→ Read src/test/resources/features/wechselgeld.feature
+→ Read src/test/resources/features/getraenke_kosten_geld.feature
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java
+Keine wesentlichen Befunde.

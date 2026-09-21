@@ -1,0 +1,12 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich lege jetzt die Spec-Datei für Story 1 unter `specs/1-alles-umsonst/spec.md` an und halte mich an genau die drei geforderten Abschnitte.
+✱ Glob "specs/1-*" in . · 0 matches
+✱ Glob "specs/*" in . · 2 matches
+Die Story 1 hat noch keinen eigenen Spec-Ordner. Ich schreibe jetzt die neue Spec-Datei mit einer EARS-Regel und ohne weitere Änderungen außerhalb von `specs/`.
+% Patch 1 file
+`specs/1-alles-umsonst/spec.md`
+
+Regel:
+- `WHEN der Kunde einen beliebigen Knopf drückt, SHALL der Automat eine vorhandene Dose aus dem gewählten Fach ohne Bezahlung ins Ausgabefach fallen lassen.`

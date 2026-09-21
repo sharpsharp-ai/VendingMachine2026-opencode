@@ -1,0 +1,24 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich prüfe kurz die vorhandenen Spec-Verzeichnisse, damit der neue Pfad zur bestehenden Struktur passt, und lege dann nur `specs/` an.
+→ Read specs/1-alles-umsonst/spec.md
+→ Read specs/2-preis-anzeigen/spec.md
+✱ Glob "specs/*/spec.md" 2 matches
+Ich schreibe jetzt die neue Spec-Datei für Story 3 mit genau den drei geforderten Abschnitten und ohne Änderungen außerhalb von `specs/`.
+% Patch 1 file
+Ich prüfe die neue Datei einmal auf Zeichensatzfehler und korrigiere sie sofort, falls beim Schreiben etwas kaputtging.
+✗ Read specs/3-guthaben-anzeigen/spec.md failed
+Error: Cannot read binary file: /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-5/specs/3-guthaben-anzeigen/spec.md
+Beim ersten Schreiben ist ein kaputter Binärinhalt entstanden. Ich ersetze die Datei jetzt sauber durch reinen Text.
+% Patch 1 file
+% Patch 1 file
+Ich setze die Datei noch einmal neu auf und schreibe die Umlaute als echte Zeichen, nicht als Escape-Sequenzen.
+% Patch 1 file
+% Patch 1 file
+→ Read specs/3-guthaben-anzeigen/spec.md
+`specs/3-guthaben-anzeigen/spec.md`
+
+Regeln:
+- Der Automat SHALL eingeworfenes Geld als `"Guthaben: x,xx €"` anzeigen.
+- WHEN der Kunde 50 ct, 1 € oder 2 € einwirft, SHALL der Automat das Guthaben um den eingeworfenen Betrag erhöhen.

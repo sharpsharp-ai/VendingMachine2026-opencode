@@ -82,26 +82,13 @@ public void theDrinkCosts(Drink drink, int cents) {
 }
 ```
 
-Zeit kommt von außen. Der Automat bekommt im Konstruktor eine Uhr: ein eigenes Interface `Clock` im Paket
-`de.sharpsharp.vendingmachine` mit einer Methode `LocalTime now()` (nicht `java.time.Clock`). Der Test stellt sie. Nie ein Setter für die Zeit am Automaten: den hätte die echte Anwendung nicht.
-`FakeClock` liegt in `src/test/java`; fehlt `Clock` noch, baut es der Implementierer.
+Zeit kommt von außen. Der Automat hat im Konstruktor eine Uhr (`Clock`, eine Methode `LocalTime now()`); die Schritte-Klasse
+baut ihn mit einer `FakeClock` (Feld `clock`) und stellt sie. Nie ein Setter für die Zeit am Automaten: den hätte die echte Anwendung nicht.
 
 ```java
-private final FakeClock clock = new FakeClock();
-private final VendingMachine machine = new VendingMachine(clock);
-
 @Angenommen("es ist {int}:{int} Uhr")
 public void itIs(int hour, int minute) {
     clock.set(LocalTime.of(hour, minute));
-}
-```
-
-```java
-/** Eine gestellte Uhr für die Tests. */
-public class FakeClock implements Clock {
-    private LocalTime time = LocalTime.NOON;
-    public void set(LocalTime time) { this.time = time; }
-    @Override public LocalTime now() { return time; }
 }
 ```
 

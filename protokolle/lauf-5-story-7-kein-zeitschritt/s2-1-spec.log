@@ -1,0 +1,17 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich prüfe kurz das vorhandene Spec-Format und lege dann `specs/2-preis-anzeigen/spec.md` passend zur Story an.
+→ Read specs/1-alles-umsonst/spec.md
+✱ Glob "specs/1-*/spec.md" 1 match
+Ich habe das Format: knapp, drei Abschnitte, eine EARS-Regel pro Akzeptanzkriterium. Jetzt schreibe ich die neue Spec-Datei.
+✱ Glob "specs/2-*" 0 matches
+✱ Glob "specs/*" 2 matches
+% Patch 1 file
+Die Spec ist angelegt. Ich prüfe noch kurz den Inhalt gegen die Vorgaben.
+→ Read specs/2-preis-anzeigen/spec.md
+`specs/2-preis-anzeigen/spec.md`
+
+Regeln:
+- `Der Automat SHALL an jedem Fach den Preis hinter dem Namen anzeigen.`
+- `Der Automat SHALL alle Getränke mit demselben Preis anzeigen.`

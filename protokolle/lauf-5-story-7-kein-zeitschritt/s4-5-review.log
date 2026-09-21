@@ -1,0 +1,15 @@
+
+> reviewer · gpt-5.4-mini
+
+Ich prüfe zuerst die geänderten Dateien vollständig und gleiche sie dann gegen den Clean-Code-Check und die Akzeptanztest-Regeln ab.
+→ Read src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+→ Skill "akzeptanztest-regeln"
+Ich gleiche jetzt die vorhandenen Features gegen die Akzeptanztest-Regeln ab, um sicherzustellen, dass die neue Fachlogik nicht an Spezifikationsfehlern vorbeischleicht.
+✱ Glob "src/test/resources/features/*.feature" 3 matches
+✱ Grep "^\s*(Szenario|Szenariogrundriss|Funktionalität|Angenommen|Wenn|Dann|Und)" in src/test/resources/features · 30 matches
+→ Read src/test/resources/features/guthaben_anzeigen.feature
+→ Read src/test/resources/features/getraenke_kosten_geld.feature
+→ Read src/test/resources/features/preis_anzeigen.feature
+- `src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java:77-80`, Dead Code, gib in `refused()` den tatsächlichen Zustand zurück oder entferne die Methode, damit die neue Ablehnungslogik nicht an der UI vorbei läuft.
+- `src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java:43`, Magic Number, zieh `"Zu wenig Geld"` in eine benannte Konstante oder zentrale Meldungsquelle, statt den Text direkt im Kontrollfluss zu hardcodieren.
