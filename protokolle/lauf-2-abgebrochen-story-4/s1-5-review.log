@@ -1,0 +1,15 @@
+
+> reviewer · gpt-5.4-mini
+
+Ich prüfe die betroffene Klasse vollständig und gleiche sie gegen die Clean-Code- und Akzeptanztest-Regeln ab, bevor ich Befunde formuliere.
+→ Read src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+→ Read src/main/java/de/sharpsharp/vendingmachine/Main.java
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java
+✱ Glob "src/test/resources/features/*.feature" in . · 1 match
+Ich ziehe noch die betroffenen Szenarien heran, um die neue Ausgabe-Fach-Logik gegen die Spezifikation zu prüfen.
+→ Read specs/glossar.md
+→ Read .opencode/skills/akzeptanztest-regeln/SKILL.md
+→ Read src/test/resources/features/freies_getraenk.feature
+- `src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java:33`, `Misplaced Responsibility`, `selectDrink` sollte beim Ausgeben auch den Bestand des gewählten Fachs reduzieren, sonst bleibt die Ware unbegrenzt verfügbar.
+- `src/test/resources/features/freies_getraenk.feature:6`, `Bad Name`, den Szenario-Titel auf die Regel statt auf den Ablauf formulieren, z. B. `Cola fällt gratis`.

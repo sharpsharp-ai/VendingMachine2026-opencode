@@ -1,0 +1,12 @@
+
+> reviewer · gpt-5.4-mini
+
+Ich prüfe jetzt die geänderte Klasse vollständig und gleiche sie gegen die Clean-Code-Checkliste sowie die zusätzlichen Regeln ab.
+→ Read src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+→ Skill "akzeptanztest-regeln"
+`src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java:28`, `Bad Name`, benenne `c` zu `credit` um, damit der Fachbegriff aus dem Glossar sichtbar wird.
+
+`src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java:31`, `Switch Statement`, ersetze die `if/else`-Kette über Münzwerte durch eine fachliche Zuordnung mit benannten Konstanten oder einer Lookup-Struktur.
+
+`src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java:40`, `Magic Number`, ziehe die Obergrenze `9999` als benannte Konstante oder Fachregel aus dem Code.
+exit=0

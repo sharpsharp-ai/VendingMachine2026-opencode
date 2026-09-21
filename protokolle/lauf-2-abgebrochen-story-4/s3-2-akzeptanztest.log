@@ -1,0 +1,185 @@
+
+> test-autor · gpt-5.4-mini
+
+Ich prüfe zuerst die vorhandenen Feature-Dateien und den passenden Kurznamen, dann ergänze ich nur die Szenarien für Story 3.
+✱ Glob "src/test/resources/features/*.feature" 2 matches
+→ Read src/test/resources/features/freies_getraenk.feature
+→ Read src/test/resources/features/preis_anzeigen.feature
+Ich habe die vorhandenen Schritte geprüft: für Guthaben fehlen noch Einwerfen- und Guthaben-Prüfschritte. Ich ergänze deshalb die Feature-Datei und die nötigen Step-Definitionen, ohne den Automaten anzufassen.
+
+# Todos
+[•] Story 3 Feature-Datei anlegen/ergänzen mit Szenarien für Guthaben anzeigen
+[ ] Fehlende Step-Definitionen für Münze einwerfen und Guthaben prüfen ergänzen
+[ ] steps-glossar und Cucumber-Test ausführen
+
+Ich schreibe jetzt die neue Feature-Datei und ergänze genau die Schritte, die dafür fehlen. Danach lasse ich Glossar-Generierung und Cucumber laufen.
+% Patch 2 files
+
+$ scripts/steps-glossar.sh
+specs/glossar.md erzeugt: 8 Einträge
+
+$ mvn -q test -Dtest=RunCucumberTest
+Szenario: Ein Getränk wählen                    # classpath:features/freies_getraenk.feature:6
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenario: Auch Bier fällt gratis                # classpath:features/freies_getraenk.feature:11
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Bier wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Bier im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenario: Guthaben nach 50 Cent anzeigen        # classpath:features/guthaben_anzeigen.feature:5
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich 50 ct einwerfe                     # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCentCoins(int)
+  ✘ Dann der Automat meldet "Guthaben: 0,50 €"  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+        java.lang.AssertionError: 
+        Expected: is "Guthaben: 0,50 €"
+             but: was "Bitte Münzen einwerfen"
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(VendingMachineSteps.java:57)
+        	at ✽.der Automat meldet "Guthaben: 0,50 €"(classpath:features/guthaben_anzeigen.feature:8)
+
+Szenario: Guthaben nach 1 Euro anzeigen         # classpath:features/guthaben_anzeigen.feature:10
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich 1 € einwerfe                       # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertEuroCoins(int)
+  ✘ Dann der Automat meldet "Guthaben: 1,00 €"  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+        java.lang.AssertionError: 
+        Expected: is "Guthaben: 1,00 €"
+             but: was "Bitte Münzen einwerfen"
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(VendingMachineSteps.java:57)
+        	at ✽.der Automat meldet "Guthaben: 1,00 €"(classpath:features/guthaben_anzeigen.feature:13)
+
+Szenario: Guthaben nach 2 Euro anzeigen         # classpath:features/guthaben_anzeigen.feature:15
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich 2 € einwerfe                       # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertEuroCoins(int)
+  ✘ Dann der Automat meldet "Guthaben: 2,00 €"  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+        java.lang.AssertionError: 
+        Expected: is "Guthaben: 2,00 €"
+             but: was "Bitte Münzen einwerfen"
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(VendingMachineSteps.java:57)
+        	at ✽.der Automat meldet "Guthaben: 2,00 €"(classpath:features/guthaben_anzeigen.feature:18)
+
+Szenario: Mehrere Münzen addieren               # classpath:features/guthaben_anzeigen.feature:20
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich 50 ct einwerfe                     # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCentCoins(int)
+  ✔ Und ich 1 € einwerfe                        # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertEuroCoins(int)
+  ✘ Dann der Automat meldet "Guthaben: 1,50 €"  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+        java.lang.AssertionError: 
+        Expected: is "Guthaben: 1,50 €"
+             but: was "Bitte Münzen einwerfen"
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(VendingMachineSteps.java:57)
+        	at ✽.der Automat meldet "Guthaben: 1,50 €"(classpath:features/guthaben_anzeigen.feature:24)
+
+Szenario: Preis für Cola anzeigen               # classpath:features/preis_anzeigen.feature:5
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola sehe                          # de.sharpsharp.vendingmachine.VendingMachineSteps.iSee(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann der Automat meldet "Cola 1,00 €"       # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+
+Szenario: Preis für Bier anzeigen               # classpath:features/preis_anzeigen.feature:10
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Bier sehe                          # de.sharpsharp.vendingmachine.VendingMachineSteps.iSee(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann der Automat meldet "Bier 2,00 €"       # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+[ERROR] Tests run: 8, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 0.576 s <<< FAILURE! -- in de.sharpsharp.vendingmachine.RunCucumberTest
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Guthaben nach 50 Cent anzeigen -- Time elapsed: 0.015 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: is "Guthaben: 0,50 €"
+     but: was "Bitte Münzen einwerfen"
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(VendingMachineSteps.java:57)
+	at ✽.der Automat meldet "Guthaben: 0,50 €"(classpath:features/guthaben_anzeigen.feature:8)
+
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Guthaben nach 1 Euro anzeigen -- Time elapsed: 0.006 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: is "Guthaben: 1,00 €"
+     but: was "Bitte Münzen einwerfen"
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(VendingMachineSteps.java:57)
+	at ✽.der Automat meldet "Guthaben: 1,00 €"(classpath:features/guthaben_anzeigen.feature:13)
+
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Guthaben nach 2 Euro anzeigen -- Time elapsed: 0.006 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: is "Guthaben: 2,00 €"
+     but: was "Bitte Münzen einwerfen"
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(VendingMachineSteps.java:57)
+	at ✽.der Automat meldet "Guthaben: 2,00 €"(classpath:features/guthaben_anzeigen.feature:18)
+
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Mehrere Münzen addieren -- Time elapsed: 0.008 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: is "Guthaben: 1,50 €"
+     but: was "Bitte Münzen einwerfen"
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(VendingMachineSteps.java:57)
+	at ✽.der Automat meldet "Guthaben: 1,50 €"(classpath:features/guthaben_anzeigen.feature:24)
+
+[ERROR] Failures: 
+[ERROR]   RunCucumberTest.Guthaben nach 1 Euro anzeigen 
+Expected: is "Guthaben: 1,00 €"
+     but: was "Bitte Münzen einwerfen"
+[ERROR]   RunCucumberTest.Guthaben nach 2 Euro anzeigen 
+Expected: is "Guthaben: 2,00 €"
+     but: was "Bitte Münzen einwerfen"
+[ERROR]   RunCucumberTest.Guthaben nach 50 Cent anzeigen 
+Expected: is "Guthaben: 0,50 €"
+     but: was "Bitte Münzen einwerfen"
+[ERROR]   RunCucumberTest.Mehrere Münzen addieren 
+Expected: is "Guthaben: 1,50 €"
+     but: was "Bitte Münzen einwerfen"
+[ERROR] Tests run: 8, Failures: 4, Errors: 0, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.6.0:test (default-test) on project getraenkeautomat: There are test failures.
+[ERROR] 
+[ERROR] See /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-2/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+
+Die Szenarien sind drin, die neuen Schritte werden erkannt. `mvn -q test -Dtest=RunCucumberTest` ist erwartungsgemäß rot, weil `VendingMachine` Guthaben noch nicht umsetzt.
+# Todos
+[✓] Story 3 Feature-Datei anlegen/ergänzen mit Szenarien für Guthaben anzeigen
+[✓] Fehlende Step-Definitionen für Münze einwerfen und Guthaben prüfen ergänzen
+[✓] steps-glossar und Cucumber-Test ausführen
+
+Datei: `src/test/resources/features/guthaben_anzeigen.feature`  
+Zusätzlich: `src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java`, `specs/glossar.md`
+
+Szenarien:
+- Guthaben nach 50 Cent anzeigen
+- Guthaben nach 1 Euro anzeigen
+- Guthaben nach 2 Euro anzeigen
+- Mehrere Münzen addieren
+
+Regeln:
+1. ja: genau
+2. ja: deklarativ
+3. ja: Fachsprache
+4. ja: Zustand
+5. ja: Beispiele
+6. ja: Regelname
+7. ja: unabhängig
+8. ja: wiederverwendet
+9. ja: abgedeckt
+10. ja: kurz
+11. ja: VendingMachine
+
+`mvn -q test -Dtest=RunCucumberTest`: rot, weil Guthaben im Automaten noch nicht implementiert ist.

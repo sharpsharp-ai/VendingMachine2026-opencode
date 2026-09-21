@@ -1,0 +1,42 @@
+diff --git a/src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java b/src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+index 5d0a124..e6cd563 100644
+--- a/src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
++++ b/src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+@@ -25,7 +25,25 @@ public class VendingMachine {
+ 
+     // ---- What a customer can do --------------------------------------------
+ 
++    private int c;
++
+     public synchronized void insertCoin(int cents) {
++        if (cents == 50) {
++            c = c + 50;
++        } else if (cents == 100) {
++            c = c + 100;
++        } else if (cents == 200) {
++            c = c + 200;
++        } else {
++            System.out.println("bad coin " + cents);
++        }
++        if (c > 9999) {
++            c = 9999;
++        }
++    }
++
++    public synchronized int credit() {
++        return c;
+     }
+ 
+     public synchronized void selectDrink(Drink drink) {
+@@ -46,11 +64,6 @@ public class VendingMachine {
+ 
+     // ---- What the machine shows ---------------------------------------------
+ 
+-    /** In cents. */
+-    public synchronized int credit() {
+-        return 0;
+-    }
+-
+     public synchronized String message() {
+         return "Bitte Münzen einwerfen";
+     }

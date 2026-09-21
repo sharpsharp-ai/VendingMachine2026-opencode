@@ -25,10 +25,13 @@ Der Automat, so wie er heute ist:
 Vorgehen:
 1. Jede Regel der Spec bekommt mindestens ein Szenario: Normalfall, Grenzwert, Fehlerfall, wo es sie gibt.
    WHILE wird Angenommen, WHEN wird Wenn, SHALL wird Dann. IF wird ein eigenes Fehlerfall-Szenario.
+   Eine Regel ohne WHEN (Immer) bekommt ein Szenario ohne Wenn: Angenommen und Dann.
 2. Datei `src/test/resources/features/<kurzname>.feature`, erste Zeile `# language: de`. Gibt es die Datei, ergänze fehlende Szenarien. Vorhandene Szenarien bleiben, wie sie sind, auch ihr Titel.
+   Ausnahme: Hebt die neue Story eine alte Regel auf (Story 4 hebt das freie Getränk auf), dann gilt das alte Szenario nicht mehr. Ändere es so, dass es zur neuen Regel passt, oder lösche es, und schreibe das in die Antwort.
 3. Schritte: erst die aus dem Glossar wiederverwenden. Fehlt ein Wort, schreibe den neuen Schritt in `VendingMachineSteps.java`. Fehlt dafür eine Methode am Automaten, benutze sie so, wie sie heißen soll; der Implementierer baut sie.
    Angenommen-Schritte stellen den Zustand her, indem sie den Automaten bedienen. Sie prüfen nichts. Beispiel im Skill: ein leeres Fach.
    Wenn-Schritte rufen genau eine Methode auf. Dann-Schritte prüfen genau eine Sache mit `assertThat`.
+   Welche Methode zu welchem Wort gehört, steht im Glossar, Spalte „Am Automaten": Guthaben ist `credit()`, Meldung ist `message()`, Preis ist `price(drink)`.
 4. Führe `scripts/steps-glossar.sh` aus.
 5. Führe `mvn -q test -Dtest=RunCucumberTest` aus. Neue Szenarien dürfen rot sein oder nicht kompilieren. Alte Szenarien bleiben grün. Ändere keinen Produktivcode.
 6. Antworte mit: Datei, Liste der Szenarien, und je Regel des Skills "ja" oder "nein" mit einem Wort Begründung.

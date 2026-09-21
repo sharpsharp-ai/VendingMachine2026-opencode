@@ -1,0 +1,9 @@
+
+> reviewer · gpt-5.4-mini
+
+Ich prüfe jetzt die betroffenen Dateien vollständig und gleiche sie gegen die beiden Skills ab, damit ich nur belastbare Befunde melde.
+→ Read src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+→ Read src/main/java/de/sharpsharp/vendingmachine/Main.java
+→ Read .opencode/skills/akzeptanztest-regeln/SKILL.md
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+- `src/main/java/de/sharpsharp/vendingmachine/Main.java:60-114`, `Misplaced Responsibility` / `Hardcoded Text`, gib in `act` wieder `state(machine)` zurück und lass den Anzeigetext ausschließlich von `VendingMachine.message()` kommen, sonst liefern alle Aktionen im HTTP-Flow eine falsche Statusmeldung.

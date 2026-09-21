@@ -4,10 +4,10 @@ description: Die elf Regeln für gute Akzeptanztests in Gherkin, mit Beispiel un
 ---
 # Elf Regeln für Akzeptanztests
 
-1. Ein Szenario, ein Verhalten: genau ein Wenn.
+1. Ein Szenario, ein Verhalten: genau ein Wenn. Hat die Regel keinen Auslöser (EARS „Immer“), entfällt das Wenn: nur Angenommen und Dann.
 2. Deklarativ: was, nicht wie. Keine Knöpfe, Klicks, IDs, Indizes, HTTP.
 3. Fachsprache des Kunden: Namen statt nullbasierter Nummern. "Cola", nicht "Fach 0".
-4. Angenommen ist Zustand, Wenn ist Ereignis, Dann ist von außen beobachtbar. Nie interner Zustand.
+4. Angenommen ist Zustand, Wenn ist Ereignis, Dann ist von außen beobachtbar: Dose im Ausgabefach, Guthaben, Meldung, Münzrückgabe, Preis und Bestand am Fach. Nie interner Zustand.
 5. Konkrete Beispiele mit Grenzwerten. Nur Details, die für die Regel zählen.
 6. Der Titel nennt die Regel, nicht den Ablauf.
 7. Unabhängig und wiederholbar: keine Reihenfolge zwischen Szenarien, Zeit und Zufall sind gestellt.
@@ -38,8 +38,21 @@ Funktionalität: Kein Bier vor 4
     Dann liegt eine Dose Bier im Ausgabefach
 ```
 
+Eine Regel ohne Auslöser, als Szenariogrundriss mit Beispielen:
+
+```gherkin
+  Szenariogrundriss: Der Preis steht am Fach
+    Angenommen der Automat ist frisch gestartet
+    Dann kostet <Getränk> <Preis>
+
+    Beispiele:
+      | Getränk | Preis  |
+      | Cola    | 1,00 € |
+      | Bier    | 2,00 € |
+```
+
 Schritte dazu, in `VendingMachineSteps.java`. Angenommen bedient den Automaten und stellt so den Zustand her,
-Wenn ruft eine Methode, Dann prüft eine Sache:
+Wenn ruft eine Methode, Dann prüft eine Sache. `{drink}` und `{betrag}` ("1,00 €", "2 €", "50 ct" als Cent) stehen in `ParameterTypes.java`:
 
 ```java
 @Angenommen("das Fach {drink} ist leer")
@@ -62,13 +75,18 @@ public void iSelect(Drink drink) {
 public void theMachineSays(String text) {
     assertThat(machine.message(), is(text));
 }
+
+@Dann("kostet {drink} {betrag}")
+public void theDrinkCosts(Drink drink, int cents) {
+    assertThat(machine.price(drink), is(cents));
+}
 ```
 
 ## Checkliste vor dem Abgeben, je Szenario ja oder nein
-- Genau ein Wenn? (1)
+- Genau ein Wenn, oder keins, weil die Regel keinen Auslöser hat? (1)
 - Kein Wort der Oberfläche? (2, 11)
 - Namen statt Nummern? (3)
-- Angenommen stellt Zustand her und prüft nichts? Dann prüft etwas Sichtbares: Dose, Guthaben, Meldung, Münzrückgabe? (4)
+- Angenommen stellt Zustand her und prüft nichts? Dann prüft etwas Sichtbares: Dose, Guthaben, Meldung, Münzrückgabe, Preis, Bestand? (4)
 - Zahlen und Grenzwerte konkret? (5)
 - Titel nennt die Regel? (6)
 - Läuft allein und wiederholt gleich? (7)

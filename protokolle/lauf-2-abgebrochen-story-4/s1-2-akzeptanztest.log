@@ -1,0 +1,107 @@
+
+> test-autor · gpt-5.4-mini
+
+Ich prüfe zuerst die vorhandene Feature-Datei und ergänze nur die fehlenden Szenarien, ohne Produktivcode anzufassen.
+→ Read src/test/resources/features/freies_getraenk.feature
+✱ Glob "**/*.feature" in . · 2 matches
+Ich ergänze die Feature-Datei um einen zweiten, gleich aufgebauten Fach-frei-Szenariofall mit bestehendem Vokabular.
+% Patch 1 file
+Die Feature-Datei ist ergänzt; jetzt aktualisiere ich das Glossar und prüfe die Cucumber-Szenarien.
+
+$ scripts/steps-glossar.sh && mvn -q test -Dtest=RunCucumberTest
+specs/glossar.md erzeugt: 4 Einträge
+
+Szenario: Ein Getränk wählen                    # classpath:features/freies_getraenk.feature:6
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✘ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+        java.lang.AssertionError: 
+        Expected: iterable containing [<COLA>]
+             but: no item was <COLA>
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(VendingMachineSteps.java:37)
+        	at ✽.liegt eine Dose Cola im Ausgabefach(classpath:features/freies_getraenk.feature:9)
+
+Szenario: Auch Bier fällt gratis                # classpath:features/freies_getraenk.feature:11
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Bier wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✘ Dann liegt eine Dose Bier im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+        java.lang.AssertionError: 
+        Expected: iterable containing [<BEER>]
+             but: no item was <BEER>
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(VendingMachineSteps.java:37)
+        	at ✽.liegt eine Dose Bier im Ausgabefach(classpath:features/freies_getraenk.feature:14)
+[ERROR] Tests run: 2, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.526 s <<< FAILURE! -- in de.sharpsharp.vendingmachine.RunCucumberTest
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Ein Getränk wählen -- Time elapsed: 0.073 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: iterable containing [<COLA>]
+     but: no item was <COLA>
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(VendingMachineSteps.java:37)
+	at ✽.liegt eine Dose Cola im Ausgabefach(classpath:features/freies_getraenk.feature:9)
+
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Auch Bier fällt gratis -- Time elapsed: 0.006 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: iterable containing [<BEER>]
+     but: no item was <BEER>
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(VendingMachineSteps.java:37)
+	at ✽.liegt eine Dose Bier im Ausgabefach(classpath:features/freies_getraenk.feature:14)
+
+[ERROR] Failures: 
+[ERROR]   RunCucumberTest.Auch Bier fällt gratis 
+Expected: iterable containing [<BEER>]
+     but: no item was <BEER>
+[ERROR]   RunCucumberTest.Ein Getränk wählen 
+Expected: iterable containing [<COLA>]
+     but: no item was <COLA>
+[ERROR] Tests run: 2, Failures: 2, Errors: 0, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.6.0:test (default-test) on project getraenkeautomat: There are test failures.
+[ERROR] 
+[ERROR] See /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-2/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+
+Ich prüfe noch die betroffenen Dateien, damit ich dir die Änderung und den Teststand sauber zusammenfassen kann.
+→ Read specs/glossar.md
+
+$ git status --short
+M src/test/resources/features/freies_getraenk.feature
+?? specs/1-alles-umsonst/
+
+Das Glossar wurde neu erzeugt; ich prüfe noch den neu angelegten Story-Ordner, damit ich nichts Unbeabsichtigtes übersehe.
+✱ Glob "specs/1-alles-umsonst/**" in . · 1 match
+✱ Glob "src/test/resources/features/*.feature" in . · 1 match
+Datei: `src/test/resources/features/freies_getraenk.feature`
+
+Szenarien:
+- `Ein Getränk wählen`
+- `Auch Bier fällt gratis`
+
+`mvn -q test -Dtest=RunCucumberTest`: rot, beide Szenarien scheitern aktuell am leeren `outputTray`.
+
+Regeln:
+1. ja - einzeln
+2. ja - deklarativ
+3. ja - Fachsprache
+4. ja - beobachtbar
+5. nein - kein Randwert
+6. nein - Ablauf
+7. ja - unabhängig
+8. ja - Glossar
+9. ja - Normalfall
+10. ja - kurz
+11. ja - VendingMachine

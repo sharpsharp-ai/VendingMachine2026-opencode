@@ -1,0 +1,37 @@
+### Gate 1: Methode mit 25 Zeilen (Checkstyle MethodLength)
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-checkstyle-plugin:3.6.0:check (checkstyle) on project getraenkeautomat: Failed during checkstyle execution: There is 1 error reported by C
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+exit=1
+### Gate 2: VendingMachine importiert Javalin (ArchUnit)
+[ERROR] Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.672 s <<< FAILURE! -- in de.sharpsharp.vendingmachine.ArchitekturTest
+[ERROR] de.sharpsharp.vendingmachine.ArchitekturTest.onlyMainUsesTheWeb -- Time elapsed: 0.003 s <<< FAILURE!
+Architecture Violation [Priority: MEDIUM] - Rule 'no classes that have name not matching '.*\.Main(\$.*)?' should depend on classes that reside in any package ['io.javalin..', 'com.fasterxml.jackson..
+	at com.tngtech.archunit.lang.ArchRule$Assertions.assertNoViolation(ArchRule.java:94)
+	at com.tngtech.archunit.lang.ArchRule$Assertions.check(ArchRule.java:86)
+exit=1
+### Gate 3: roter Unit-Test (Surefire)
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.015 s <<< FAILURE! -- in de.sharpsharp.vendingmachine.RotTest
+[ERROR] de.sharpsharp.vendingmachine.RotTest.faellt -- Time elapsed: 0.013 s <<< FAILURE!
+[ERROR] Failures: 
+[ERROR]   RotTest.faellt:5 
+[ERROR] Tests run: 8, Failures: 1, Errors: 0, Skipped: 0
+exit=1
+### Gate 4: ungetestete Klasse, Abdeckung unter 80 % (JaCoCo)
+[ERROR] Failed to execute goal org.jacoco:jacoco-maven-plugin:0.8.15:check (check) on project getraenkeautomat: Coverage checks have not been met. See log for details. -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+exit=1
+error: pathspec 'config' did not match any file(s) known to git
+### Kontrolle: alles zurückgesetzt, verify grün?
+ M pom.xml
+?? config/
+?? scripts/
+?? specs/
+?? src/test/java/de/sharpsharp/vendingmachine/ArchitekturTest.java
+exit=0
+### done

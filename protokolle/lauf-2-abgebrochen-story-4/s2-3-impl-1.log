@@ -1,0 +1,115 @@
+### Runde 1 von 5: /implementiere Preis für Cola anzeigen
+[0m
+> implementierer · gpt-5.4-mini
+[0m
+Ich prüfe jetzt die vorhandenen Unit-Tests und baue nur die kleinste Regel für `Cola` ein, ohne andere Szenarien anzufassen.
+[0m✱ [0mGlob "src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java"[90m 1 match[0m
+[0m✱ [0mGrep "message\(|stock\(|selectDrink\(|credit\("[90m in . · 12 matches[0m
+[0m→ [0mRead src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+[0m→ [0mRead src/main/java/de/sharpsharp/vendingmachine/Drink.java
+Ich habe den Preis schon im `Drink`-Enum gefunden. Jetzt prüfe ich kurz, ob `VendingMachine` den Namen/Preis schon über bestehende Felder ableiten kann, damit ich nur einen kleinen, zielgenauen Fix mache.
+[0m✱ [0mGrep "message\("[90m in . · 3 matches[0m
+[0m→ [0mRead src/main/java/de/sharpsharp/vendingmachine/Main.java[90m [offset=90, limit=30][0m
+[0m✱ [0mGrep "Preis für|sehe|price"[90m in . · 5 matches[0m
+[0m✱ [0mGrep "stock\("[90m in . · 3 matches[0m
+Ich kläre noch kurz, ob es schon eine bestehende Preis-Regel in den Specs gibt. Wenn nicht, halte ich den Fix bewusst klein und lokal.
+[0m✱ [0mGrep "Preis|Meldung|Cola 1,00|Bier 2,00"[90m in specs · 10 matches[0m
+[0m✱ [0mGlob "specs/**/*.md"[90m in . · 4 matches[0m
+[0m→ [0mRead specs/glossar.md[90m [offset=1, limit=60][0m
+[0m→ [0mRead specs/2-preis-anzeigen/spec.md
+Ich schreibe jetzt den kleinsten rot/grün-Test für die Preisregel in `VendingMachineTest.java`.
+[0m% [0mPatch 1 file
+[0m
+[0m$ [0mmvn -q test -Dtest=VendingMachineTest
+[ERROR] Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.038 s <<< FAILURE! -- in de.sharpsharp.vendingmachine.VendingMachineTest
+[ERROR] de.sharpsharp.vendingmachine.VendingMachineTest.seeingColaShowsItsPrice -- Time elapsed: 0.025 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: is "Cola 1,00 €"
+     but: was "Bitte Münzen einwerfen"
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineTest.seeingColaShowsItsPrice(VendingMachineTest.java:26)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+
+[ERROR] Failures: 
+[ERROR]   VendingMachineTest.seeingColaShowsItsPrice:26 
+Expected: is "Cola 1,00 €"
+     but: was "Bitte Münzen einwerfen"
+[ERROR] Tests run: 2, Failures: 1, Errors: 0, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.6.0:test (default-test) on project getraenkeautomat: There are test failures.
+[ERROR] 
+[ERROR] See /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-2/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[0m
+Ich baue jetzt die kleinste Zustandslogik in `VendingMachine`, damit genau ein „Fach ansehen“ die Preis-Meldung erzeugt und die Web-Ansicht dabei nicht umkippt.
+[0m✗ [0mPatch failed
+[91m[1mError: [0mapply_patch verification failed: Error: Failed to find expected lines in /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-2/src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java:
+    public synchronized String message() {
+        return "Bitte Münzen einwerfen";
+    }
+[0m→ [0mRead src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java[90m [offset=15, limit=70][0m
+[0m% [0mPatch 1 file
+[0m
+[0m$ [0mmvn -q test -Dtest=VendingMachineTest
+(no output)
+[0m
+Der rote Test ist grün. Jetzt prüfe ich das Feature-Szenario, weil die Änderung die Anzeige auch für die Cucumber-Schritte tragen muss.
+[0m$ [0mmvn -q test -Dtest=RunCucumberTest
+Szenario: Ein Getränk wählen                    # classpath:features/freies_getraenk.feature:6
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenario: Auch Bier fällt gratis                # classpath:features/freies_getraenk.feature:11
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Bier wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Bier im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenario: Preis für Cola anzeigen               # classpath:features/preis_anzeigen.feature:5
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola sehe                          # de.sharpsharp.vendingmachine.VendingMachineSteps.iSee(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann der Automat meldet "Cola 1,00 €"       # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+
+Szenario: Preis für Bier anzeigen               # classpath:features/preis_anzeigen.feature:10
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Bier sehe                          # de.sharpsharp.vendingmachine.VendingMachineSteps.iSee(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann der Automat meldet "Bier 2,00 €"       # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+[0m
+Die Story ist grün. Ich lasse jetzt `mvn -q verify` laufen, um sicherzugehen, dass nichts anderes kaputt gegangen ist.
+[0m$ [0mmvn -q verify
+Szenario: Ein Getränk wählen                    # classpath:features/freies_getraenk.feature:6
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenario: Auch Bier fällt gratis                # classpath:features/freies_getraenk.feature:11
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Bier wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Bier im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenario: Preis für Cola anzeigen               # classpath:features/preis_anzeigen.feature:5
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola sehe                          # de.sharpsharp.vendingmachine.VendingMachineSteps.iSee(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann der Automat meldet "Cola 1,00 €"       # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+
+Szenario: Preis für Bier anzeigen               # classpath:features/preis_anzeigen.feature:10
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Bier sehe                          # de.sharpsharp.vendingmachine.VendingMachineSteps.iSee(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann der Automat meldet "Bier 2,00 €"       # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+[0m
+[0m$ [0mgit status --short
+M src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+ M src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+[0m
+Geändert: `src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java`, `src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java`
+`mvn -q verify`: grün; letzter Block `Szenario: Preis für Bier anzeigen ... ✔ Dann der Automat meldet "Bier 2,00 €"`
+Offen: keine
+### Grün nach Runde 1.

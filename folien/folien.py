@@ -62,10 +62,10 @@ FOLIEN = [
         "            Dann ist das Ausgabefach leer\n"
         "            Und der Automat meldet \"Kein Bier vor 4\"")),
     dict(titel="Elf Regeln für Akzeptanztests", art="nummern", punkte=[
-        "Ein Szenario, ein Verhalten: genau ein Wenn.",
+        "Ein Szenario, ein Verhalten: genau ein Wenn, keins bei einer Regel ohne Auslöser.",
         "Deklarativ: was, nicht wie. Keine Knöpfe, Klicks, IDs, HTTP.",
         "Fachsprache des Kunden: Namen statt Nummern.",
-        "Angenommen ist Zustand, Wenn ist Ereignis, Dann ist von außen sichtbar.",
+        "Angenommen ist Zustand, Wenn ist Ereignis, Dann ist von außen sichtbar: Dose, Guthaben, Meldung, Preis, Bestand.",
         "Konkrete Beispiele mit Grenzwerten, nur relevante Details.",
         "Der Titel nennt die Regel, nicht den Ablauf.",
         "Unabhängig und wiederholbar: Zeit und Zufall gestellt.",
@@ -75,9 +75,18 @@ FOLIEN = [
         "Schritte sprechen mit dem Automaten, nicht mit der Oberfläche.",
     ]),
     dict(titel="Vorher und nachher: Story 1", art="spalten", spalten=[
-        ("Vanilla opencode", ["PLATZHALTER BASELINE"]),
-        ("Mit Pipeline", ["PLATZHALTER PIPELINE"]),
-    ], fuss="PLATZHALTER FUSS"),
+        ("Vanilla opencode, zwei Versuche", [
+            "Versuch 1, 57 Sekunden: mvn -q verify grün. 16 Zeilen in VendingMachine.java, kein Test, keine Spec.",
+            "Nebenbei takeCoins und coinReturn gebaut, die keine Story verlangt.",
+            "Versuch 2, 10 Sekunden: Dateipfad außerhalb des Projekts erfunden, Rechteabfrage abgelehnt, aufgehört.",
+        ]),
+        ("Mit Pipeline, vier Minuten", [
+            "/spec: eine EARS-Regel, keine offenen Fragen.",
+            "/akzeptanztest: zweites Szenario „Auch Bier fällt gratis“, beide rot.",
+            "/implementiere: roter Unit-Test zuerst, dann neun Zeilen Code, verify grün.",
+            "/review: zwei Befunde mit Datei:Zeile, zum Bestand und zum Szenariotitel.",
+        ]),
+    ], fuss="Gleiches Modell, gleiche Story. Der Unterschied: Regeln, Szenarien, Test und Review, jedes Mal in dieser Reihenfolge."),
     dict(titel="Deine Verantwortung", art="bullets", punkte=[
         "Du reviewst jedes Diff. Der Agent liefert Vorschläge, du lieferst Code.",
         "Wer eine Regel nicht formulieren kann, kann sie auch nicht vom Agenten verlangen.",

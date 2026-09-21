@@ -1,0 +1,34 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich prüfe kurz das Format der vorhandenen Specs, damit Story 4 im gleichen Stil landet.
+→ Read specs/1-alles-umsonst/spec.md
+→ Read specs/2-preis-anzeigen/spec.md
+→ Read specs/3-guthaben-anzeigen/spec.md
+Ich schreibe jetzt die Spec-Datei für Story 4 im gleichen kompakten Format wie die bisherigen.
+
+# Todos
+[✓] Story 4 in stories.md prüfen und den passenden Kurzname festlegen
+[•] specs/4-<kurzname>/spec.md mit Story, Regeln und offenen Fragen anlegen
+[ ] Kurz prüfen, ob die Datei nur unter specs/ geändert wurde
+
+% Patch 1 file
+Die erste Fassung braucht noch sauberere Grenzwerte, ich schärfe die Regeln jetzt auf konkrete Beträge nach.
+% Patch 1 file
+→ Read specs/4-getraenke-kosten-geld/spec.md
+
+$ git status --short
+?? specs/4-getraenke-kosten-geld/
+
+Die Spec liegt an; ich markiere den Abschluss und gebe dir gleich den Pfad plus Regeln.
+# Todos
+[✓] Story 4 in stories.md prüfen und den passenden Kurzname festlegen
+[✓] specs/4-<kurzname>/spec.md mit Story, Regeln und offenen Fragen anlegen
+[✓] Kurz prüfen, ob die Datei nur unter specs/ geändert wurde
+
+`specs/4-getraenke-kosten-geld/spec.md`
+
+Regeln:
+- `IF das Guthaben 0,99 € betraegt und der Preis 1,00 € ist, THEN SHALL der Automat keine Dose ausgeben und „Zu wenig Geld" melden.`
+- `WHEN das Guthaben 1,00 € betraegt und der Preis 1,00 € ist, SHALL der Automat die Dose ausgeben und den Preis vom Guthaben abziehen.`
+- `WHEN nach einem Kauf bei 1,50 € Guthaben und 1,00 € Preis 0,50 € Restguthaben bleibt, SHALL der Automat das Restguthaben mit zwei Nachkommastellen anzeigen.`

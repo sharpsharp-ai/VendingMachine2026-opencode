@@ -1,0 +1,220 @@
+
+> test-autor · gpt-5.4-mini
+
+Ich prüfe zuerst die vorhandene Feature-Datei und die vorhandenen Szenarien, dann ergänze ich nur die fehlenden Regeln für Story 2.
+→ Read src/test/resources/features/freies_getraenk.feature
+✱ Glob "src/test/resources/features/*.feature" in . · 1 match
+Die Story braucht vermutlich einen neuen Schritt für die Anzeige. Ich prüfe kurz, ob es dafür schon ein Vokabular gibt, damit ich nur die Feature-Datei ergänze oder sonst minimal erweitere.
+✱ Grep "meldet|zeigt|Preis|1,00|Münze|Guthaben" in . · 7 matches
+✱ Grep "Szenario:|Funktionalität:" in src/test/resources/features · 3 matches
+Ich prüfe noch die vorhandenen Display-Schritte. Falls sie nur die Maschine lesen, kann ich sie wiederverwenden und mir neue Java-Schritte sparen.
+→ Read src/test/java/de/sharpsharp/vendingmachine/smoke/WebSmokeSteps.java [offset=1, limit=180]
+✱ Grep "@Dann\(|@Wenn\(|@Angenommen\(" in src/test/java · 17 matches
+Ich suche noch nach vorhandenen Preis-Schritten oder einer fertigen Anzeige-Formulierung. Wenn es die gibt, kann ich die Story sauberer ohne neue Fachwörter formulieren.
+✱ Grep "1,00|Preis|kostet|€/|€" in . · 1 match
+✱ Grep "ich sehe|sehen|anzeige|anzeigen|zeigt der Automat" in . · 0 matches
+✱ Grep "enum Drink|class Drink" in src/main/java · 1 match
+→ Read src/main/java/de/sharpsharp/vendingmachine/Drink.java
+✱ Grep "slot\(|displayName|price\(|show|price" in src/main/java/de/sharpsharp/vendingmachine · 16 matches
+✱ Grep "Fach|Slot" in src/test/java/de/sharpsharp/vendingmachine · 6 matches
+Ich setze jetzt die neue Story-Datei auf und ergänze nur den fehlenden Anzeigeschritt in den bestehenden Steps. Danach generiere ich das Glossar neu und teste die Cucumber-Szenarien.
+% Patch 2 files
+
+# Todos
+[✓] Szenarien für Story 2 in `preis_anzeigen.feature` ergänzen
+[✓] Fehlenden Schritt in `VendingMachineSteps.java` hinzufügen
+[•] `scripts/steps-glossar.sh` ausführen
+[ ] `mvn -q test -Dtest=RunCucumberTest` ausführen
+
+$ scripts/steps-glossar.sh
+specs/glossar.md erzeugt: 5 Einträge
+
+Das Glossar ist aktualisiert. Jetzt prüfe ich die neuen Szenarien mit dem Cucumber-Run, um zu sehen, ob nur die Story 2 rot ist.
+$ mvn -q test -Dtest=RunCucumberTest
+Szenario: Ein Getränk wählen                    # classpath:features/freies_getraenk.feature:6
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenario: Auch Bier fällt gratis                # classpath:features/freies_getraenk.feature:11
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Bier wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Bier im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenario: Preis für Cola anzeigen               # classpath:features/preis_anzeigen.feature:5
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✘ Dann der Automat meldet "Cola 1,00 €"       # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+        java.lang.AssertionError: 
+        Expected: is "Cola 1,00 €"
+             but: was "Bitte Münzen einwerfen"
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(VendingMachineSteps.java:42)
+        	at ✽.der Automat meldet "Cola 1,00 €"(classpath:features/preis_anzeigen.feature:8)
+
+Szenario: Preis für Bier anzeigen               # classpath:features/preis_anzeigen.feature:10
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Bier wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✘ Dann der Automat meldet "Bier 2,00 €"       # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+        java.lang.AssertionError: 
+        Expected: is "Bier 2,00 €"
+             but: was "Bitte Münzen einwerfen"
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(VendingMachineSteps.java:42)
+        	at ✽.der Automat meldet "Bier 2,00 €"(classpath:features/preis_anzeigen.feature:13)
+[ERROR] Tests run: 4, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.512 s <<< FAILURE! -- in de.sharpsharp.vendingmachine.RunCucumberTest
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Preis für Cola anzeigen -- Time elapsed: 0.013 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: is "Cola 1,00 €"
+     but: was "Bitte Münzen einwerfen"
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(VendingMachineSteps.java:42)
+	at ✽.der Automat meldet "Cola 1,00 €"(classpath:features/preis_anzeigen.feature:8)
+
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Preis für Bier anzeigen -- Time elapsed: 0.005 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: is "Bier 2,00 €"
+     but: was "Bitte Münzen einwerfen"
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(VendingMachineSteps.java:42)
+	at ✽.der Automat meldet "Bier 2,00 €"(classpath:features/preis_anzeigen.feature:13)
+
+[ERROR] Failures: 
+[ERROR]   RunCucumberTest.Preis für Bier anzeigen 
+Expected: is "Bier 2,00 €"
+     but: was "Bitte Münzen einwerfen"
+[ERROR]   RunCucumberTest.Preis für Cola anzeigen 
+Expected: is "Cola 1,00 €"
+     but: was "Bitte Münzen einwerfen"
+[ERROR] Tests run: 4, Failures: 2, Errors: 0, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.6.0:test (default-test) on project getraenkeautomat: There are test failures.
+[ERROR] 
+[ERROR] See /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-2/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+
+Ich passe den Ereignisschritt noch an die Story an: nicht auswählen, sondern das Fach ansehen. Der Test soll weiterhin rot bleiben, aber fachlich näher an der Spec sein.
+% Patch 2 files
+
+$ scripts/steps-glossar.sh
+specs/glossar.md erzeugt: 6 Einträge
+
+$ mvn -q test -Dtest=RunCucumberTest
+Szenario: Ein Getränk wählen                    # classpath:features/freies_getraenk.feature:6
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenario: Auch Bier fällt gratis                # classpath:features/freies_getraenk.feature:11
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Bier wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Bier im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenario: Preis für Cola anzeigen               # classpath:features/preis_anzeigen.feature:5
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola sehe                          # de.sharpsharp.vendingmachine.VendingMachineSteps.iSee(de.sharpsharp.vendingmachine.Drink)
+  ✘ Dann der Automat meldet "Cola 1,00 €"       # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+        java.lang.AssertionError: 
+        Expected: is "Cola 1,00 €"
+             but: was "Bitte Münzen einwerfen"
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(VendingMachineSteps.java:47)
+        	at ✽.der Automat meldet "Cola 1,00 €"(classpath:features/preis_anzeigen.feature:8)
+
+Szenario: Preis für Bier anzeigen               # classpath:features/preis_anzeigen.feature:10
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Bier sehe                          # de.sharpsharp.vendingmachine.VendingMachineSteps.iSee(de.sharpsharp.vendingmachine.Drink)
+  ✘ Dann der Automat meldet "Bier 2,00 €"       # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+        java.lang.AssertionError: 
+        Expected: is "Bier 2,00 €"
+             but: was "Bitte Münzen einwerfen"
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(VendingMachineSteps.java:47)
+        	at ✽.der Automat meldet "Bier 2,00 €"(classpath:features/preis_anzeigen.feature:13)
+[ERROR] Tests run: 4, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.516 s <<< FAILURE! -- in de.sharpsharp.vendingmachine.RunCucumberTest
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Preis für Cola anzeigen -- Time elapsed: 0.008 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: is "Cola 1,00 €"
+     but: was "Bitte Münzen einwerfen"
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(VendingMachineSteps.java:47)
+	at ✽.der Automat meldet "Cola 1,00 €"(classpath:features/preis_anzeigen.feature:8)
+
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Preis für Bier anzeigen -- Time elapsed: 0.004 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: is "Bier 2,00 €"
+     but: was "Bitte Münzen einwerfen"
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(VendingMachineSteps.java:47)
+	at ✽.der Automat meldet "Bier 2,00 €"(classpath:features/preis_anzeigen.feature:13)
+
+[ERROR] Failures: 
+[ERROR]   RunCucumberTest.Preis für Bier anzeigen 
+Expected: is "Bier 2,00 €"
+     but: was "Bitte Münzen einwerfen"
+[ERROR]   RunCucumberTest.Preis für Cola anzeigen 
+Expected: is "Cola 1,00 €"
+     but: was "Bitte Münzen einwerfen"
+[ERROR] Tests run: 4, Failures: 2, Errors: 0, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.6.0:test (default-test) on project getraenkeautomat: There are test failures.
+[ERROR] 
+[ERROR] See /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-2/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+
+# Todos
+[✓] Szenarien für Story 2 in `preis_anzeigen.feature` ergänzen
+[✓] Fehlenden Schritt in `VendingMachineSteps.java` hinzufügen
+[✓] `scripts/steps-glossar.sh` ausführen
+[✓] `mvn -q test -Dtest=RunCucumberTest` ausführen
+
+→ Read src/test/resources/features/preis_anzeigen.feature
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java [offset=1, limit=120]
+**Dateien**
+- `src/test/resources/features/preis_anzeigen.feature`
+- `src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java`
+- `specs/glossar.md`
+
+**Szenarien**
+- Preis für Cola anzeigen
+- Preis für Bier anzeigen
+
+**Regeln**
+1. ja - einzeln
+2. ja - deklarativ
+3. ja - Fachsprache
+4. ja - außen
+5. ja - konkret
+6. ja - regel
+7. ja - stabil
+8. ja - Glossar
+9. ja - abgedeckt
+10. ja - kurz
+11. ja - Maschine
+
+**Test**
+- `mvn -q test -Dtest=RunCucumberTest` ist rot, die neuen Preis-Szenarien scheitern wie erwartet am noch fehlenden Verhalten.

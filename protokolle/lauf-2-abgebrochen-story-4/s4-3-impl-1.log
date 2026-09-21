@@ -1,0 +1,472 @@
+### Runde 1 von 5: /implementiere Zu wenig Geld meldet Ablehnung
+[0m
+> implementierer · gpt-5.4-mini
+[0m
+Ich prüfe zuerst die vorhandenen Unit-Tests und die kleinste Regel für „Zu wenig Geld“, dann mache ich genau diesen Fall rot/grün ohne andere Stories anzufassen.
+[0m✱ [0mGrep "class VendingMachineTest|@Test"[90m in . · 8 matches[0m
+[0m✱ [0mGlob "src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java"[90m 1 match[0m
+[0m→ [0mRead src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+[0m→ [0mRead src/test/java/de/sharpsharp/vendingmachine/WebTest.java
+Ich habe die aktuelle Basis: `selectDrink` legt immer direkt eine Dose in das Ausgabefach, deshalb wird „Zu wenig Geld“ nie ausgelöst. Als Nächstes schreibe ich den kleinsten Unit-Test für die Ablehnung und passe danach nur `VendingMachine` an.
+[0m✱ [0mGrep "refused\(|message\(|selectDrink\(|stock\("[90m in . · 15 matches[0m
+[0m→ [0mRead src/main/java/de/sharpsharp/vendingmachine/Drink.java
+[0m→ [0mRead src/main/java/de/sharpsharp/vendingmachine/Main.java[90m [offset=35, limit=90][0m
+[0m→ [0mRead src/main/java/de/sharpsharp/vendingmachine/Main.java[90m [offset=90, limit=40][0m
+[0m
+[0m# [0mTodos
+[•] Write the smallest failing unit test for 'Zu wenig Geld meldet Ablehnung'
+[ ] Implement only the minimal VendingMachine change for insufficient money rejection
+[ ] Run the targeted unit test and Cucumber scenario, then `mvn -q verify`
+[ ] Apply clean-code check only if needed
+[0m
+Ich ändere jetzt nur den kleinsten Pfad: ein Unit-Test für die Ablehnung und eine minimale `refused`-Markierung in `VendingMachine`, ohne die übrigen Stories anzufassen.
+[0m% [0mPatch 1 file
+[0m✗ [0mPatch failed
+[91m[1mError: [0mapply_patch verification failed: Error: Failed to find expected lines in /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-2/src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java:
+    private final List<Drink> outputTray = new ArrayList<>();
+    private int credit;
+    private Drink viewedDrink;
+[0m→ [0mRead src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java[90m [offset=15, limit=30][0m
+[0m% [0mPatch 1 file
+Ich habe die minimale Ablehnungslogik eingebaut. Jetzt prüfe ich zuerst den Unit-Test, dann das Cucumber-Szenario und erst danach den Gesamtlauf.
+[0m
+[0m$ [0mmvn -q test -Dtest=VendingMachineTest
+(no output)
+[0m
+[0m$ [0mmvn -q test -Dtest=RunCucumberTest
+Szenario: Ein Getränk wählen                    # classpath:features/freies_getraenk.feature:6
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenario: Auch Bier fällt gratis                # classpath:features/freies_getraenk.feature:11
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Bier wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Bier im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenario: Zu wenig Geld meldet Ablehnung        # classpath:features/getraenke_kosten_geld.feature:5
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich habe 99 ct eingeworfen              # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveInsertedCentCoins(int)
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann der Automat meldet "Zu wenig Geld"     # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+
+Szenario: Genau genug Geld gibt eine Dose aus   # classpath:features/getraenke_kosten_geld.feature:11
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich habe 1 € eingeworfen                # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveInsertedEuroCoins(int)
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenario: Restguthaben nach dem Kauf anzeigen   # classpath:features/getraenke_kosten_geld.feature:17
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich habe 1 € eingeworfen                # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveInsertedEuroCoins(int)
+  ✔ Und ich habe 50 ct eingeworfen              # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveInsertedCentCoins(int)
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✘ Dann der Automat meldet "Guthaben: 0,50 €"  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+        java.lang.AssertionError: 
+        Expected: is "Guthaben: 0,50 €"
+             but: was "Guthaben: 1,50 €"
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(VendingMachineSteps.java:67)
+        	at ✽.der Automat meldet "Guthaben: 0,50 €"(classpath:features/getraenke_kosten_geld.feature:22)
+
+Szenario: Guthaben nach 50 Cent anzeigen        # classpath:features/guthaben_anzeigen.feature:5
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich 50 ct einwerfe                     # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCentCoins(int)
+  ✔ Dann der Automat meldet "Guthaben: 0,50 €"  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+
+Szenario: Guthaben nach 1 Euro anzeigen         # classpath:features/guthaben_anzeigen.feature:10
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich 1 € einwerfe                       # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertEuroCoins(int)
+  ✔ Dann der Automat meldet "Guthaben: 1,00 €"  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+
+Szenario: Guthaben nach 2 Euro anzeigen         # classpath:features/guthaben_anzeigen.feature:15
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich 2 € einwerfe                       # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertEuroCoins(int)
+  ✔ Dann der Automat meldet "Guthaben: 2,00 €"  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+
+Szenario: Mehrere Münzen addieren               # classpath:features/guthaben_anzeigen.feature:20
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich 50 ct einwerfe                     # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCentCoins(int)
+  ✔ Und ich 1 € einwerfe                        # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertEuroCoins(int)
+  ✔ Dann der Automat meldet "Guthaben: 1,50 €"  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+
+Szenario: Preis für Cola anzeigen               # classpath:features/preis_anzeigen.feature:5
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola sehe                          # de.sharpsharp.vendingmachine.VendingMachineSteps.iSee(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann der Automat meldet "Cola 1,00 €"       # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+
+Szenario: Preis für Bier anzeigen               # classpath:features/preis_anzeigen.feature:10
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Bier sehe                          # de.sharpsharp.vendingmachine.VendingMachineSteps.iSee(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann der Automat meldet "Bier 2,00 €"       # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+[ERROR] Tests run: 11, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.545 s <<< FAILURE! -- in de.sharpsharp.vendingmachine.RunCucumberTest
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Restguthaben nach dem Kauf anzeigen -- Time elapsed: 0.015 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: is "Guthaben: 0,50 €"
+     but: was "Guthaben: 1,50 €"
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(VendingMachineSteps.java:67)
+	at ✽.der Automat meldet "Guthaben: 0,50 €"(classpath:features/getraenke_kosten_geld.feature:22)
+
+[ERROR] Failures: 
+[ERROR]   RunCucumberTest.Restguthaben nach dem Kauf anzeigen 
+Expected: is "Guthaben: 0,50 €"
+     but: was "Guthaben: 1,50 €"
+[ERROR] Tests run: 11, Failures: 1, Errors: 0, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.6.0:test (default-test) on project getraenkeautomat: There are test failures.
+[ERROR] 
+[ERROR] See /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-2/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[0m
+Das Ziel-Szenario ist jetzt grün. Der Gesamtlauf bleibt absichtlich rot wegen des bereits bestehenden Restguthaben-Falls; ich hole mir noch die exakten `verify`-Schlusszeilen für die Abschlussmeldung.
+[0m$ [0mmvn -q verify
+Szenario: Ein Getränk wählen                    # classpath:features/freies_getraenk.feature:6
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenario: Auch Bier fällt gratis                # classpath:features/freies_getraenk.feature:11
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Bier wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Bier im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenario: Zu wenig Geld meldet Ablehnung        # classpath:features/getraenke_kosten_geld.feature:5
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich habe 99 ct eingeworfen              # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveInsertedCentCoins(int)
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann der Automat meldet "Zu wenig Geld"     # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+
+Szenario: Genau genug Geld gibt eine Dose aus   # classpath:features/getraenke_kosten_geld.feature:11
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich habe 1 € eingeworfen                # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveInsertedEuroCoins(int)
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenario: Restguthaben nach dem Kauf anzeigen   # classpath:features/getraenke_kosten_geld.feature:17
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich habe 1 € eingeworfen                # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveInsertedEuroCoins(int)
+  ✔ Und ich habe 50 ct eingeworfen              # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveInsertedCentCoins(int)
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✘ Dann der Automat meldet "Guthaben: 0,50 €"  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+        java.lang.AssertionError: 
+        Expected: is "Guthaben: 0,50 €"
+             but: was "Guthaben: 1,50 €"
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(VendingMachineSteps.java:67)
+        	at ✽.der Automat meldet "Guthaben: 0,50 €"(classpath:features/getraenke_kosten_geld.feature:22)
+
+Szenario: Guthaben nach 50 Cent anzeigen        # classpath:features/guthaben_anzeigen.feature:5
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich 50 ct einwerfe                     # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCentCoins(int)
+  ✔ Dann der Automat meldet "Guthaben: 0,50 €"  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+
+Szenario: Guthaben nach 1 Euro anzeigen         # classpath:features/guthaben_anzeigen.feature:10
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich 1 € einwerfe                       # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertEuroCoins(int)
+  ✔ Dann der Automat meldet "Guthaben: 1,00 €"  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+
+Szenario: Guthaben nach 2 Euro anzeigen         # classpath:features/guthaben_anzeigen.feature:15
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich 2 € einwerfe                       # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertEuroCoins(int)
+  ✔ Dann der Automat meldet "Guthaben: 2,00 €"  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+
+Szenario: Mehrere Münzen addieren               # classpath:features/guthaben_anzeigen.feature:20
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich 50 ct einwerfe                     # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCentCoins(int)
+  ✔ Und ich 1 € einwerfe                        # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertEuroCoins(int)
+  ✔ Dann der Automat meldet "Guthaben: 1,50 €"  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+
+Szenario: Preis für Cola anzeigen               # classpath:features/preis_anzeigen.feature:5
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola sehe                          # de.sharpsharp.vendingmachine.VendingMachineSteps.iSee(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann der Automat meldet "Cola 1,00 €"       # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+
+Szenario: Preis für Bier anzeigen               # classpath:features/preis_anzeigen.feature:10
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Bier sehe                          # de.sharpsharp.vendingmachine.VendingMachineSteps.iSee(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann der Automat meldet "Bier 2,00 €"       # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+[ERROR] Tests run: 11, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.541 s <<< FAILURE! -- in de.sharpsharp.vendingmachine.RunCucumberTest
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Restguthaben nach dem Kauf anzeigen -- Time elapsed: 0.014 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: is "Guthaben: 0,50 €"
+     but: was "Guthaben: 1,50 €"
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(VendingMachineSteps.java:67)
+	at ✽.der Automat meldet "Guthaben: 0,50 €"(classpath:features/getraenke_kosten_geld.feature:22)
+
+[ERROR] Failures: 
+[ERROR]   RunCucumberTest.Restguthaben nach dem Kauf anzeigen 
+Expected: is "Guthaben: 0,50 €"
+     but: was "Guthaben: 1,50 €"
+[ERROR] Tests run: 21, Failures: 1, Errors: 0, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.6.0:test (default-test) on project getraenkeautomat: There are test failures.
+[ERROR] 
+[ERROR] See /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-2/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[0m
+[0m# [0mTodos
+[✓] Write the smallest failing unit test for 'Zu wenig Geld meldet Ablehnung'
+[✓] Implement only the minimal VendingMachine change for insufficient money rejection
+[✓] Run the targeted unit test and Cucumber scenario, then `mvn -q verify`
+[✓] Apply clean-code check only if needed
+[0m
+[0m$ [0mgit status --short
+M src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+ M src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+[0m
+Geändert: `src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java`, `src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java`
+`mvn -q verify`: `[ERROR] RunCucumberTest.Restguthaben nach dem Kauf anzeigen ... Expected: is "Guthaben: 0,50 €" but: was "Guthaben: 1,50 €"`
+Offen: Das gewünschte Szenario ist grün; `verify` bleibt wegen dem anderen, bereits roten Szenario offen.
+### Noch rot. Letzte Zeilen:
+[ERROR]   RunCucumberTest.Restguthaben nach dem Kauf anzeigen 
+Expected: is "Guthaben: 0,50 €"
+     but: was "Guthaben: 1,50 €"
+[ERROR] Tests run: 21, Failures: 1, Errors: 0, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.6.0:test (default-test) on project getraenkeautomat: There are test failures.
+[ERROR] 
+[ERROR] See /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-2/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+### Runde 2 von 5: /implementiere Zu wenig Geld meldet Ablehnung
+[0m
+> implementierer · gpt-5.4-mini
+[0m
+Ich prüfe kurz die vorhandenen Unit-Tests und das aktuelle Verhalten, damit ich nur die kleinste Regel ändere, die das gewünschte Szenario braucht.
+[0m✱ [0mGlob "src/test/java/de/sharpsharp/vendingmachine/*Test.java"[90m 4 matches[0m
+[0m✱ [0mGrep "selectDrink|credit\(|message\(|refused"[90m in . · 9 matches[0m
+[0m→ [0mRead src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+[0m→ [0mRead src/test/java/de/sharpsharp/vendingmachine/WebTest.java[90m [offset=1, limit=120][0m
+Ich verifiziere nur die kleinste Regel für `Zu wenig Geld meldet Ablehnung`, ohne am Rest etwas zu ändern.
+[0m
+[0m$ [0mmvn -q test -Dtest=VendingMachineTest#selectingColaWithTooLittleMoneyShowsRejection
+(no output)
+[0m
+Geänderte Dateien: keine.
+`VendingMachineTest#selectingColaWithTooLittleMoneyShowsRejection` ist grün; das Szenario `Zu wenig Geld meldet Ablehnung` braucht keine Änderung.
+Offen: `mvn -q verify` hat weiterhin den anderen Fehler `Restguthaben nach dem Kauf anzeigen`.
+### Noch rot. Letzte Zeilen:
+[ERROR]   RunCucumberTest.Restguthaben nach dem Kauf anzeigen 
+Expected: is "Guthaben: 0,50 €"
+     but: was "Guthaben: 1,50 €"
+[ERROR] Tests run: 21, Failures: 1, Errors: 0, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.6.0:test (default-test) on project getraenkeautomat: There are test failures.
+[ERROR] 
+[ERROR] See /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-2/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+### Runde 3 von 5: /implementiere Zu wenig Geld meldet Ablehnung
+[0m
+> implementierer · gpt-5.4-mini
+[0m
+Ich prüfe kurz die bestehenden Unit-Tests und passe dann nur die kleinstmögliche Kaufregel an.
+[0m→ [0mRead src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+[0m✱ [0mGlob "src/test/java/de/sharpsharp/vendingmachine/*Test.java"[90m 4 matches[0m
+Ich ergänze zuerst den kleinsten fehlenden Unit-Test für die Kaufregel, dann ziehe ich genau diese Regel im Produktivcode nach.
+[0m
+[0m# [0mTodos
+[•] Unit-Test für Restguthaben nach erfolgreichem Kauf ergänzen
+[ ] Kaufregel minimal im VendingMachine-Code umsetzen
+[ ] Betroffenes Szenario und `mvn -q verify` prüfen
+[0m
+[0m% [0mPatch 1 file
+[0m
+[0m$ [0mmvn -q test -Dtest=VendingMachineTest
+[ERROR] Tests run: 5, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.051 s <<< FAILURE! -- in de.sharpsharp.vendingmachine.VendingMachineTest
+[ERROR] de.sharpsharp.vendingmachine.VendingMachineTest.buyingColaReducesCredit -- Time elapsed: 0.035 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: is "Guthaben: 0,50 €"
+     but: was "Guthaben: 1,50 €"
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineTest.buyingColaReducesCredit(VendingMachineTest.java:55)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+
+[ERROR] Failures: 
+[ERROR]   VendingMachineTest.buyingColaReducesCredit:55 
+Expected: is "Guthaben: 0,50 €"
+     but: was "Guthaben: 1,50 €"
+[ERROR] Tests run: 5, Failures: 1, Errors: 0, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.6.0:test (default-test) on project getraenkeautomat: There are test failures.
+[ERROR] 
+[ERROR] See /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-2/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[0m
+Ich ändere nur die Kaufabwicklung: bei genug Guthaben wird der Preis abgezogen, das Gratis-Verhalten bleibt unangetastet.
+[0m% [0mPatch 1 file
+[0m
+[0m$ [0mmvn -q test -Dtest=VendingMachineTest
+(no output)
+[0m
+Der Unit-Test ist grün. Ich prüfe jetzt das betroffene Cucumber-Szenario und danach den Gesamt-Verify.
+[0m$ [0mmvn -q test -Dtest=RunCucumberTest
+Szenario: Ein Getränk wählen                    # classpath:features/freies_getraenk.feature:6
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenario: Auch Bier fällt gratis                # classpath:features/freies_getraenk.feature:11
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Bier wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Bier im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenario: Zu wenig Geld meldet Ablehnung        # classpath:features/getraenke_kosten_geld.feature:5
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich habe 99 ct eingeworfen              # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveInsertedCentCoins(int)
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann der Automat meldet "Zu wenig Geld"     # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+
+Szenario: Genau genug Geld gibt eine Dose aus   # classpath:features/getraenke_kosten_geld.feature:11
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich habe 1 € eingeworfen                # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveInsertedEuroCoins(int)
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenario: Restguthaben nach dem Kauf anzeigen   # classpath:features/getraenke_kosten_geld.feature:17
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich habe 1 € eingeworfen                # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveInsertedEuroCoins(int)
+  ✔ Und ich habe 50 ct eingeworfen              # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveInsertedCentCoins(int)
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann der Automat meldet "Guthaben: 0,50 €"  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+
+Szenario: Guthaben nach 50 Cent anzeigen        # classpath:features/guthaben_anzeigen.feature:5
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich 50 ct einwerfe                     # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCentCoins(int)
+  ✔ Dann der Automat meldet "Guthaben: 0,50 €"  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+
+Szenario: Guthaben nach 1 Euro anzeigen         # classpath:features/guthaben_anzeigen.feature:10
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich 1 € einwerfe                       # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertEuroCoins(int)
+  ✔ Dann der Automat meldet "Guthaben: 1,00 €"  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+
+Szenario: Guthaben nach 2 Euro anzeigen         # classpath:features/guthaben_anzeigen.feature:15
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich 2 € einwerfe                       # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertEuroCoins(int)
+  ✔ Dann der Automat meldet "Guthaben: 2,00 €"  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+
+Szenario: Mehrere Münzen addieren               # classpath:features/guthaben_anzeigen.feature:20
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich 50 ct einwerfe                     # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCentCoins(int)
+  ✔ Und ich 1 € einwerfe                        # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertEuroCoins(int)
+  ✔ Dann der Automat meldet "Guthaben: 1,50 €"  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+
+Szenario: Preis für Cola anzeigen               # classpath:features/preis_anzeigen.feature:5
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola sehe                          # de.sharpsharp.vendingmachine.VendingMachineSteps.iSee(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann der Automat meldet "Cola 1,00 €"       # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+
+Szenario: Preis für Bier anzeigen               # classpath:features/preis_anzeigen.feature:10
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Bier sehe                          # de.sharpsharp.vendingmachine.VendingMachineSteps.iSee(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann der Automat meldet "Bier 2,00 €"       # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+[0m
+[0m$ [0mmvn -q verify
+Szenario: Ein Getränk wählen                    # classpath:features/freies_getraenk.feature:6
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenario: Auch Bier fällt gratis                # classpath:features/freies_getraenk.feature:11
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Bier wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Bier im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenario: Zu wenig Geld meldet Ablehnung        # classpath:features/getraenke_kosten_geld.feature:5
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich habe 99 ct eingeworfen              # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveInsertedCentCoins(int)
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann der Automat meldet "Zu wenig Geld"     # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+
+Szenario: Genau genug Geld gibt eine Dose aus   # classpath:features/getraenke_kosten_geld.feature:11
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich habe 1 € eingeworfen                # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveInsertedEuroCoins(int)
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenario: Restguthaben nach dem Kauf anzeigen   # classpath:features/getraenke_kosten_geld.feature:17
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich habe 1 € eingeworfen                # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveInsertedEuroCoins(int)
+  ✔ Und ich habe 50 ct eingeworfen              # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveInsertedCentCoins(int)
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann der Automat meldet "Guthaben: 0,50 €"  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+
+Szenario: Guthaben nach 50 Cent anzeigen        # classpath:features/guthaben_anzeigen.feature:5
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich 50 ct einwerfe                     # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCentCoins(int)
+  ✔ Dann der Automat meldet "Guthaben: 0,50 €"  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+
+Szenario: Guthaben nach 1 Euro anzeigen         # classpath:features/guthaben_anzeigen.feature:10
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich 1 € einwerfe                       # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertEuroCoins(int)
+  ✔ Dann der Automat meldet "Guthaben: 1,00 €"  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+
+Szenario: Guthaben nach 2 Euro anzeigen         # classpath:features/guthaben_anzeigen.feature:15
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich 2 € einwerfe                       # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertEuroCoins(int)
+  ✔ Dann der Automat meldet "Guthaben: 2,00 €"  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+
+Szenario: Mehrere Münzen addieren               # classpath:features/guthaben_anzeigen.feature:20
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich 50 ct einwerfe                     # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCentCoins(int)
+  ✔ Und ich 1 € einwerfe                        # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertEuroCoins(int)
+  ✔ Dann der Automat meldet "Guthaben: 1,50 €"  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+
+Szenario: Preis für Cola anzeigen               # classpath:features/preis_anzeigen.feature:5
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola sehe                          # de.sharpsharp.vendingmachine.VendingMachineSteps.iSee(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann der Automat meldet "Cola 1,00 €"       # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+
+Szenario: Preis für Bier anzeigen               # classpath:features/preis_anzeigen.feature:10
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Bier sehe                          # de.sharpsharp.vendingmachine.VendingMachineSteps.iSee(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann der Automat meldet "Bier 2,00 €"       # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+[0m
+Das Szenario ist grün und `mvn -q verify` ist still grün. Ich schließe die Arbeit mit den zwei geänderten Dateien ab.
+[0m# [0mTodos
+[✓] Unit-Test für Restguthaben nach erfolgreichem Kauf ergänzen
+[✓] Kaufregel minimal im VendingMachine-Code umsetzen
+[✓] Betroffenes Szenario und `mvn -q verify` prüfen
+[0m
+Geändert: `src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java`, `src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java`
+`mvn -q verify`: keine Ausgabe, Exit-Code 0
+Offen: nichts
+### Grün nach Runde 3.

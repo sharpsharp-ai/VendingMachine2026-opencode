@@ -1,0 +1,23 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich prüfe kurz die vorhandenen Specs, damit die neue Datei den gleichen Zuschnitt und Stil hat.
+→ Read specs/1-alles-umsonst/spec.md
+→ Read specs/2-preis-anzeigen/spec.md
+Ich lege jetzt die neue Spec an, mit zwei EARS-Regeln passend zu den beiden Akzeptanzkriterien der Story 3.
+✱ Glob "specs/3-*" in . · 0 matches
+
+$ ls specs
+1-alles-umsonst
+2-preis-anzeigen
+glossar.md
+stories.md
+
+% Patch 1 file
+Die Datei ist angelegt; ich prüfe noch kurz den Inhalt und bleibe dabei nur in `specs/`.
+→ Read specs/3-guthaben-anzeigen/spec.md
+`specs/3-guthaben-anzeigen/spec.md`
+
+Regeln:
+- WHEN der Kunde 50 ct, 1 € oder 2 € einwirft, SHALL der Automat das Guthaben um 50, 100 oder 200 Cent erhöhen und als `"Guthaben: x,xx €"` anzeigen.
+- WHEN der Kunde mehrere Münzen einwirft, SHALL der Automat die Beträge addieren und das Guthaben mit zwei Nachkommastellen anzeigen.
