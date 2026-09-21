@@ -1,0 +1,98 @@
+
+> test-autor · gpt-5.4-mini
+
+Ich prüfe erst vorhandene Feature-Dateien und vorhandene Zeit-Schritte, damit die neue Story 7 im bestehenden Stil ergänzt wird.
+✱ Glob "src/test/resources/features/*.feature" 5 matches
+✱ Grep "Uhr|Zeit|16:00|vor 16|Bier vor 4" in . · 0 matches
+→ Read specs/stories.md
+→ Read src/test/resources/features/bier_kostet_mehr.feature
+Ich füge jetzt die neue Feature-Datei hinzu und ergänze die Step-Klasse um einen Zeit-Schritt, damit die Szenarien fachlich vollständig sind.
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java [offset=1, limit=140]
+✱ Grep "setTime|time\(" in . · 0 matches
+% Patch 2 files
+Die Szenarien stehen; jetzt lasse ich das Glossar neu erzeugen und prüfe danach, wie weit die Testausführung kommt.
+
+$ scripts/steps-glossar.sh
+specs/glossar.md erzeugt: 17 Einträge
+
+$ mvn -q test -Dtest=RunCucumberTest
+[ERROR] COMPILATION ERROR : 
+[ERROR] /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-4/src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java:[28,16] cannot find symbol
+  symbol:   method setTime(int,int)
+  location: variable machine of type de.sharpsharp.vendingmachine.VendingMachine
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.14.0:testCompile (default-testCompile) on project getraenkeautomat: Compilation failure
+[ERROR] /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-4/src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java:[28,16] cannot find symbol
+[ERROR]   symbol:   method setTime(int,int)
+[ERROR]   location: variable machine of type de.sharpsharp.vendingmachine.VendingMachine
+[ERROR] 
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+
+Das Ergebnis ist erwartbar rot, weil der neue Zeit-Schritt noch keine Maschinenmethode hat. Ich prüfe jetzt kurz die erzeugten Dateien und halte dann die Abgabe sauber fest.
+→ Read specs/glossar.md [offset=1, limit=120]
+→ Read src/test/resources/features/kein_bier_vor_4.feature [offset=1, limit=120]
+
+$ git status --short
+M specs/glossar.md
+ M src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java
+?? specs/7-kein-bier-vor-4/
+?? src/test/resources/features/kein_bier_vor_4.feature
+
+`steps-glossar.sh` hat auch die neue Story-7-Spec angelegt. Ich schaue kurz rein, damit ich nichts Ungewolltes übersehe.
+→ Read specs/7-kein-bier-vor-4/spec.md [offset=1, limit=120]
+✱ Glob "specs/7-kein-bier-vor-4/**" 1 match
+
+$ git diff -- src/test/resources/features/kein_bier_vor_4.feature src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java specs/glossar.md specs/7-kein-bier-vor-4/spec.md
+diff --git a/specs/glossar.md b/specs/glossar.md
+index a4604d4..e5becec 100644
+--- a/specs/glossar.md
++++ b/specs/glossar.md
+@@ -35,6 +35,7 @@ die Schrittdefinitionen rufen die Methode in der letzten Spalte.
+ Wiederverwenden, bevor ein neuer Schritt entsteht. Quelle: die Step-Klassen im Paket `de.sharpsharp.vendingmachine`.
+ 
+ - Angenommen der Automat ist frisch gestartet
++- Angenommen es ist {int}:{int} Uhr
+ - Angenommen ich habe {betrag} eingeworfen
+ - Angenommen ich habe Abbruch gedrückt
+ - Dann der Automat meldet {string}
+diff --git a/src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java b/src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java
+index 77d9a09..7a0a49d 100644
+--- a/src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java
++++ b/src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java
+@@ -23,6 +23,11 @@ public class VendingMachineSteps {
+         // Nothing to do: Cucumber builds this class, and with it the machine, fresh for every scenario.
+     }
+ 
++    @Angenommen("es ist {int}:{int} Uhr")
++    public void itIsClock(int hour, int minute) {
++        machine.setTime(hour, minute);
++    }
++
+     @Angenommen("ich habe {betrag} eingeworfen")
+     public void iHaveInsertedCredit(int cents) {
+         machine.insertCoin(cents);
+
+$ git log --oneline -10
+9a644d4 Story 6: implementiert
+dcf6ca2 Story 6: Spec und Szenarien
+02a68b0 Story 5: implementiert
+0d9f69e Story 5: Spec und Szenarien
+bdc2302 Story 4: implementiert
+582432b Story 4: Spec und Szenarien
+88e6db1 Story 3: implementiert
+f7339ab Story 3: Spec und Szenarien
+5c4657b Story 2: implementiert
+a9df150 Story 2: Spec und Szenarien
+
+Datei: `src/test/resources/features/kein_bier_vor_4.feature`  
+Szenarien: `Vor 16 Uhr fällt kein Bier`, `Ab 16 Uhr fällt Bier`  
+Regeln: 1 ja Ein Wenn; 2 ja deklarativ; 3 ja Namen; 4 ja sichtbar; 5 ja Grenzwert; 6 ja Titel; 7 ja unabhängig; 8 ja Glossar; 9 ja beide Regeln; 10 ja knapp; 11 ja VendingMachine
+
+Geändert: `src/test/resources/features/kein_bier_vor_4.feature`, `src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java`, `specs/glossar.md`, `specs/7-kein-bier-vor-4/spec.md`
+mvn -q verify: nicht ausgeführt
+Offen: `mvn -q test -Dtest=RunCucumberTest` ist rot, weil `VendingMachine#setTime(int,int)` noch fehlt

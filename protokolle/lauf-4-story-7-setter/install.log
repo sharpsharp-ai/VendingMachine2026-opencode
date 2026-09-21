@@ -1,0 +1,14 @@
+kopiert      .opencode/commands/akzeptanztest.md
+kopiert      .opencode/commands/implementiere.md
+kopiert      .opencode/commands/review.md
+kopiert      .opencode/commands/spec.md
+kopiert      .opencode/skills/akzeptanztest-regeln/SKILL.md
+kopiert      .opencode/skills/clean-code-check/SKILL.md
+kopiert      .opencode/skills/ears-regeln/SKILL.md
+kopiert      .opencode/skills/tdd-zyklus/SKILL.md
+kopiert      AGENTS.md
+kopiert      opencode.json
+kopiert      scripts/bis-gruen.sh
+kopiert      src/test/resources/features/AGENTS.md
+specs/glossar.md erzeugt: 5 Einträge
+Fertig. opencode im Projekt starten (oder neu starten), dann: /spec 1

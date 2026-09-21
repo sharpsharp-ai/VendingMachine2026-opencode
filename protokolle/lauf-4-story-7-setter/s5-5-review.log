@@ -1,0 +1,23 @@
+
+> reviewer · gpt-5.4-mini
+
+Ich prüfe jetzt die betroffenen Klassen vollständig und gleiche sie mit den Review-Regeln ab, besonders auf Fachlogik, Tests und Akzeptanzszenarien.
+→ Read .opencode/skills/akzeptanztest-regeln/SKILL.md
+→ Read src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+Ich prüfe zusätzlich die Feature-Dateien, um festzustellen, ob die neuen Tests oder Szenarien gegen die Gherkin-Regeln verstoßen.
+→ Read src/main/java/de/sharpsharp/vendingmachine/Main.java
+✱ Glob "src/test/resources/features/*.feature" 4 matches
+→ Read src/test/resources/features/preis_anzeigen.feature
+→ Read src/test/resources/features/guthaben_anzeigen.feature
+→ Read src/test/resources/features/wechselgeld.feature
+→ Read src/test/resources/features/getraenke_kosten_geld.feature
+Ich suche jetzt nach weiteren Stellen rund um Münzrückgabe und Abbruch, um zu sehen, ob die neue Implementierung einen Modellfehler einführt.
+✱ Grep "Münzrückgabe|Abbruch" in . · 9 matches
+✱ Grep "coinReturn|takeCoins|cancel\(" in . · 22 matches
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java
+→ Read src/test/java/de/sharpsharp/vendingmachine/WebTest.java
+Ich prüfe noch den Glossar-Kontext für die Münzrückgabe, um die fachliche Erwartung an die Rückgabe der Münzen sauber einzuordnen.
+→ Read specs/glossar.md
+✱ Grep "Münzrückgabe|coinReturn|Abbruch" in specs · 14 matches
+`src/test/resources/features/wechselgeld.feature:15`, Regelverstoß (Ereignis als `Angenommen`), zieh das Abbruch-Drücken in ein eigenes `Wenn`, damit das Szenario genau einen Auslöser hat.

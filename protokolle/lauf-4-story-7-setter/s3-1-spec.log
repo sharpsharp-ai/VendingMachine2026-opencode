@@ -1,0 +1,15 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich prüfe kurz die vorhandenen Specs, damit die neue Datei denselben Stil trifft.
+→ Read specs/1-alles-umsonst/spec.md
+→ Read specs/2-preis-anzeigen/spec.md
+Ich lege jetzt `specs/3-guthaben-anzeigen/spec.md` an und halte mich an die vorhandene, knappe Spec-Form.
+% Patch 1 file
+Die Spec ist angelegt; ich prüfe kurz den Inhalt, damit ich dir nur die endgültigen Regeln nenne.
+→ Read specs/3-guthaben-anzeigen/spec.md
+`specs/3-guthaben-anzeigen/spec.md`
+
+Regeln:
+- Der Automat SHALL das eingeworfene Geld als „Guthaben: x,xx €" anzeigen.
+- WHEN eine unterstützte Münze eingeworfen wird, SHALL der Automat das Guthaben um den Münzwert erhöhen.

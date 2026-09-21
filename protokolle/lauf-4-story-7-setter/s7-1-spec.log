@@ -1,0 +1,15 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich lege jetzt die Spec nur unter `specs/` an und formuliere die drei EARS-Regeln direkt aus Story 7.
+→ Read specs/6-bier-kostet-mehr/spec.md
+✱ Glob "specs/*/spec.md" in . · 6 matches
+Ich schreibe die Spec jetzt im vorhandenen Format der anderen Stories: kurze Story, drei Regeln, offene Fragen `keine`.
+% Patch 1 file
+→ Read specs/7-kein-bier-vor-4/spec.md
+`specs/7-kein-bier-vor-4/spec.md`
+
+Regeln:
+- `WHILE es vor 16:00 Uhr ist, WHEN der Kunde Bier wählt, SHALL der Automat keine Dose ausgeben und die Meldung "Kein Bier vor 4" anzeigen und laut sagen.`
+- `WHILE es 16:00 Uhr oder später ist, WHEN der Kunde Bier wählt, SHALL der Automat die Dose ausgeben.`
+- `WHILE es vor 16:00 Uhr ist, WHEN der Kunde Bier wählt, SHALL das Guthaben unverändert bleiben.`

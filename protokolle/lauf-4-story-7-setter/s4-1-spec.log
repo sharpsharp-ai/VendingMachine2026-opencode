@@ -1,0 +1,29 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich prüfe kurz die vorhandenen Specs 1 bis 3, damit die neue Story denselben Stil und Zuschnitt bekommt.
+→ Read specs/2-preis-anzeigen/spec.md
+→ Read specs/1-alles-umsonst/spec.md
+→ Read specs/3-guthaben-anzeigen/spec.md
+Ich lege jetzt die neue Spec an. Danach prüfe ich nur noch den Inhalt und melde dir den Pfad plus die Regeln zurück.
+
+# Todos
+[✓] Story 4 in specs/stories.md identifizieren und Anforderungen übernehmen
+[•] `specs/4-getraenke-kosten-geld/spec.md` mit Story, Regeln und offenen Fragen anlegen
+[ ] Inhalt gegen die Story prüfen und Pfad plus Regeln zurückmelden
+
+% Patch 1 file
+Die Spec ist angelegt. Ich prüfe noch kurz den exakten Inhalt gegen die Vorgabe und schließe dann ab.
+→ Read specs/4-getraenke-kosten-geld/spec.md
+
+# Todos
+[✓] Story 4 in specs/stories.md identifizieren und Anforderungen übernehmen
+[✓] `specs/4-getraenke-kosten-geld/spec.md` mit Story, Regeln und offenen Fragen anlegen
+[✓] Inhalt gegen die Story prüfen und Pfad plus Regeln zurückmelden
+
+`specs/4-getraenke-kosten-geld/spec.md`
+
+Regeln:
+- IF das Guthaben unter dem Preis liegt, THEN SHALL der Automat keine Dose ausgeben und "Zu wenig Geld" melden.
+- WHEN das Guthaben den Preis erreicht oder übersteigt und ein Fach gewählt wird, SHALL der Automat die Dose ausgeben und den Preis vom Guthaben abziehen.
+- WHEN nach einem Kauf Guthaben übrig bleibt, SHALL der Automat das Restguthaben anzeigen.

@@ -1,0 +1,8 @@
+### Runde 1 von 5: /implementiere Münzrückgabe wird nach Entnahme leer
+[0m
+> implementierer · gpt-5.4-mini
+[0m
+Geänderte Dateien: keine.
+`mvn -q verify`: das Szenario ist bereits grün; die letzten gezeigten Zeilen enden mit `Dann ist die Münzrückgabe leer`.
+Offen: nichts.
+### Grün nach Runde 1.

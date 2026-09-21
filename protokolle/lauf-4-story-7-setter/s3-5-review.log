@@ -1,0 +1,14 @@
+
+> reviewer · gpt-5.4-mini
+
+Ich lese die geänderten Dateien vollständig und prüfe sie gegen die Clean-Code-Checkliste sowie die zusätzlichen Punkte.
+→ Read src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+Ich prüfe noch `Main` und die Akzeptanzszenarien, damit die Zusatzregeln wirklich abgedeckt sind.
+→ Read src/main/java/de/sharpsharp/vendingmachine/Main.java
+✱ Glob "src/test/resources/features/*.feature" in . · 3 matches
+Ich prüfe die vorhandenen Gherkin-Dateien kurz gegen die Akzeptanztest-Regeln, damit ich dort nichts übersehe.
+→ Read src/test/resources/features/guthaben_anzeigen.feature
+→ Read src/test/resources/features/freies_getraenk.feature
+→ Read src/test/resources/features/preis_anzeigen.feature
+Keine wesentlichen Befunde.

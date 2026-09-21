@@ -1,0 +1,23 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich ziehe die Story-1-Karte und lege die Spec direkt unter `specs/` an, ohne andere Bereiche zu ändern.
+# Todos
+[✓] Story 1 in `specs/stories.md` lokalisieren und Text übernehmen
+[•] `specs/1-alles-umsonst/spec.md` mit Story, Regeln und offenen Fragen anlegen
+[ ] Nur `specs/` prüfen und Nutzer mit Pfad plus Regeln antworten
+
+✱ Glob "specs/*" in . · 2 matches
+Die Spec wird jetzt minimal nach EARS formuliert: eine Regel, keine Zahlen, offene Fragen auf „keine“.
+% Patch 1 file
+Die Datei liegt an, ich markiere den letzten Schritt als erledigt und gebe dir nur Pfad plus Regel zurück.
+
+# Todos
+[✓] Story 1 in `specs/stories.md` lokalisieren und Text übernehmen
+[✓] `specs/1-alles-umsonst/spec.md` mit Story, Regeln und offenen Fragen anlegen
+[✓] Nur `specs/` prüfen und Nutzer mit Pfad plus Regeln antworten
+
+`specs/1-alles-umsonst/spec.md`
+
+Regel:
+- `WHEN ein Fach gewählt wird und eine Dose im Fach ist, SHALL der Automat die Dose ohne Bezahlung ins Ausgabefach ausgeben.`

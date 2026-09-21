@@ -1,0 +1,17 @@
+
+> reviewer · gpt-5.4-mini
+
+Ich lese jetzt die betroffenen Dateien vollständig und prüfe die Änderung gegen die Clean-Code- und Akzeptanztest-Regeln.
+→ Read .opencode/skills/akzeptanztest-regeln/SKILL.md
+→ Read src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+Ich prüfe kurz, ob `Drink` oder die bestehenden Features die neue Preisregel anders ausdrücken, damit ich nichts fälschlich als Befund markiere.
+→ Read src/main/java/de/sharpsharp/vendingmachine/Drink.java
+✱ Glob "src/test/resources/features/*.feature" in . · 5 matches
+Ich lese die Feature-Dateien mit, weil die Preisänderung eine bestehende Spezifikation berührt und ich die Akzeptanzregeln daran mitprüfen soll.
+→ Read src/test/resources/features/wechselgeld.feature
+→ Read src/test/resources/features/getraenke_kosten_geld.feature
+→ Read src/test/resources/features/bier_kostet_mehr.feature
+→ Read src/test/resources/features/guthaben_anzeigen.feature
+→ Read src/test/resources/features/preis_anzeigen.feature
+src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java:32, Magic Number, zieh den Bierpreis in eine benannte Konstante oder zentrale Preisdefinition statt `200` direkt im Konstruktor zu verwenden.

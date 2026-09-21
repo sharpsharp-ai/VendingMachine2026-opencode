@@ -1,0 +1,13 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich prüfe kurz die vorhandenen Specs, damit die neue Story im selben Stil und mit passendem Kurzname angelegt wird.
+→ Read specs/5-wechselgeld/spec.md
+→ Read specs/4-getraenke-kosten-geld/spec.md
+✱ Glob "specs/*/spec.md" in . · 5 matches
+Die Story 6 hat nur ein Akzeptanzkriterium. Ich lege deshalb eine kurze Spec mit genau einer EARS-Regel an und halte mich an den Kartenwortlaut.
+% Patch 1 file
+`specs/6-bier-kostet-mehr/spec.md`
+
+Regeln:
+- `WHEN der Kunde Bier wählt und das Guthaben mindestens 2,00 € beträgt, SHALL der Automat die Dose ausgeben.`

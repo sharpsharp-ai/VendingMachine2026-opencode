@@ -1,0 +1,15 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich prüfe kurz die vorhandene Specs-Struktur und schreibe dann `specs/2-.../spec.md` passend zur Story 2.
+→ Read specs/1-alles-umsonst/spec.md
+✱ Glob "specs/*/spec.md" 1 match
+Ich lege jetzt die neue Spec-Datei für Story 2 an, mit genau den drei geforderten Abschnitten.
+% Patch 1 file
+Die Datei ist angelegt; ich prüfe noch kurz den Inhalt gegen die Vorgaben.
+→ Read specs/2-preis-anzeigen/spec.md
+`specs/2-preis-anzeigen/spec.md`
+
+Regeln:
+- Der Automat SHALL an jedem Fach den Preis hinter dem Namen anzeigen.
+- Der Automat SHALL alle Getränke mit dem Preis 1,00 € anzeigen.

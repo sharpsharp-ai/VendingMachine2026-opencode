@@ -1,0 +1,17 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich prüfe kurz die vorhandenen Specs und lege dann die neue Story-5-Spec im selben Stil an.
+→ Read specs/4-getraenke-kosten-geld/spec.md
+→ Read specs/3-guthaben-anzeigen/spec.md
+✱ Glob "specs/5-*" in . · 0 matches
+Ich schreibe die Spec jetzt als neue `spec.md` unter `specs/5-wechselgeld/` und halte sie auf die drei geforderten Abschnitte begrenzt.
+% Patch 1 file
+Die neue Spec ist angelegt; ich prüfe noch kurz den finalen Inhalt gegen die Vorgaben.
+→ Read specs/5-wechselgeld/spec.md
+`specs/5-wechselgeld/spec.md`
+
+Regeln:
+- WHEN der Kunde Abbruch drückt, SHALL der Automat das gesamte Guthaben als Münzen in der Münzrückgabe bereitstellen.
+- WHEN der Automat Guthaben als Münzen in die Münzrückgabe ausgezahlt hat, SHALL der Automat Guthaben 0,00 € anzeigen.
+- WHEN die Münzrückgabe entnommen wird, SHALL der Automat die Münzrückgabe leeren.

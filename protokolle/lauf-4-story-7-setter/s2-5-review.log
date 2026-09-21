@@ -1,0 +1,16 @@
+
+> reviewer · gpt-5.4-mini
+
+Ich lese die betroffenen Dateien vollständig und prüfe zusätzlich die Gherkin-Regeln gegen die geänderten Tests/Szenarien.
+→ Read .opencode/skills/akzeptanztest-regeln/SKILL.md
+→ Read src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+→ Read src/test/java/de/sharpsharp/vendingmachine/WebTest.java
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+Ich prüfe noch kurz, ob die neue Preislogik irgendwo gegen vorhandene Akzeptanzszenarien oder vorhandene Story-Regeln läuft.
+✱ Glob "src/test/resources/features/*.feature" in . · 2 matches
+✱ Grep "price|Preis|kosten" in . · 5 matches
+✱ Grep "class Main|price\(|PRICE_PER_DRINK|new EnumMap" in . · 9 matches
+→ Read src/test/resources/features/freies_getraenk.feature
+→ Read src/test/resources/features/preis_anzeigen.feature
+→ Read src/main/java/de/sharpsharp/vendingmachine/Main.java
+src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java:75, Comment, die Javadoc behauptet noch `null` bei unbekanntem Preis, obwohl der Konstruktor jetzt alle Preise vorbefüllt; den Vertrag auf den tatsächlichen Rückgabewert anpassen oder die veraltete Aussage entfernen.
