@@ -1,0 +1,9 @@
+
+> test-autor · gpt-5.4-mini
+
+Ich prüfe zuerst die vorhandenen Feature-Dateien und den passenden Schritt-/Glossar-Stand, dann ergänze ich Story 3 minimal und validiere die Szenarien mit dem Glossar-Skript und Cucumber.
+→ Read src/test/resources/features/preis_anzeigen.feature
+→ Read src/test/resources/features/freies_getraenk.feature
+Ich habe die Story-3-Spec eingeordnet: Dafür brauche ich eine neue Feature-Datei mit mindestens einem Szenario pro Regel und zwei neue Testschritte für Münzeinwurf und Displaytext. Danach lasse ich den Glossar-Generator und Cucumber laufen.
+✱ Grep "guthaben_anzeigen|Guthaben anzeigen" in src/test/resources/features · 0 matches
+✱ Grep "Guthaben|Meldung|einwerfe|einwirft" in src/test/java/de/sharpsharp/vendingmachine · 3 matches

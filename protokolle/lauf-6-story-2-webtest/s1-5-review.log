@@ -1,0 +1,22 @@
+
+> reviewer · gpt-5.4-mini
+
+Ich prüfe die betroffene Klasse vollständig und gleiche sie gegen die Clean-Code- und Akzeptanztest-Regeln ab.
+→ Read src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+→ Read .opencode/skills/akzeptanztest-regeln/SKILL.md
+Ich prüfe noch die umliegenden Tests und Szenarien gegen die Zusatzregeln, damit ich keine strukturellen Probleme übersehe.
+✱ Glob "src/test/resources/features/*.feature" 1 match
+✱ Glob "src/test/java/de/sharpsharp/vendingmachine/*.java" 7 matches
+✱ Glob "src/main/java/**/*.java" 4 matches
+→ Read src/test/resources/features/freies_getraenk.feature
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java
+→ Read src/main/java/de/sharpsharp/vendingmachine/Main.java
+Ich gleiche die Änderung noch gegen die Story-/Spec-Struktur ab, um zu sehen, ob der Patch schon eine sichtbare Regel verletzt.
+→ Read src/main/java/de/sharpsharp/vendingmachine/Drink.java
+→ Read src/main/java/de/sharpsharp/vendingmachine/Clock.java
+✱ Glob "specs/**/*.md" 3 matches
+→ Read specs/stories.md
+→ Read specs/1-alles-umsonst/spec.md
+→ Read specs/glossar.md
+- `src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java:38-39`, `Misplaced Responsibility`, `selectDrink` sollte den Bestand des gewählten Fachs reduzieren und nur bei vorhandenem Vorrat eine Dose ins Ausgabefach legen, sonst bleibt die Bestandsanzeige falsch und das Fach kann nie leer werden.

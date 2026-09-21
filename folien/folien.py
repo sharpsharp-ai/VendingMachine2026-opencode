@@ -80,11 +80,11 @@ FOLIEN = [
             "Nebenbei takeCoins und coinReturn gebaut, die keine Story verlangt.",
             "Versuch 2, 10 Sekunden: Dateipfad außerhalb des Projekts erfunden, Rechteabfrage abgelehnt, aufgehört.",
         ]),
-        ("Mit Pipeline, vier Minuten", [
-            "/spec: eine EARS-Regel, keine offenen Fragen.",
-            "/akzeptanztest: zweites Szenario „Auch Bier fällt gratis“, beide rot.",
-            "/implementiere: roter Unit-Test zuerst, dann neun Zeilen Code, verify grün.",
-            "/review: zwei Befunde mit Datei:Zeile, zum Bestand und zum Szenariotitel.",
+        ("Mit Pipeline, viereinhalb Minuten", [
+            "/spec: eine Regel: WHILE eine Dose im Fach ist, WHEN der Kunde ein Fach wählt, SHALL … Keine offenen Fragen.",
+            "/akzeptanztest: zweites Szenario „Guthaben bleibt beim freien Getränk gleich“, beide rot.",
+            "/implementiere: Unit-Test zuerst rot, dann zehn Zeilen Code, verify grün.",
+            "/review: ein Befund mit Datei:Zeile: der Bestand wird beim Ausgeben nicht verringert.",
         ]),
     ], fuss="Gleiches Modell, gleiche Story. Der Unterschied: Regeln, Szenarien, Test und Review, jedes Mal in dieser Reihenfolge."),
     dict(titel="Deine Verantwortung", art="bullets", punkte=[

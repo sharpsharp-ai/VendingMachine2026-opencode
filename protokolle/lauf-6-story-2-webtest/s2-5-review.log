@@ -1,0 +1,17 @@
+
+> reviewer · gpt-5.4-mini
+
+Ich prüfe zuerst die betroffenen Dateien vollständig und ziehe dann die Review-Regeln aus den Skills heran, damit die Befunde sauber auf Zeilen und Smells gemappt sind.
+→ Read src/main/java/de/sharpsharp/vendingmachine/Main.java
+→ Read src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+→ Read .opencode/skills/akzeptanztest-regeln/SKILL.md
+Die produktiven Änderungen sind klar: `Main` baut jetzt die Ansicht anders, `VendingMachine` hat Preislogik eingeführt, und der Test prüft nur den Preis. Ich prüfe noch, ob es betroffene Szenarien gibt oder ob hier nur der UI-/Domain-Vertrag verschoben wurde.
+✱ Grep "new Slot\(" in . · 1 match
+✱ Glob "src/test/resources/features/*.feature" 2 matches
+✱ Grep "price\(" in . · 3 matches
+→ Read src/test/resources/features/freies_getraenk.feature
+→ Read src/test/resources/features/preis_anzeigen.feature
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java
+- `src/main/java/de/sharpsharp/vendingmachine/Main.java:108`, Hardcoded Test Data, reiche den echten Preis mit `machine.price(drink)` durch statt `null` zu setzen.
+- `src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java:30-33`, Bad Name, benenne den Test auf den konkret geprüften Fall um oder parametriere ihn über alle Getränke.

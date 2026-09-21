@@ -1,0 +1,33 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich ziehe mir kurz die vorhandenen Specs als Vorlage und schreibe dann nur `specs/3-.../spec.md`.
+→ Read specs/1-alles-umsonst/spec.md
+→ Read specs/2-preis-anzeigen/spec.md
+Ich lege jetzt die neue Spec-Datei unter `specs/3-...` an und halte mich an die vorhandene knappe Form.
+✱ Glob "specs/3-*" in . · 0 matches
+✱ Glob "specs" in . · 0 matches
+
+$ ls
+AGENTS.md
+config
+opencode.json
+pom.xml
+README.md
+scripts
+specs
+src
+target
+
+$ ls specs
+1-alles-umsonst
+2-preis-anzeigen
+glossar.md
+stories.md
+
+% Patch 1 file
+`specs/3-guthaben-anzeigen/spec.md`
+
+Regeln:
+- WHEN der Kunde Geld einwirft, SHALL der Automat das Guthaben als `"Guthaben: x,xx €"` anzeigen.
+- WHEN der Kunde eine Münze einwirft, SHALL der Automat das Guthaben um den Münzwert erhöhen.

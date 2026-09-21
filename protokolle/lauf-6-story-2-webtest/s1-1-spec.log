@@ -1,0 +1,14 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich lege jetzt die Story-Spec für Nr. 1 an und halte mich dabei nur an `specs/`.
+✱ Glob "specs/*" in . · 2 matches
+✱ Glob "specs/1-*" in . · 0 matches
+Ich schreibe die Spec jetzt mit genau drei Abschnitten und nur einer EARS-Regel aus der Story.
+% Patch 1 file
+Die Datei ist angelegt. Ich prüfe noch kurz den Inhalt gegen die Vorgabe.
+→ Read specs/1-alles-umsonst/spec.md
+`specs/1-alles-umsonst/spec.md`
+
+Regel:
+- `WHILE eine Dose im Fach ist, WHEN der Kunde ein Fach wählt, SHALL der Automat die Dose ins Ausgabefach fallen lassen und kein Guthaben abziehen.`

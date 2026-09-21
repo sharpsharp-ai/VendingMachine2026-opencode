@@ -1,0 +1,15 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich prüfe erst die vorhandene Spec-Struktur und baue dann nur `specs/2-.../spec.md` neu auf.
+→ Read specs/1-alles-umsonst/spec.md
+✱ Glob "specs/2-*" in . · 0 matches
+Ich lege jetzt die neue Spec-Datei an. Die Story hat zwei Akzeptanzkriterien, also kommen zwei EARS-Regeln hinein.
+% Patch 1 file
+Die Datei ist angelegt. Ich prüfe kurz den Inhalt gegen die Vorgaben und antworte dann mit Pfad und Regeln.
+→ Read specs/2-preis-anzeigen/spec.md
+`specs/2-preis-anzeigen/spec.md`
+
+Regeln:
+- Der Automat SHALL an jedem Fach den Preis hinter dem Namen anzeigen.
+- Der Automat SHALL alle Getränke mit 1,00 € als Preis anzeigen.

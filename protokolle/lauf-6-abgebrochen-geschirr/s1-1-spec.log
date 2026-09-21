@@ -1,0 +1,24 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich prüfe kurz die vorhandene `specs/`-Struktur und lege dann die Spec für Story 1 an.
+# Todos
+[✓] Story 1 in `specs/stories.md` identifizieren und Kurzname festlegen
+[•] `specs/1-alles-umsonst/spec.md` anlegen oder überarbeiten
+[ ] Inhalt gegen die Story und EARS-Regeln prüfen
+
+✱ Glob "specs/*" in . · 2 matches
+Ich schreibe jetzt die Spec-Datei mit genau den drei geforderten Abschnitten und einer EARS-Regel zur Story.
+% Patch 1 file
+Die Datei ist angelegt; ich prüfe kurz den finalen Inhalt und schließe dann ab.
+→ Read specs/1-alles-umsonst/spec.md
+
+# Todos
+[✓] Story 1 in `specs/stories.md` identifizieren und Kurzname festlegen
+[✓] `specs/1-alles-umsonst/spec.md` anlegen oder überarbeiten
+[✓] Inhalt gegen die Story und EARS-Regeln prüfen
+
+`specs/1-alles-umsonst/spec.md`
+
+Regel:
+- `WHILE eine Dose im Fach ist, WHEN der Kunde ein Fach wählt, SHALL der Automat die Dose ohne Bezahlung ins Ausgabefach ausgeben.`

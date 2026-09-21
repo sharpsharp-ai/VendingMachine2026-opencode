@@ -1,0 +1,113 @@
+
+> test-autor · gpt-5.4-mini
+
+Ich prüfe zuerst die vorhandene Feature-Datei und den Stand der Schritte, dann ergänze ich nur die fehlenden Szenarien für Story 1.
+→ Read src/test/resources/features/AGENTS.md
+→ Read src/test/resources/features/freies_getraenk.feature
+Ich habe die aktuelle Story-Datei geprüft: Es gibt schon ein Basis-Szenario, aber es deckt Guthaben noch nicht ab. Ich ergänze deshalb die Story so, dass die Regel direkt beobachtbar wird, und füge dafür die fehlenden Schritte hinzu.
+% Patch 1 file
+% Patch 1 file
+Die neuen Szenarien und Schrittdefinitionen sind drin. Jetzt lasse ich das Glossar neu erzeugen und prüfe danach die Cucumber-Szenarien.
+
+$ scripts/steps-glossar.sh
+specs/glossar.md erzeugt: 7 Einträge
+
+$ mvn -q test -Dtest=RunCucumberTest
+Szenario: Ein Getränk wählen                    # classpath:features/freies_getraenk.feature:6
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✘ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+        java.lang.AssertionError: 
+        Expected: iterable containing [<COLA>]
+             but: no item was <COLA>
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(VendingMachineSteps.java:38)
+        	at ✽.liegt eine Dose Cola im Ausgabefach(classpath:features/freies_getraenk.feature:9)
+
+Szenario: Guthaben bleibt beim freien Getränk gleich # classpath:features/freies_getraenk.feature:11
+  ✔ Angenommen der Automat ist frisch gestartet      # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich habe 2 € eingeworfen                     # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveInsertedMoney(int)
+  ✔ Wenn ich Cola wähle                              # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✘ Dann liegt eine Dose Cola im Ausgabefach         # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+        java.lang.AssertionError: 
+        Expected: iterable containing [<COLA>]
+             but: no item was <COLA>
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(VendingMachineSteps.java:38)
+        	at ✽.liegt eine Dose Cola im Ausgabefach(classpath:features/freies_getraenk.feature:15)
+  ↷ Und das Guthaben ist 2,00 €                      # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+[ERROR] Tests run: 2, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.474 s <<< FAILURE! -- in de.sharpsharp.vendingmachine.RunCucumberTest
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Ein Getränk wählen -- Time elapsed: 0.070 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: iterable containing [<COLA>]
+     but: no item was <COLA>
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(VendingMachineSteps.java:38)
+	at ✽.liegt eine Dose Cola im Ausgabefach(classpath:features/freies_getraenk.feature:9)
+
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Guthaben bleibt beim freien Getränk gleich -- Time elapsed: 0.007 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: iterable containing [<COLA>]
+     but: no item was <COLA>
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(VendingMachineSteps.java:38)
+	at ✽.liegt eine Dose Cola im Ausgabefach(classpath:features/freies_getraenk.feature:15)
+
+[ERROR] Failures: 
+[ERROR]   RunCucumberTest.Ein Getränk wählen 
+Expected: iterable containing [<COLA>]
+     but: no item was <COLA>
+[ERROR]   RunCucumberTest.Guthaben bleibt beim freien Getränk gleich 
+Expected: iterable containing [<COLA>]
+     but: no item was <COLA>
+[ERROR] Tests run: 2, Failures: 2, Errors: 0, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.6.0:test (default-test) on project getraenkeautomat: There are test failures.
+[ERROR] 
+[ERROR] See /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-6/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+
+Die Cucumber-Szenarien laufen jetzt gegen den aktuellen Automatenstand rot, wie erwartet: Der Automat legt noch keine Dose ins Ausgabefach. Ich prüfe noch die tatsächlich geänderten Dateien, damit die Antwort sauber ist.
+→ Read specs/glossar.md [offset=1, limit=120]
+
+$ git status --short
+M specs/glossar.md
+ M src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java
+ M src/test/resources/features/freies_getraenk.feature
+?? specs/1-alles-umsonst/
+
+Dateien:
+- `src/test/resources/features/freies_getraenk.feature`
+- `src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java`
+- `specs/glossar.md`
+
+Szenarien:
+- `Ein Getränk wählen`
+- `Guthaben bleibt beim freien Getränk gleich`
+
+Regeln:
+- 1. ja - einWhen
+- 2. ja - deklarativ
+- 3. ja - Fachsprache
+- 4. ja - sichtbar
+- 5. ja - konkret
+- 6. nein - Titel
+- 7. ja - unabhängig
+- 8. ja - Glossar
+- 9. ja - abgedeckt
+- 10. ja - kurz
+- 11. ja - VendingMachine
+
+`mvn -q test -Dtest=RunCucumberTest`: rot, weil der Automat noch keine Dose ins Ausgabefach legt.

@@ -1,0 +1,34 @@
+
+> reviewer · gpt-5.4-mini
+
+Ich prüfe zuerst, ob es geänderte Dateien gibt, und lese dann die betroffenen Dateien vollständig samt letztem Commit, falls nötig.
+$ git log --oneline -10
+2bea296 Story 1: Spec und Szenarien
+1d97bff Paket installiert
+9420ef6 Uhr als Naht im Start: Clock, VendingMachine(Clock), FakeClock im Test
+e6cbea2 Story 2: alle Getränke kosten 1,00 € steht auf der Karte
+526076e training-start: Preise wirklich raus, Glossar mit Methodenspalte, WebTest ohne Meldungstext
+3747407 training-start: Gates, Stories, Glossar, Preise erst mit Story 2
+a026316 So plain wie möglich: drei Klassen, Cent statt Money, Strings statt Message
+4472f2d Startstand: Oberfläche fertig, Automat tut nichts, ein rotes Szenario
+
+$ git status --short && git diff --name-only && git diff --stat
+(no output)
+
+Es sieht nach leerem Arbeitsdiff aus; ich prüfe jetzt den letzten Commit und lese die betroffenen Dateien vollständig.
+$ git diff --name-only HEAD^ HEAD
+specs/1-alles-umsonst/spec.md
+
+$ git show --stat --name-only --format=fuller HEAD
+commit 2bea296a473ca329d11548820eea8e19f0a3a464
+Author:     seb <seb@improuv.com>
+AuthorDate: Tue Sep 22 00:56:37 2026 +0200
+Commit:     seb <seb@improuv.com>
+CommitDate: Tue Sep 22 00:56:37 2026 +0200
+
+    Story 1: Spec und Szenarien
+
+specs/1-alles-umsonst/spec.md
+
+→ Read specs/1-alles-umsonst/spec.md
+→ Read .opencode/skills/akzeptanztest-regeln/SKILL.md

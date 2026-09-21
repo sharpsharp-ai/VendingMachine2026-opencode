@@ -19,6 +19,7 @@ description: Rot, Grün, Aufräumen: ein Szenario mit Unit-Tests in kleinen Schr
 - Zeit, Zufall, Mechanik: Interface im Produktivcode, Mock oder Fake im Test. Mockito ist da.
 - Meldungen wörtlich aus der Story.
 - Tests, die grün waren, bleiben grün. Bricht einer, ist der Code falsch, nicht der Test.
+  Einzige Ausnahme: ein alter Test schreibt das Fehlen von etwas fest, das die Story gerade einführt (etwa „noch kein Preis"). Dann ist der Test veraltet: pass ihn an die Story an und nenne das in der Antwort. Nie den Wert in `Main` festnageln.
 
 ## Checkliste vor "fertig", je Punkt ja oder nein
 1. Der Test war rot, bevor der Code kam.
