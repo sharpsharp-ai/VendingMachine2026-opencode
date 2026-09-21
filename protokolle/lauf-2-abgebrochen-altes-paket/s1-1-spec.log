@@ -1,0 +1,12 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich prüfe kurz, ob unter `specs/` schon eine passende Story-1-Struktur existiert, dann lege ich nur die neue Spec an.
+✱ Glob "specs/*" in . · 2 matches
+✱ Glob "specs/1-*" in . · 0 matches
+Ich schreibe die Spec jetzt minimal und nur für Story 1, mit genau einem EARS-Satz für das einzige Akzeptanzkriterium.
+% Patch 1 file
+`specs/1-alles-umsonst/spec.md`
+
+Regel:
+- `WHEN der Kunde ein Fach wählt und dort eine Dose liegt, SHALL der Automat die Dose ohne Bezahlung ins Ausgabefach fallen lassen.`

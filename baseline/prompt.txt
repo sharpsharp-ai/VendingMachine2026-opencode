@@ -1,0 +1,1 @@
+Setze die Story „Alles umsonst" aus specs/stories.md um: Egal welchen Knopf ich drücke, solange eine Dose im Fach ist, fällt sie ohne Bezahlung ins Ausgabefach. Wenn du fertig bist, muss `mvn -q verify` grün sein.

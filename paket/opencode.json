@@ -1,0 +1,85 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "permission": {
+    "question": "deny",
+    "webfetch": "deny",
+    "websearch": "deny",
+    "external_directory": "deny",
+    "doom_loop": "deny",
+    "edit": "allow",
+    "bash": {
+      "*": "deny",
+      "mvn *": "allow",
+      "mvn *skipTests*": "deny",
+      "mvn *maven.test.skip*": "deny",
+      "scripts/steps-glossar.sh*": "allow",
+      "./scripts/steps-glossar.sh*": "allow",
+      "bash scripts/steps-glossar.sh*": "allow",
+      "sh scripts/steps-glossar.sh*": "allow",
+      "ls*": "allow",
+      "pwd": "allow",
+      "cat *": "allow",
+      "head *": "allow",
+      "tail *": "allow",
+      "wc *": "allow",
+      "grep *": "allow",
+      "rg *": "allow",
+      "find *": "allow",
+      "mkdir *": "allow",
+      "git status*": "allow",
+      "git diff*": "allow",
+      "git log*": "allow",
+      "git show*": "allow"
+    }
+  },
+  "agent": {
+    "spec-autor": {
+      "description": "Schreibt die Spec einer Story nach specs/. Ändert nichts anderes.",
+      "mode": "primary",
+      "steps": 20,
+      "permission": {
+        "edit": { "*": "deny", "specs/*": "allow" }
+      }
+    },
+    "test-autor": {
+      "description": "Schreibt Szenarien und Schritte. Ändert keinen Produktivcode.",
+      "mode": "primary",
+      "steps": 30,
+      "permission": {
+        "edit": {
+          "*": "deny",
+          "src/test/resources/features/*": "allow",
+          "src/test/java/*Steps.java": "allow",
+          "src/test/java/*ParameterTypes.java": "allow",
+          "src/test/java/*Fake*.java": "allow"
+        }
+      }
+    },
+    "implementierer": {
+      "description": "Macht ein Szenario grün: Unit-Test, Code, Aufräumen. Rührt Szenarien, Schritte und Specs nicht an.",
+      "mode": "primary",
+      "steps": 40,
+      "permission": {
+        "edit": {
+          "*": "allow",
+          "src/test/resources/features/*": "deny",
+          "src/test/java/*Steps.java": "deny",
+          "specs/*": "deny",
+          "pom.xml": "deny",
+          "config/*": "deny",
+          ".opencode/*": "deny",
+          "AGENTS.md": "deny",
+          "opencode.json": "deny"
+        }
+      }
+    },
+    "reviewer": {
+      "description": "Liest nur. Nennt Befunde mit Datei:Zeile, Smell und Refactoring-Vorschlag.",
+      "mode": "primary",
+      "steps": 15,
+      "permission": {
+        "edit": "deny"
+      }
+    }
+  }
+}

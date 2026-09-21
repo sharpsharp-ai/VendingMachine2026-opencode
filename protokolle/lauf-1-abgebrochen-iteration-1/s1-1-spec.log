@@ -1,0 +1,26 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich prüfe kurz die vorhandene `specs/`-Struktur und lege dann nur die Story-1-Spec an.
+# Todos
+[✓] Story 1 in `specs/stories.md` prüfen und Kurzname ableiten
+[•] `specs/1-alles-umsonst/spec.md` anlegen oder überarbeiten
+[ ] Inhalt gegen Story und Glossar gegenlesen
+
+✱ Glob "specs/*" in . · 2 matches
+Die Struktur ist da. Ich schreibe jetzt die neue Story-Spec minimal und nur unter `specs/`.
+→ Read specs
+% Patch 1 file
+Die Datei ist angelegt. Ich prüfe noch den Inhalt gegen die Story und den Wortlaut.
+→ Read specs/1-alles-umsonst/spec.md
+
+# Todos
+[✓] Story 1 in `specs/stories.md` prüfen und Kurzname ableiten
+[✓] `specs/1-alles-umsonst/spec.md` anlegen oder überarbeiten
+[✓] Inhalt gegen Story und Glossar gegenlesen
+
+`specs/1-alles-umsonst/spec.md`
+
+Regeln:
+- WHEN der Kunde einen beliebigen Knopf drückt und im Fach eine Dose liegt, SHALL der Automat die Dose ohne Bezahlung ins Ausgabefach geben.
+- WHEN der Kunde einen beliebigen Knopf drückt und im Fach keine Dose liegt, SHALL der Automat nichts ausgeben.

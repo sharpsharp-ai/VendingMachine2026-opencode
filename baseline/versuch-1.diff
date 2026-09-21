@@ -1,0 +1,65 @@
+diff --git a/src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java b/src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+index dc4d5f8..4c7a676 100644
+--- a/src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
++++ b/src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+@@ -1,5 +1,6 @@
+ package de.sharpsharp.vendingmachine;
+ 
++import java.util.ArrayList;
+ import java.util.EnumMap;
+ import java.util.List;
+ import java.util.Map;
+@@ -16,6 +17,8 @@ public class VendingMachine {
+     public static final int CANS_PER_SLOT = 5;
+ 
+     private final Map<Drink, Integer> stock = new EnumMap<>(Drink.class);
++    private final List<Drink> outputTray = new ArrayList<>();
++    private final List<Integer> coinReturn = new ArrayList<>();
+ 
+     public VendingMachine() {
+         for (Drink drink : Drink.values()) {
+@@ -29,6 +32,11 @@ public class VendingMachine {
+     }
+ 
+     public synchronized void selectDrink(Drink drink) {
++        int available = stock.get(drink);
++        if (available > 0) {
++            stock.put(drink, available - 1);
++            outputTray.add(drink);
++        }
+     }
+ 
+     public synchronized void cancel() {
+@@ -36,12 +44,16 @@ public class VendingMachine {
+ 
+     /** Empties the output tray and returns the cans that were in it. */
+     public synchronized List<Drink> takeDrinks() {
+-        return List.of();
++        List<Drink> drinks = List.copyOf(outputTray);
++        outputTray.clear();
++        return drinks;
+     }
+ 
+     /** Empties the coin return and returns the coins that were in it, in cents. */
+     public synchronized List<Integer> takeCoins() {
+-        return List.of();
++        List<Integer> coins = List.copyOf(coinReturn);
++        coinReturn.clear();
++        return coins;
+     }
+ 
+     // ---- What the machine shows ---------------------------------------------
+@@ -66,11 +78,11 @@ public class VendingMachine {
+ 
+     /** The cans that dropped out and have not been taken yet. */
+     public synchronized List<Drink> outputTray() {
+-        return List.of();
++        return List.copyOf(outputTray);
+     }
+ 
+     /** The coins that came back and have not been taken yet, in cents. */
+     public synchronized List<Integer> coinReturn() {
+-        return List.of();
++        return List.copyOf(coinReturn);
+     }
+ }

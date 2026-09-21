@@ -1,0 +1,35 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich ziehe jetzt die Story 1 und das Glossar zusammen, formuliere die EARS-Regeln und lege die Spec-Datei unter `specs/` an.
+# Todos
+[✓] Story 1 in `specs/stories.md` identifizieren und Wortlaut übernehmen
+[•] EARS-Regeln für Story 1 aus Akzeptanzkriterium ableiten
+[ ] `specs/1-alles-umsonst/spec.md` anlegen oder überarbeiten
+[ ] Änderung auf `specs/` beschränken und Ergebnis prüfen
+
+Die Story hat nur ein Akzeptanzkriterium, deshalb wird die Spec sehr klein: eine Story, eine EARS-Regel, keine offenen Fragen.
+✱ Glob "specs/1-*" in . · 0 matches
+✱ Glob "specs/*/spec.md" in . · 0 matches
+% Patch 1 file
+Die Spec ist angelegt. Ich prüfe noch kurz den Inhalt und beschränke die Änderung auf `specs/`.
+→ Read specs/1-alles-umsonst/spec.md
+
+$ git status --short
+?? specs/1-alles-umsonst/
+
+Ich passe die Regel noch an den Glossar-Wortlaut an, damit sie ohne UI-Begriff auskommt.
+% Patch 1 file
+
+# Todos
+[✓] Story 1 in `specs/stories.md` identifizieren und Wortlaut übernehmen
+[✓] EARS-Regeln für Story 1 aus Akzeptanzkriterium ableiten
+[✓] `specs/1-alles-umsonst/spec.md` anlegen oder überarbeiten
+[✓] Änderung auf `specs/` beschränken und Ergebnis prüfen
+
+`specs/1-alles-umsonst/spec.md`
+
+Regeln:
+- `WHEN der Kunde ein Fach wählt und eine Dose im Fach ist, SHALL der Automat die Dose ohne Bezahlung ins Ausgabefach fallen lassen.`
+
+Offene Fragen: keine

@@ -1,0 +1,122 @@
+
+> test-autor · gpt-5.4-mini
+
+Ich prüfe zuerst die vorhandene Feature-Datei und den aktuellen Stand der Szenarien, dann ergänze ich nur die fehlenden Fälle für Story 1.
+→ Read src/test/resources/features/freies_getraenk.feature
+✱ Glob "src/test/resources/features/*.feature" in . · 1 match
+Die bestehende Datei deckt nur den Normalfall ab. Für den Fehlerfall brauche ich noch einen beobachtbaren Zustandsschritt, deshalb prüfe ich kurz, ob der schon existiert.
+✱ Grep "Ausgabefach|empty\)|outputTray|keine Dose|leer" in src/test/java · 7 matches
+✱ Grep "Ausgabefach|leer|nichts|keine Dose" in src/test/resources/features · 1 match
+Der Fehlerfall braucht eine leere Fach-Initialisierung. Ich suche noch kurz nach vorhandenen Schritten oder Hilfsmethoden dafür, bevor ich den minimalen neuen Schritt ergänze.
+✱ Grep "keine Dose|leer" in src/test/java/de/sharpsharp/vendingmachine · 0 matches
+✱ Grep "stock\(|setStock|empty slot|leer.*Fach|Fach.*leer|keine Dose" in src/test/java · 0 matches
+✱ Grep "frisch gestartet|Guthaben|Kasse|Münzen|Dose" in src/test/java/de/sharpsharp/vendingmachine · 4 matches
+✱ Grep "frisch gestartet|Guthaben|Kasse|Münzen|Dose" in src/test/resources/features · 3 matches
+✱ Grep "stock\(" in . · 2 matches
+✱ Grep "takeDrinks\(|outputTray\(" in . · 5 matches
+✱ Grep "new VendingMachine\(|class Slot|slot\(" in src/main/java · 1 match
+→ Read src/main/java/de/sharpsharp/vendingmachine/Main.java [offset=80, limit=60]
+Ich ergänze jetzt die Story-Datei um den Normal- und Fehlerfall und füge den fehlenden Beobachtungsschritt für ein leeres Ausgabefach hinzu.
+% Patch 2 files
+Die Szenarien sind drin. Jetzt aktualisiere ich das Glossar und prüfe danach den Cucumber-Status.
+
+$ scripts/steps-glossar.sh
+specs/glossar.md erzeugt: 6 Einträge
+
+$ mvn -q test -Dtest=RunCucumberTest
+Szenario: Volles Fach gibt die Dose ohne Bezahlung # classpath:features/freies_getraenk.feature:6
+  ✔ Angenommen der Automat ist frisch gestartet    # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                            # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✘ Dann liegt eine Dose Cola im Ausgabefach       # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+        java.lang.AssertionError: 
+        Expected: iterable containing [<COLA>]
+             but: no item was <COLA>
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(VendingMachineSteps.java:42)
+        	at ✽.liegt eine Dose Cola im Ausgabefach(classpath:features/freies_getraenk.feature:9)
+
+Szenario: Leeres Fach gibt nichts aus # classpath:features/freies_getraenk.feature:11
+  ✘ Angenommen das Fach Cola ist leer # de.sharpsharp.vendingmachine.VendingMachineSteps.theSlotIsEmpty(de.sharpsharp.vendingmachine.Drink)
+        java.lang.AssertionError: 
+        Expected: is <0>
+             but: was <5>
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.theSlotIsEmpty(VendingMachineSteps.java:32)
+        	at ✽.das Fach Cola ist leer(classpath:features/freies_getraenk.feature:12)
+  ↷ Wenn ich Cola wähle               # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ↷ Dann ist das Ausgabefach leer     # de.sharpsharp.vendingmachine.VendingMachineSteps.theOutputTrayIsEmpty()
+[ERROR] Tests run: 2, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.498 s <<< FAILURE! -- in de.sharpsharp.vendingmachine.RunCucumberTest
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Volles Fach gibt die Dose ohne Bezahlung -- Time elapsed: 0.073 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: iterable containing [<COLA>]
+     but: no item was <COLA>
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(VendingMachineSteps.java:42)
+	at ✽.liegt eine Dose Cola im Ausgabefach(classpath:features/freies_getraenk.feature:9)
+
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Leeres Fach gibt nichts aus -- Time elapsed: 0.007 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: is <0>
+     but: was <5>
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.theSlotIsEmpty(VendingMachineSteps.java:32)
+	at ✽.das Fach Cola ist leer(classpath:features/freies_getraenk.feature:12)
+
+[ERROR] Failures: 
+[ERROR]   RunCucumberTest.Leeres Fach gibt nichts aus 
+Expected: is <0>
+     but: was <5>
+[ERROR]   RunCucumberTest.Volles Fach gibt die Dose ohne Bezahlung 
+Expected: iterable containing [<COLA>]
+     but: no item was <COLA>
+[ERROR] Tests run: 2, Failures: 2, Errors: 0, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.6.0:test (default-test) on project getraenkeautomat: There are test failures.
+[ERROR] 
+[ERROR] See /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-1/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+
+Die Tests sind erwartungsgemäß rot, weil der Automat die Story noch nicht kann. Ich prüfe kurz den finalen Diff, damit ich die geänderten Dateien sauber benennen kann.
+$ git status --short
+M specs/glossar.md
+ M src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java
+ M src/test/resources/features/freies_getraenk.feature
+?? specs/1-alles-umsonst/
+
+→ Read specs/glossar.md [offset=1, limit=120]
+✱ Glob "specs/1-alles-umsonst/**" in . · 1 match
+Dateien:
+- `src/test/resources/features/freies_getraenk.feature`
+- `src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java`
+- `specs/glossar.md`
+
+Szenarien:
+- `Volles Fach gibt die Dose ohne Bezahlung`
+- `Leeres Fach gibt nichts aus`
+
+`mvn -q test -Dtest=RunCucumberTest`: rot
+
+Regeln:
+1. ja: eins
+2. ja: deklarativ
+3. ja: Fachsprache
+4. ja: beobachtbar
+5. ja: konkret
+6. ja: Titel
+7. ja: unabhängig
+8. ja: wiederverwendet
+9. ja: abgedeckt
+10. ja: knapp
+11. ja: VendingMachine
