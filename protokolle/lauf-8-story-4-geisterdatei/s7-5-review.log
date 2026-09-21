@@ -1,0 +1,14 @@
+
+> reviewer · gpt-5.4-mini
+
+Ich lese die betroffenen Dateien vollständig und gleiche die Änderungen gegen die Review-Regeln und die Akzeptanztest-Regeln ab.
+→ Read src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+→ Read .opencode/skills/akzeptanztest-regeln/SKILL.md
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+Ich prüfe noch, ob die neue Regel mit bestehenden Szenarien oder anderer Logik kollidiert.
+✱ Grep "selectDrink\(|message = |clock.now\(" in src/main/java · 6 matches
+✱ Grep "Bier|Kein Bier vor 4|Zu wenig Geld" in src/test/resources/features · 16 matches
+→ Read src/test/resources/features/kein_bier_vor_4.feature
+→ Read src/main/java/de/sharpsharp/vendingmachine/Main.java
+- `src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java:62`, Magic Number, ziehe die `16:00`-Grenze in eine benannte Konstante oder Hilfsmethode.
+- `src/test/resources/features/kein_bier_vor_4.feature:5`, Zu viele Schritte, kürze das Szenario auf die wesentlichen Beobachtungen oder splitte es in zwei unabhängigere Szenarien.

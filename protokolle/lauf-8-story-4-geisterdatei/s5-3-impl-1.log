@@ -1,0 +1,257 @@
+### Runde 1 von 5: /implementiere Abbruch zahlt das Guthaben in die Münzrückgabe aus
+[0m
+> implementierer · gpt-5.4-mini
+[0m
+Ich prüfe zuerst die vorhandenen Unit-Tests und die minimale Regel, die für `Abbruch zahlt das Guthaben in die Münzrückgabe aus` fehlt. Danach ergänze ich genau einen kleinen Test und die dazugehörige Produktivlogik.
+[0m✱ [0mGlob "src/test/java/de/sharpsharp/vendingmachine/*.java"[90m 7 matches[0m
+[0m✱ [0mGrep "coinReturn|cancel\("[90m in . · 5 matches[0m
+Ich schaue mir jetzt `VendingMachineTest` an, damit ich den kleinsten passenden Test ergänze statt an der Oberfläche herumzupatchen.
+[0m→ [0mRead src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+[0m→ [0mRead src/test/java/de/sharpsharp/vendingmachine/FakeClock.java
+Ich ergänze jetzt zuerst den roten Unit-Test und dann nur die minimale Logik in `VendingMachine`, damit genau dieses Szenario grün wird.
+[0m% [0mPatch 1 file
+[0m
+[0m$ [0mmvn -q test -Dtest=VendingMachineTest
+[ERROR] Tests run: 4, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.041 s <<< FAILURE! -- in de.sharpsharp.vendingmachine.VendingMachineTest
+[ERROR] de.sharpsharp.vendingmachine.VendingMachineTest.cancelReturnsTheCreditToTheCoinReturn -- Time elapsed: 0.005 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: iterable containing [<200>]
+     but: no item was <200>
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineTest.cancelReturnsTheCreditToTheCoinReturn(VendingMachineTest.java:46)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+
+[ERROR] Failures: 
+[ERROR]   VendingMachineTest.cancelReturnsTheCreditToTheCoinReturn:46 
+Expected: iterable containing [<200>]
+     but: no item was <200>
+[ERROR] Tests run: 4, Failures: 1, Errors: 0, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.6.0:test (default-test) on project getraenkeautomat: There are test failures.
+[ERROR] 
+[ERROR] See /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-8/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[0m
+Der neue Test ist rot, wie gewünscht. Ich implementiere jetzt nur das Auszahlen des Guthabens in die Münzrückgabe und das Leeren beim Entnehmen.
+[0m→ [0mRead src/test/java/de/sharpsharp/vendingmachine/WebTest.java
+[0m% [0mPatch 1 file
+[0m
+[0m$ [0mmvn -q test -Dtest=VendingMachineTest
+(no output)
+[0m
+[0m$ [0mmvn -q test -Dtest=RunCucumberTest
+Szenario: Ein Getränk wählen                    # classpath:features/freies_getraenk.feature:6
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenariogrundriss: Alle Getränke fallen ohne Bezahlung # classpath:features/freies_getraenk.feature:18
+  ✔ Angenommen der Automat ist frisch gestartet        # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                                # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach           # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenariogrundriss: Alle Getränke fallen ohne Bezahlung # classpath:features/freies_getraenk.feature:19
+  ✔ Angenommen der Automat ist frisch gestartet        # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Orange wähle                              # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Orange im Ausgabefach         # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenariogrundriss: Alle Getränke fallen ohne Bezahlung # classpath:features/freies_getraenk.feature:20
+  ✔ Angenommen der Automat ist frisch gestartet        # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Zitrone wähle                             # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Zitrone im Ausgabefach        # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenariogrundriss: Alle Getränke fallen ohne Bezahlung # classpath:features/freies_getraenk.feature:21
+  ✔ Angenommen der Automat ist frisch gestartet        # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Bier wähle                                # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Bier im Ausgabefach           # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenario: Zu wenig Geld bringt keine Dose und eine Meldung # classpath:features/getraenke_kosten_geld.feature:5
+  ✔ Angenommen der Automat ist frisch gestartet            # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich 50 ct einwerfe                                 # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCoin(int)
+  ✔ Wenn ich Cola wähle                                    # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann ist das Ausgabefach leer                          # de.sharpsharp.vendingmachine.VendingMachineSteps.theOutputTrayIsEmpty()
+  ✔ Und der Automat meldet "Zu wenig Geld"                 # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+
+Szenario: Bei genauem Preis fällt die Dose ohne Restguthaben # classpath:features/getraenke_kosten_geld.feature:12
+  ✔ Angenommen der Automat ist frisch gestartet              # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich 1 € einwerfe                                     # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCoin(int)
+  ✔ Wenn ich Cola wähle                                      # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach                 # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+  ✔ Und ist das Guthaben 0,00 €                              # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenario: Restguthaben bleibt nach dem Kauf sichtbar # classpath:features/getraenke_kosten_geld.feature:19
+  ✔ Angenommen der Automat ist frisch gestartet      # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich 2 € einwerfe                             # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCoin(int)
+  ✔ Wenn ich Cola wähle                              # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach         # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+  ✔ Und ist das Guthaben 1,00 €                      # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenario: Das Guthaben steht bei null           # classpath:features/guthaben_anzeigen.feature:5
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann ist das Guthaben 0,00 €                # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenariogrundriss: Eine Münze erhöht das Guthaben # classpath:features/guthaben_anzeigen.feature:16
+  ✔ Angenommen der Automat ist frisch gestartet   # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich 50 ct einwerfe                       # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCoin(int)
+  ✔ Dann ist das Guthaben 0,50 €                  # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenariogrundriss: Eine Münze erhöht das Guthaben # classpath:features/guthaben_anzeigen.feature:17
+  ✔ Angenommen der Automat ist frisch gestartet   # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich 1 € einwerfe                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCoin(int)
+  ✔ Dann ist das Guthaben 1,00 €                  # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenariogrundriss: Eine Münze erhöht das Guthaben # classpath:features/guthaben_anzeigen.feature:18
+  ✔ Angenommen der Automat ist frisch gestartet   # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich 2 € einwerfe                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCoin(int)
+  ✔ Dann ist das Guthaben 2,00 €                  # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenariogrundriss: An jedem Fach steht der Preis # classpath:features/preis_anzeigen.feature:11
+  ✔ Angenommen der Automat ist frisch gestartet  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Cola 1,00 €                      # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenariogrundriss: An jedem Fach steht der Preis # classpath:features/preis_anzeigen.feature:12
+  ✔ Angenommen der Automat ist frisch gestartet  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Orange 1,00 €                    # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenariogrundriss: An jedem Fach steht der Preis # classpath:features/preis_anzeigen.feature:13
+  ✔ Angenommen der Automat ist frisch gestartet  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Zitrone 1,00 €                   # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenariogrundriss: An jedem Fach steht der Preis # classpath:features/preis_anzeigen.feature:14
+  ✔ Angenommen der Automat ist frisch gestartet  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Bier 1,00 €                      # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenario: Ein Getränk kostet 1,00 €             # classpath:features/preis_anzeigen.feature:16
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Cola 1,00 €                     # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenario: Abbruch zahlt das Guthaben in die Münzrückgabe aus # classpath:features/wechselgeld.feature:5
+  ✔ Angenommen der Automat ist frisch gestartet              # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich 2 € einwerfe                                     # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCoin(int)
+  ✔ Wenn ich Abbruch drücke                                  # de.sharpsharp.vendingmachine.VendingMachineSteps.iPressCancel()
+  ✔ Dann die Münzrückgabe enthält 2 €                        # de.sharpsharp.vendingmachine.VendingMachineSteps.theCoinReturnContains(int)
+  ✔ Und ist das Guthaben 0,00 €                              # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenario: Die Münzrückgabe wird beim Entnehmen geleert # classpath:features/wechselgeld.feature:12
+  ✔ Angenommen der Automat ist frisch gestartet        # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich habe 2 € in der Münzrückgabe               # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveCoinsInTheCoinReturn(int)
+  ✔ Wenn ich die Münzrückgabe entnehme                 # de.sharpsharp.vendingmachine.VendingMachineSteps.iTakeTheCoinReturn()
+  ✔ Dann die Münzrückgabe ist leer                     # de.sharpsharp.vendingmachine.VendingMachineSteps.theCoinReturnIsEmpty()
+[0m
+Die Cucumber-Szenarien sind jetzt grün. Ich mache noch den Pflichtlauf `mvn -q verify`, damit wir sehen, ob irgendwo ein Nebenproblem bleibt.
+[0m$ [0mmvn -q verify
+Szenario: Ein Getränk wählen                    # classpath:features/freies_getraenk.feature:6
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenariogrundriss: Alle Getränke fallen ohne Bezahlung # classpath:features/freies_getraenk.feature:18
+  ✔ Angenommen der Automat ist frisch gestartet        # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                                # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach           # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenariogrundriss: Alle Getränke fallen ohne Bezahlung # classpath:features/freies_getraenk.feature:19
+  ✔ Angenommen der Automat ist frisch gestartet        # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Orange wähle                              # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Orange im Ausgabefach         # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenariogrundriss: Alle Getränke fallen ohne Bezahlung # classpath:features/freies_getraenk.feature:20
+  ✔ Angenommen der Automat ist frisch gestartet        # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Zitrone wähle                             # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Zitrone im Ausgabefach        # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenariogrundriss: Alle Getränke fallen ohne Bezahlung # classpath:features/freies_getraenk.feature:21
+  ✔ Angenommen der Automat ist frisch gestartet        # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Bier wähle                                # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Bier im Ausgabefach           # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenario: Zu wenig Geld bringt keine Dose und eine Meldung # classpath:features/getraenke_kosten_geld.feature:5
+  ✔ Angenommen der Automat ist frisch gestartet            # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich 50 ct einwerfe                                 # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCoin(int)
+  ✔ Wenn ich Cola wähle                                    # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann ist das Ausgabefach leer                          # de.sharpsharp.vendingmachine.VendingMachineSteps.theOutputTrayIsEmpty()
+  ✔ Und der Automat meldet "Zu wenig Geld"                 # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+
+Szenario: Bei genauem Preis fällt die Dose ohne Restguthaben # classpath:features/getraenke_kosten_geld.feature:12
+  ✔ Angenommen der Automat ist frisch gestartet              # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich 1 € einwerfe                                     # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCoin(int)
+  ✔ Wenn ich Cola wähle                                      # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach                 # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+  ✔ Und ist das Guthaben 0,00 €                              # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenario: Restguthaben bleibt nach dem Kauf sichtbar # classpath:features/getraenke_kosten_geld.feature:19
+  ✔ Angenommen der Automat ist frisch gestartet      # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich 2 € einwerfe                             # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCoin(int)
+  ✔ Wenn ich Cola wähle                              # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach         # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+  ✔ Und ist das Guthaben 1,00 €                      # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenario: Das Guthaben steht bei null           # classpath:features/guthaben_anzeigen.feature:5
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann ist das Guthaben 0,00 €                # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenariogrundriss: Eine Münze erhöht das Guthaben # classpath:features/guthaben_anzeigen.feature:16
+  ✔ Angenommen der Automat ist frisch gestartet   # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich 50 ct einwerfe                       # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCoin(int)
+  ✔ Dann ist das Guthaben 0,50 €                  # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenariogrundriss: Eine Münze erhöht das Guthaben # classpath:features/guthaben_anzeigen.feature:17
+  ✔ Angenommen der Automat ist frisch gestartet   # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich 1 € einwerfe                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCoin(int)
+  ✔ Dann ist das Guthaben 1,00 €                  # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenariogrundriss: Eine Münze erhöht das Guthaben # classpath:features/guthaben_anzeigen.feature:18
+  ✔ Angenommen der Automat ist frisch gestartet   # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich 2 € einwerfe                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCoin(int)
+  ✔ Dann ist das Guthaben 2,00 €                  # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenariogrundriss: An jedem Fach steht der Preis # classpath:features/preis_anzeigen.feature:11
+  ✔ Angenommen der Automat ist frisch gestartet  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Cola 1,00 €                      # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenariogrundriss: An jedem Fach steht der Preis # classpath:features/preis_anzeigen.feature:12
+  ✔ Angenommen der Automat ist frisch gestartet  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Orange 1,00 €                    # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenariogrundriss: An jedem Fach steht der Preis # classpath:features/preis_anzeigen.feature:13
+  ✔ Angenommen der Automat ist frisch gestartet  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Zitrone 1,00 €                   # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenariogrundriss: An jedem Fach steht der Preis # classpath:features/preis_anzeigen.feature:14
+  ✔ Angenommen der Automat ist frisch gestartet  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Bier 1,00 €                      # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenario: Ein Getränk kostet 1,00 €             # classpath:features/preis_anzeigen.feature:16
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Cola 1,00 €                     # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenario: Abbruch zahlt das Guthaben in die Münzrückgabe aus # classpath:features/wechselgeld.feature:5
+  ✔ Angenommen der Automat ist frisch gestartet              # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich 2 € einwerfe                                     # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCoin(int)
+  ✔ Wenn ich Abbruch drücke                                  # de.sharpsharp.vendingmachine.VendingMachineSteps.iPressCancel()
+  ✔ Dann die Münzrückgabe enthält 2 €                        # de.sharpsharp.vendingmachine.VendingMachineSteps.theCoinReturnContains(int)
+  ✔ Und ist das Guthaben 0,00 €                              # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenario: Die Münzrückgabe wird beim Entnehmen geleert # classpath:features/wechselgeld.feature:12
+  ✔ Angenommen der Automat ist frisch gestartet        # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich habe 2 € in der Münzrückgabe               # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveCoinsInTheCoinReturn(int)
+  ✔ Wenn ich die Münzrückgabe entnehme                 # de.sharpsharp.vendingmachine.VendingMachineSteps.iTakeTheCoinReturn()
+  ✔ Dann die Münzrückgabe ist leer                     # de.sharpsharp.vendingmachine.VendingMachineSteps.theCoinReturnIsEmpty()
+[0m
+Der letzte Schritt ist nur noch die kurze Kontrolle der Änderungen, dann melde ich dir exakt die betroffenen Dateien und das Verifier-Ergebnis.
+[0m$ [0mgit status --short
+M src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+ M src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+[0m
+Geändert: `src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java`, `src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java`
+`mvn -q verify`: grün; letzte Zeilen zeigen das Szenario `Abbruch zahlt das Guthaben in die Münzrückgabe aus` und `Die Münzrückgabe wird beim Entnehmen geleert` mit allen Schritten grün
+Offen: nichts
+### Grün nach Runde 1.

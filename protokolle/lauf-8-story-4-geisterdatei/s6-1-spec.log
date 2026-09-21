@@ -1,0 +1,23 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich ziehe nur Story 6 heran und lege dafür die Spec unter `specs/6-bier-kostet-mehr/spec.md` an. Danach prüfe ich kurz, ob Inhalt und Format genau zu den Vorgaben passen.
+# Todos
+[✓] Story 6 in `specs/stories.md` identifizieren und den Wortlaut übernehmen
+[•] `specs/6-bier-kostet-mehr/spec.md` mit Story, Regeln und offenen Fragen anlegen/überarbeiten
+[ ] Inhalt und Pfad gegen die Vorgaben prüfen
+
+Ich schreibe jetzt die neue Spec-Datei mit genau den drei geforderten Abschnitten und nur der Story 6.
+% Patch 1 file
+Die Datei liegt an Ort und Stelle; ich prüfe jetzt kurz den finalen Inhalt gegen die drei geforderten Abschnitte.
+→ Read specs/6-bier-kostet-mehr/spec.md
+
+# Todos
+[✓] Story 6 in `specs/stories.md` identifizieren und den Wortlaut übernehmen
+[✓] `specs/6-bier-kostet-mehr/spec.md` mit Story, Regeln und offenen Fragen anlegen/überarbeiten
+[✓] Inhalt und Pfad gegen die Vorgaben prüfen
+
+`specs/6-bier-kostet-mehr/spec.md`
+
+Regel:
+- WHEN der Kunde Bier wählt und das Guthaben mindestens 2,00 € beträgt, SHALL der Automat die Dose ausgeben.

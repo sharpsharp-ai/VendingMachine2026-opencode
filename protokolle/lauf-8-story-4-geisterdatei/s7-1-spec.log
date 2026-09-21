@@ -1,0 +1,13 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich prüfe kurz die vorhandenen Specs, damit der neue Eintrag exakt zum Stil im `specs/`-Ordner passt.
+→ Read specs/6-bier-kostet-mehr/spec.md
+→ Read specs/5-wechselgeld/spec.md
+Ich lege jetzt `specs/7-kein-bier-vor-4/spec.md` an und halte mich an die drei geforderten Abschnitte.
+% Patch 1 file
+`specs/7-kein-bier-vor-4/spec.md`
+
+- WHILE es vor 16:00 Uhr ist, WHEN der Kunde Bier wählt, SHALL der Automat keine Dose ausgeben, `"Kein Bier vor 4"` melden und die Meldung laut ausgeben.
+- WHILE es ab 16:00 Uhr ist, WHEN der Kunde Bier wählt, SHALL der Automat Bier wie gewohnt ausgeben.
+- WHILE es vor 16:00 Uhr ist, WHEN der Kunde Bier wählt, SHALL das Guthaben unverändert bleiben.

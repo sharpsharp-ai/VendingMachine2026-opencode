@@ -1,0 +1,16 @@
+
+> reviewer · gpt-5.4-mini
+
+Ich prüfe die betroffenen Dateien vollständig und gleiche die Änderung gegen die Clean-Code- und Testregeln ab.
+→ Read src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+→ Read src/main/java/de/sharpsharp/vendingmachine/Main.java
+Ich ziehe noch die Akzeptanztest-Regeln heran, um die Änderung gegen die Szenario- und Testqualität zu prüfen.
+→ Read .opencode/skills/akzeptanztest-regeln/SKILL.md
+✱ Glob "src/test/resources/features/*.feature" in . · 2 matches
+✱ Grep "kostet|Preis" in . · 6 matches
+✱ Grep "price\(" in . · 4 matches
+Ich habe den Kontext zur Preisregel gefunden und lese das dazugehörige Feature, um die Änderung gegen die Spezifikation zu prüfen.
+→ Read src/test/resources/features/preis_anzeigen.feature
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java
+Keine wesentlichen Befunde.

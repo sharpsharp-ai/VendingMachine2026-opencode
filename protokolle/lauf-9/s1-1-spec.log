@@ -1,0 +1,36 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich lese die Story 1 aus und lege nur die dazugehörige Spec unter `specs/` an.
+# Todos
+[✓] Story 1 in `specs/stories.md` lesen und Kurzname bestimmen
+[•] `specs/1-alles-umsonst/spec.md` anlegen oder überarbeiten
+[ ] Inhalt gegen die Vorgaben prüfen und nur Pfad plus Regeln melden
+
+✱ Glob "specs/*" in . · 2 matches
+Ich schreibe jetzt die neue Spec-Datei mit genau den drei geforderten Abschnitten.
+% Patch 1 file
+Ich prüfe kurz die Datei auf saubere Zeichen und korrigiere sie falls nötig.
+
+# Todos
+[✓] Story 1 in `specs/stories.md` lesen und Kurzname bestimmen
+[•] `specs/1-alles-umsonst/spec.md` anlegen oder überarbeiten
+[ ] Inhalt gegen die Vorgaben prüfen und nur Pfad plus Regeln melden
+
+✗ Read specs/1-alles-umsonst/spec.md failed
+Error: Cannot read binary file: /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-9/specs/1-alles-umsonst/spec.md
+Die erste Version hatte kaputte Bytes. Ich überschreibe die Datei jetzt sauber mit normalem UTF-8-Text.
+% Patch 1 file
+% Patch 1 file
+Die Spec ist neu geschrieben. Ich prüfe jetzt nur noch den Inhalt und schließe ab.
+
+# Todos
+[✓] Story 1 in `specs/stories.md` lesen und Kurzname bestimmen
+[✓] `specs/1-alles-umsonst/spec.md` anlegen oder überarbeiten
+[✓] Inhalt gegen die Vorgaben prüfen und nur Pfad plus Regeln melden
+
+→ Read specs/1-alles-umsonst/spec.md
+`specs/1-alles-umsonst/spec.md`
+
+Regel:
+`WHILE im gewählten Fach noch eine Dose ist, WHEN ein Fach gewählt wird, SHALL der Automat die Dose ohne Bezahlung ins Ausgabefach fallen lassen.`

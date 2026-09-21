@@ -1,0 +1,14 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich prüfe kurz das Format der bestehenden Specs und lege dann Story 5 als neue Spec unter `specs/` an.
+→ Read specs/1-alles-umsonst/spec.md
+→ Read specs/4-getraenke-kosten-geld/spec.md
+✱ Glob "specs/*/spec.md" 4 matches
+Ich schreibe die neue Spec jetzt direkt im passenden Unterordner unter `specs/` und halte mich an die drei geforderten Abschnitte.
+% Patch 1 file
+`specs/5-wechselgeld/spec.md`
+
+- `WHEN der Kunde Abbruch drückt, SHALL der Automat das gesamte Guthaben als Münzen in die Münzrückgabe auszahlen.`
+- `WHEN der Kunde Abbruch drückt, SHALL der Automat das Guthaben auf 0,00 € anzeigen.`
+- `WHEN der Kunde die Münzrückgabe entnimmt, SHALL der Automat die Münzrückgabe leeren.`

@@ -1,0 +1,12 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich lege jetzt die Spec für Story 1 unter `specs/1-alles-umsonst/spec.md` an und halte mich dabei strikt an die drei geforderten Abschnitte.
+✱ Glob "specs/1-*/spec.md" in . · 0 matches
+✱ Glob "specs/1-*" in . · 0 matches
+Es gibt noch keine Story-1-Spec, ich lege sie jetzt neu an.
+% Patch 1 file
+`specs/1-alles-umsonst/spec.md`
+
+Regeln:
+- `WHILE eine Dose im Fach ist, WHEN der Kunde ein Fach wählt, SHALL der Automat die Dose ohne Bezahlung ins Ausgabefach fallen lassen.`

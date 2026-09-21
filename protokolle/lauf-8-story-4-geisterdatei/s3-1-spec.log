@@ -1,0 +1,21 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich prüfe kurz die vorhandenen Specs, damit die neue Datei exakt ins vorhandene Format passt, und lege dann nur `specs/` an.
+→ Read specs/1-alles-umsonst/spec.md
+→ Read specs/2-preis-anzeigen/spec.md
+Die Story 3 heißt `Guthaben anzeigen`; ich lege dafür die neue Spec-Datei an und halte mich an die drei geforderten Abschnitte.
+
+# Todos
+[✓] Story 3 in `specs/stories.md` lesen und passenden Kurzname bestimmen
+[•] `specs/3-guthaben-anzeigen/spec.md` anlegen oder überarbeiten
+[ ] Inhalt gegen Vorgaben prüfen und Antwort formulieren
+
+✱ Glob "specs/3-*" in . · 0 matches
+% Patch 1 file
+Die Spec ist angelegt. Ich prüfe noch kurz den Inhalt, damit der Antworttext nur die Datei und die Regeln enthält.
+→ Read specs/3-guthaben-anzeigen/spec.md
+`specs/3-guthaben-anzeigen/spec.md`
+
+- Der Automat SHALL das eingeworfene Geld als Guthaben: x,xx € anzeigen.
+- WHEN der Kunde eine zulässige Münze einwirft, SHALL der Automat das Guthaben um den Münzbetrag erhöhen.

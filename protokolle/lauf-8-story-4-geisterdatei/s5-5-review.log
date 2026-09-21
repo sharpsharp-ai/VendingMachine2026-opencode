@@ -1,0 +1,23 @@
+
+> reviewer · gpt-5.4-mini
+
+Ich prüfe jetzt die beiden geänderten Dateien vollständig und gleiche die neuen Tests gegen die Clean-Code- und Akzeptanztest-Regeln ab.
+→ Read .opencode/skills/akzeptanztest-regeln/SKILL.md
+→ Read src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+Ich gleiche die neue Münzrückgabe gegen vorhandene Spezifikation und Tests ab, um echte Verhaltenslücken von Stilproblemen zu trennen.
+✱ Grep "coinReturn|cancel\(" in . · 19 matches
+✱ Grep "Münzrückgabe|Münzen|Guthaben|cancel" in . · 17 matches
+✱ Grep "coin return|coinReturn|cancel" in . · 5 matches
+Ich prüfe jetzt die vorhandene Spezifikation für Abbruch und Münzrückgabe, weil dort am ehesten ein funktionaler Fehler sichtbar wird.
+→ Read specs/glossar.md
+→ Read src/test/resources/features/wechselgeld.feature
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java
+Ich prüfe noch die Doku auf Erwartung an Münzstücke, um nicht fälschlich ein korrektes Cent-Modell als Fehler zu markieren.
+✱ Grep "50 ct|1 €|2 €|Münzen zurück|Wechselgeld" in . · 10 matches
+→ Read README.md [offset=90, limit=40]
+→ Read specs/5-wechselgeld/spec.md
+Ich prüfe die Story-Übersicht noch einmal, um sicherzugehen, dass ich keine implizite Regel übersehe.
+→ Read specs/stories.md [offset=24, limit=85]
+→ Read src/main/java/de/sharpsharp/vendingmachine/Main.java [offset=90, limit=35]
+Keine wesentlichen Befunde.

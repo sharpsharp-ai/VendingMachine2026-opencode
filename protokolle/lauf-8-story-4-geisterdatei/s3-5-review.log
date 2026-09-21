@@ -1,0 +1,14 @@
+
+> reviewer · gpt-5.4-mini
+
+Ich prüfe die betroffenen Dateien vollständig und gleiche die Änderungen gegen die Clean-Code- und Akzeptanztest-Regeln ab.
+→ Read src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+→ Read .opencode/skills/akzeptanztest-regeln/SKILL.md
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+Ich prüfe noch die Akzeptanzszenarien im Projekt, um Regelverstöße gegen die elf Gherkin-Regeln auszuschließen.
+→ Read specs/glossar.md
+✱ Glob "src/test/resources/features/*.feature" 3 matches
+→ Read src/test/resources/features/preis_anzeigen.feature
+→ Read src/test/resources/features/guthaben_anzeigen.feature
+→ Read src/test/resources/features/freies_getraenk.feature
+Keine wesentlichen Befunde.

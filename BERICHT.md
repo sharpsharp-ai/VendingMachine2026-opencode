@@ -41,7 +41,7 @@ Wer opencode das Setup machen lassen will: Text aus `PROMPT.md` einfügen (Weg B
 | Jedes Gate hat nachweislich ausgelöst | Erfüllt. `protokolle/gates/gates.log`: Methode mit 25 Zeilen (Checkstyle), Javalin-Import in `VendingMachine` (ArchUnit), roter Unit-Test (Surefire), ungetestete Klasse (JaCoCo unter 80 %); jedes Mal Exit 1, danach wieder grün |
 | H1 bis H4 getestet, Ergebnis im Bericht, Setup passt dazu | Erfüllt, Abschnitt 3 |
 | `training-start` enthält keine Story-Lösungen und baut grün | Erfüllt mit einer Absicht: kompiliert, alle Tests grün bis auf das eine Szenario „Ein Getränk wählen", das nach Sebastians Vorgabe rot wartet (`mvn -q verify` endet deshalb mit Exit 1, `mvn -q test -Dtest=WebTest` grün). Keine Story-Regel ist gebaut: `selectDrink`, `insertCoin`, `cancel` sind leer, `price` liefert null |
-| Folien, README, PROMPT, Bericht liegen vor, alles committet und gepusht | Erfüllt: `folien/folien.pdf` und `.pptx` (Kopien `~/Downloads/opencode-folien.*`), `README.md`, `PROMPT.md`, `BERICHT.md`; Paket-Repo öffentlich auf GitHub, `training-start` gepusht. Miro: TODO-MIRO |
+| Folien, README, PROMPT, Bericht liegen vor, alles committet und gepusht | Erfüllt: `folien/folien.pdf` und `.pptx` (Kopien `~/Downloads/opencode-folien.*`), `README.md`, `PROMPT.md`, `BERICHT.md`; Paket-Repo öffentlich auf GitHub, `training-start` gepusht. Miro: die elf Folien liegen als Bilder im vorgegebenen Frame (Board `uXjVHnldClU=`, Frame `3458764684499712615`, drei Reihen), nichts Vorhandenes verändert; Bild-IDs und Positionen in `protokolle/miro/miro-upload.md` |
 
 Bewertung je Story in den beiden Abnahmeläufen (Protokolle `protokolle/lauf-7/` und `protokolle/lauf-8/`, je Story Spec, Szenarien, Implementierung je Szenario, verify, Review, HTTP):
 
@@ -89,7 +89,7 @@ Skript und Ausgabe: `protokolle/h-tests/`.
    - Qwen ruft gar keine Tools auf: dann bleibt die Pipeline als Ablauf für Menschen (Spec, Szenarien, roter Test, Code, Review), das Modell liefert Text zum Einfügen.
 2. **Kontextgröße.** Jeder Command lädt alle Specs oder alle Feature-Dateien. Bei Story 7 sind das einige tausend Tokens, für Qwen mit 32k oder mehr unkritisch, bei kleineren Fenstern die Feature-Dateien im Command auf die aktuelle beschränken.
 3. **Story 4 hebt Story 1 auf.** Der Test-Autor darf dann das alte Szenario ändern (Iteration 6). Ob Qwen das tut, ist offen; sonst von Hand: Szenario "Ein Getränk wählen" bekommt ein Guthaben.
-4. **Story 7 braucht eine Uhr.** Der Implementierer muss ein Interface einführen und `Main` eine echte Uhr geben; `AGENTS.md` verlangt das, der Reviewer prüft es. TODO-STORY7
+4. **Story 7 braucht eine Uhr.** Seit Iteration 10 steckt sie im Startstand: `VendingMachine(Clock)`, `Main` gibt `LocalTime::now` hinein, die Schritte eine `FakeClock`. In Lauf 8 stellte der Test-Autor die Zeit mit `clock.set(LocalTime.of(15, 59))`, der Implementierer fragte `clock.now()`, `Main` blieb unverändert. Ohne diese Naht (Lauf 4 und 5) erfand der Test-Autor einen Setter am Automaten oder verweigerte den Zeitschritt.
 5. **CI läuft nur auf `main`.** Der Branch `training-start` selbst hat keinen CI-Lauf; in den Team-Repos wird er zu `main` gepusht, dann läuft die CI, anfangs rot (ein Szenario wartet).
 6. **Commits macht der Mensch.** Keine Rolle darf `git add` oder `git commit` (Whitelist). Nach jedem grünen Szenario selbst committen, sonst frisst `/undo` oder ein Neustart Arbeit.
 7. **Der Reviewer meldet auch bei sauberem Code etwas.** In allen Läufen fand er ein bis drei Punkte, teils spekulativ (etwa "Bestand reduzieren", bevor die Story das verlangt). Die Teilnehmerinnen entscheiden, was sie annehmen; das ist Absicht und steht auf Folie 11.
@@ -101,7 +101,7 @@ Skript und Ausgabe: `protokolle/h-tests/`.
 | Paket, Installer, README, PROMPT, Folien, Baseline, Protokolle, dieser Bericht | `github.com/sharpsharp-ai/VendingMachine2026-opencode` (öffentlich), lokal `taskforce/compax_csd_mit_opencode/VendingMachine2026-opencode/` |
 | Startstand der Teams | `github.com/sharpsharp-ai/VendingMachine2026-Start`, Branch `training-start`; lokal Worktree `vending_machine_training_start/` |
 | Referenzlösung | `github.com/sharpsharp-ai/VendingMachine2026` (privat), lokal `vending_machine_1shot/` |
-| Folien | `folien/folien.pdf`, `folien/folien.pptx`, Quelle `folien/folien.py`; Kopien in `~/Downloads`; TODO-MIRO |
+| Folien | `folien/folien.pdf`, `folien/folien.pptx`, Quelle `folien/folien.py`; Kopien in `~/Downloads`; auf dem Miro-Board im Frame `3458764684499712615`, erste Folie: https://miro.com/app/board/uXjVHnldClU=/?moveToWidget=3458764684509393595 |
 | Baseline Story 1 ohne Paket | `baseline/` (Prompt, zwei Läufe, Diff) |
 | Verifikationsläufe | `protokolle/lauf-*/` (je Story: Spec, Szenarien, Implementierung je Szenario, verify, Review, HTTP-Prüfung), `protokolle/probe-*/` (Teilnehmer-Probe) |
 | Iterationen am Setup | `ITERATIONEN.md` |

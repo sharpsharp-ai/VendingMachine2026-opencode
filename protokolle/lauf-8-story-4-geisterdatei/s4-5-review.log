@@ -1,0 +1,24 @@
+
+> reviewer · gpt-5.4-mini
+
+Ich lese jetzt die betroffenen Dateien vollständig und prüfe zusätzlich die Akzeptanztest-Regeln, damit ich die Änderungen sauber gegen die Projektregeln bewerten kann.
+→ Read src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+→ Read .opencode/skills/akzeptanztest-regeln/SKILL.md
+Ich prüfe jetzt die betroffenen Szenarien und die restlichen Stellen auf die ausdrücklich geforderten Punkte: Fachlogik in `Main`, Testwerte im Produktivcode, und Akzeptanztest-Regeln.
+✱ Grep "^\s*Szenario|^\s*Szenariogrundriss|^\s*Funktionalität|^\s*Wenn|^\s*Angenommen|^\s*Dann" in src/test/resources/features · 28 matches
+✱ Grep "class Main|public class Main|selectDrink\(|message\(|insertCoin\(" in . · 14 matches
+→ Read src/main/java/de/sharpsharp/vendingmachine/Main.java
+→ Read src/test/resources/features/getraenke_kosten_geld.feature
+→ Read src/test/resources/features/preis_anzeigen.feature
+→ Read src/test/resources/features/guthaben_anzeigen.feature
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java
+Ich habe genug Kontext: Es gibt mindestens einen fachlichen Fehler in `selectDrink`, und zusätzlich einen klaren Clean-Code-Befund zu harten Texten im Produktivcode. Ich formuliere jetzt die Review-Punkte knapp mit Datei und Zeile.
+
+# Todos
+[✓] Betroffene Dateien und Skills vollständig lesen
+[✓] Szenarien und Main gegen die Zusatzregeln prüfen
+[•] Befunde mit Datei:Zeile und Refactoring-Vorschlag formulieren
+
+- `src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java:22,46` Magic String, die Anzeige-Texte als Konstanten auslagern und zentral benennen.
+- `src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java:39-51` Misplaced Responsibility, die Kaufentscheidung in einen einzigen Zahlungsweg ziehen: nur bei ausreichendem Guthaben ausgeben, sonst nichts ausgeben und die Meldung sauber setzen/zurücksetzen.

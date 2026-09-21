@@ -1,0 +1,6 @@
+FAIL ohne Guthaben: Zu wenig Geld
+FAIL mit 2 €: Cola fällt, Rest 1,00 €
+FAIL Bier kostet 2,00 €
+FAIL Bier mit 1 €: Zu wenig Geld
+FAIL Bier mit 2 €: fällt
+RESULT FAIL

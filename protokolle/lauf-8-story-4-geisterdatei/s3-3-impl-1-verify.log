@@ -1,0 +1,138 @@
+
+Szenario: Ein Getränk wählen                    # classpath:features/freies_getraenk.feature:6
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenariogrundriss: Alle Getränke fallen ohne Bezahlung # classpath:features/freies_getraenk.feature:18
+  ✔ Angenommen der Automat ist frisch gestartet        # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                                # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach           # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenariogrundriss: Alle Getränke fallen ohne Bezahlung # classpath:features/freies_getraenk.feature:19
+  ✔ Angenommen der Automat ist frisch gestartet        # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Orange wähle                              # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Orange im Ausgabefach         # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenariogrundriss: Alle Getränke fallen ohne Bezahlung # classpath:features/freies_getraenk.feature:20
+  ✔ Angenommen der Automat ist frisch gestartet        # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Zitrone wähle                             # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Zitrone im Ausgabefach        # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenariogrundriss: Alle Getränke fallen ohne Bezahlung # classpath:features/freies_getraenk.feature:21
+  ✔ Angenommen der Automat ist frisch gestartet        # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Bier wähle                                # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Bier im Ausgabefach           # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenario: Das Guthaben steht bei null           # classpath:features/guthaben_anzeigen.feature:5
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann ist das Guthaben 0,00 €                # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenariogrundriss: Eine Münze erhöht das Guthaben # classpath:features/guthaben_anzeigen.feature:16
+  ✔ Angenommen der Automat ist frisch gestartet   # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich 50 ct einwerfe                       # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCoin(int)
+  ✘ Dann ist das Guthaben 0,50 €                  # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+        java.lang.AssertionError: 
+        Expected: is <50>
+             but: was <0>
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(VendingMachineSteps.java:43)
+        	at ✽.ist das Guthaben 0,50 €(classpath:features/guthaben_anzeigen.feature:12)
+
+Szenariogrundriss: Eine Münze erhöht das Guthaben # classpath:features/guthaben_anzeigen.feature:17
+  ✔ Angenommen der Automat ist frisch gestartet   # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich 1 € einwerfe                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCoin(int)
+  ✘ Dann ist das Guthaben 1,00 €                  # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+        java.lang.AssertionError: 
+        Expected: is <100>
+             but: was <0>
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(VendingMachineSteps.java:43)
+        	at ✽.ist das Guthaben 1,00 €(classpath:features/guthaben_anzeigen.feature:12)
+
+Szenariogrundriss: Eine Münze erhöht das Guthaben # classpath:features/guthaben_anzeigen.feature:18
+  ✔ Angenommen der Automat ist frisch gestartet   # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich 2 € einwerfe                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCoin(int)
+  ✘ Dann ist das Guthaben 2,00 €                  # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+        java.lang.AssertionError: 
+        Expected: is <200>
+             but: was <0>
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(VendingMachineSteps.java:43)
+        	at ✽.ist das Guthaben 2,00 €(classpath:features/guthaben_anzeigen.feature:12)
+
+Szenariogrundriss: An jedem Fach steht der Preis # classpath:features/preis_anzeigen.feature:11
+  ✔ Angenommen der Automat ist frisch gestartet  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Cola 1,00 €                      # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenariogrundriss: An jedem Fach steht der Preis # classpath:features/preis_anzeigen.feature:12
+  ✔ Angenommen der Automat ist frisch gestartet  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Orange 1,00 €                    # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenariogrundriss: An jedem Fach steht der Preis # classpath:features/preis_anzeigen.feature:13
+  ✔ Angenommen der Automat ist frisch gestartet  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Zitrone 1,00 €                   # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenariogrundriss: An jedem Fach steht der Preis # classpath:features/preis_anzeigen.feature:14
+  ✔ Angenommen der Automat ist frisch gestartet  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Bier 1,00 €                      # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenario: Ein Getränk kostet 1,00 €             # classpath:features/preis_anzeigen.feature:16
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Cola 1,00 €                     # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+[ERROR] Tests run: 14, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 0.531 s <<< FAILURE! -- in de.sharpsharp.vendingmachine.RunCucumberTest
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Eine Münze erhöht das Guthaben #1 -- Time elapsed: 0.010 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: is <50>
+     but: was <0>
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(VendingMachineSteps.java:43)
+	at ✽.ist das Guthaben 0,50 €(classpath:features/guthaben_anzeigen.feature:12)
+
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Eine Münze erhöht das Guthaben #2 -- Time elapsed: 0.003 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: is <100>
+     but: was <0>
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(VendingMachineSteps.java:43)
+	at ✽.ist das Guthaben 1,00 €(classpath:features/guthaben_anzeigen.feature:12)
+
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Eine Münze erhöht das Guthaben #3 -- Time elapsed: 0.004 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: is <200>
+     but: was <0>
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(VendingMachineSteps.java:43)
+	at ✽.ist das Guthaben 2,00 €(classpath:features/guthaben_anzeigen.feature:12)
+
+[ERROR] Failures: 
+[ERROR]   RunCucumberTest.Eine Münze erhöht das Guthaben #1 
+Expected: is <50>
+     but: was <0>
+[ERROR]   RunCucumberTest.Eine Münze erhöht das Guthaben #2 
+Expected: is <100>
+     but: was <0>
+[ERROR]   RunCucumberTest.Eine Münze erhöht das Guthaben #3 
+Expected: is <200>
+     but: was <0>
+[ERROR] Tests run: 22, Failures: 3, Errors: 0, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.6.0:test (default-test) on project getraenkeautomat: There are test failures.
+[ERROR] 
+[ERROR] See /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-8/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

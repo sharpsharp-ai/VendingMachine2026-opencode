@@ -1,0 +1,73 @@
+=== Story 1  01:23:08
+    Feature-Dateien: src/test/resources/features/freies_getraenk.feature
+    Szenario 1: Ein Getränk wählen  01:24:04
+    bis-gruen exit=0
+    Szenario 2: Alle Getränke fallen ohne Bezahlung  01:25:15
+    bis-gruen exit=0
+    Implementierer hat Features/Specs/Schritte/Gates geändert: nein
+    mvn -q verify exit=0
+    Review: ✱ Glob "src/test/resources/features/*.feature" in . · 1 match → Read src/test/resources/features/freies_getraenk.feature Keine wesentlichen Befunde. 
+    HTTP: RESULT OK
+=== Story 2  01:26:22
+    Feature-Dateien: src/test/resources/features/preis_anzeigen.feature
+    Szenario 1: An jedem Fach steht der Preis  01:27:27
+    bis-gruen exit=0
+    Szenario 2: Ein Getränk kostet 1,00 €  01:28:41
+    bis-gruen exit=0
+    Implementierer hat Features/Specs/Schritte/Gates geändert: nein
+    mvn -q verify exit=0
+    Review: → Read src/test/resources/features/preis_anzeigen.feature → Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java Keine wesentlichen Befunde.
+    HTTP: RESULT OK
+=== Story 3  01:29:39
+    Feature-Dateien: src/test/resources/features/guthaben_anzeigen.feature
+    Szenario 1: Das Guthaben steht bei null  01:31:01
+    bis-gruen exit=1
+    Szenario 2: Eine Münze erhöht das Guthaben  01:32:56
+    bis-gruen exit=0
+    Implementierer hat Features/Specs/Schritte/Gates geändert: nein
+    mvn -q verify exit=0
+    Review: → Read src/test/resources/features/guthaben_anzeigen.feature → Read src/test/resources/features/freies_getraenk.feature Keine wesentlichen Befunde. 
+    HTTP: RESULT OK
+=== Story 4  01:34:26
+    Feature-Dateien: src/test/resources/features/getraenke_kosten_geld.feature
+    Szenario 1: Zu wenig Geld bringt keine Dose und eine Meldung  01:35:48
+    bis-gruen exit=0
+    Szenario 2: Bei genauem Preis fällt die Dose ohne Restguthaben  01:37:21
+    bis-gruen exit=0
+    Szenario 3: Restguthaben bleibt nach dem Kauf sichtbar  01:38:04
+    bis-gruen exit=0
+    Implementierer hat Features/Specs/Schritte/Gates geändert: nein
+    mvn -q verify exit=0
+    Review:  - `src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java:22,46` Magic String, die Anzeige-Texte als Konstanten auslagern und zentral benennen. - `src/
+    HTTP: RESULT FAIL
+=== Story 5  01:39:35
+    Feature-Dateien: src/test/resources/features/wechselgeld.feature
+    Szenario 1: Abbruch zahlt das Guthaben in die Münzrückgabe aus  01:41:27
+    bis-gruen exit=0
+    Szenario 2: Die Münzrückgabe wird beim Entnehmen geleert  01:42:34
+    bis-gruen exit=0
+    Implementierer hat Features/Specs/Schritte/Gates geändert: nein
+    mvn -q verify exit=0
+    Review: → Read specs/stories.md [offset=24, limit=85] → Read src/main/java/de/sharpsharp/vendingmachine/Main.java [offset=90, limit=35] Keine wesentlichen Befunde. 
+    HTTP: RESULT FAIL
+=== Story 6  01:43:57
+    Feature-Dateien: src/test/resources/features/bier_kostet_mehr.feature
+    Szenario 1: Bei mindestens 2,00 € fällt Bier  01:45:45
+    bis-gruen exit=0
+    Implementierer hat Features/Specs/Schritte/Gates geändert: nein
+    mvn -q verify exit=0
+    Review: +    Dann liegt eine Dose Bier im Ausgabefach  Keine wesentlichen Befunde. 
+    HTTP: RESULT FAIL
+On branch lauf-8
+nothing to commit, working tree clean
+=== Story 7  01:46:44
+    Feature-Dateien: src/test/resources/features/kein_bier_vor_4.feature
+    Szenario 1: Vor 16:00 Uhr gibt der Automat kein Bier aus  01:48:05
+    bis-gruen exit=0
+    Szenario 2: Ab 16:00 Uhr fällt Bier wie gewohnt  01:48:59
+    bis-gruen exit=0
+    Implementierer hat Features/Specs/Schritte/Gates geändert: nein
+    mvn -q verify exit=0
+    Review: → Read src/main/java/de/sharpsharp/vendingmachine/Main.java - `src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java:62`, Magic Number, ziehe die `16:0
+    HTTP: RESULT FAIL
+=== done 01:50:18

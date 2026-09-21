@@ -1,0 +1,69 @@
+
+> reviewer · gpt-5.4-mini
+
+Ich ermittle zuerst den Commit-/Diff-Stand und lese dann die betroffenen Dateien vollständig, damit ich die Regeln sauber gegen den Code prüfen kann.
+→ Read .opencode/skills/akzeptanztest-regeln/SKILL.md
+
+$ git status --short && git diff --stat && git log --oneline -1
+7f0380b Story 6: Spec und Szenarien
+
+Der Arbeitsbaum ist sauber; ich prüfe deshalb den letzten Commit `HEAD` und lese die dort geänderten Dateien vollständig gegen die Checklisten.
+$ git show --stat --name-only --oneline HEAD
+7f0380b Story 6: Spec und Szenarien
+specs/6-bier-kostet-mehr/spec.md
+src/test/resources/features/bier_kostet_mehr.feature
+
+$ git show --name-only --format=medium HEAD
+commit 7f0380b147c3dc5ca1abffede058654ec15a382b
+Author: seb <seb@improuv.com>
+Date:   Tue Sep 22 01:45:45 2026 +0200
+
+    Story 6: Spec und Szenarien
+
+specs/6-bier-kostet-mehr/spec.md
+src/test/resources/features/bier_kostet_mehr.feature
+
+→ Read specs/6-bier-kostet-mehr/spec.md
+→ Read src/test/resources/features/bier_kostet_mehr.feature
+Ich gleiche die geänderten Zeilen noch gegen den Vorzustand ab, damit ich keine Regression übersehe und die Befunde, falls vorhanden, sauber belegen kann.
+
+$ git show --unified=80 HEAD -- specs/6-bier-kostet-mehr/spec.md src/test/resources/features/bier_kostet_mehr.feature
+commit 7f0380b147c3dc5ca1abffede058654ec15a382b
+Author: seb <seb@improuv.com>
+Date:   Tue Sep 22 01:45:45 2026 +0200
+
+    Story 6: Spec und Szenarien
+
+diff --git a/specs/6-bier-kostet-mehr/spec.md b/specs/6-bier-kostet-mehr/spec.md
+new file mode 100644
+index 0000000..5a35f16
+--- /dev/null
++++ b/specs/6-bier-kostet-mehr/spec.md
+@@ -0,0 +1,10 @@
++## Story
++Als cleverer Automatenbetreiber
++möchte ich Bier für 2,00 € verkaufen,
++damit ich an durstigen Studenten mehr verdiene.
++
++## Regeln
++- WHEN der Kunde Bier wählt und das Guthaben mindestens 2,00 € beträgt, SHALL der Automat die Dose ausgeben.
++
++## Offene Fragen
++keine
+diff --git a/src/test/resources/features/bier_kostet_mehr.feature b/src/test/resources/features/bier_kostet_mehr.feature
+new file mode 100644
+index 0000000..59949f4
+--- /dev/null
++++ b/src/test/resources/features/bier_kostet_mehr.feature
+@@ -0,0 +1,9 @@
++# language: de
++Funktionalität: Bier kostet mehr
++  Der Automat verkauft Bier für 2,00 €.
++
++  Szenario: Bei mindestens 2,00 € fällt Bier
++    Angenommen der Automat ist frisch gestartet
++    Und ich 2 € einwerfe
++    Wenn ich Bier wähle
++    Dann liegt eine Dose Bier im Ausgabefach
+
+Keine wesentlichen Befunde.

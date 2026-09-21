@@ -1,0 +1,3 @@
+FAIL ohne Guthaben: Zu wenig Geld
+FAIL mit 2 €: Cola fällt, Rest 1,00 €
+RESULT FAIL
