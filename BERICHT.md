@@ -12,7 +12,7 @@ Beim Kunden hängt hinter opencode Qwen 3.6; das Paket setzt kein Modell, es nim
 Für die Teilnehmerinnen, in dieser Reihenfolge (steht so im `README.md` des Pakets):
 
 ```bash
-git clone -b training-start <URL des Team-Repos> getraenkeautomat
+git clone <URL des Team-Repos> getraenkeautomat          # ohne Team-Repo: git clone -b training-start …/VendingMachine2026-Start.git getraenkeautomat
 git clone https://github.com/sharpsharp-ai/VendingMachine2026-opencode.git
 ./VendingMachine2026-opencode/install.sh getraenkeautomat
 cd getraenkeautomat
@@ -63,7 +63,19 @@ Skript und Ausgabe: `protokolle/h-tests/`.
 
 ## 5. Offene Risiken
 
-TODO-RISIKEN
+1. **Qwen 3.6 35B-A3B ist nicht getestet.** Alles hier lief mit `gpt-5.4-mini`. Das Setup ist für ein schwaches Modell gebaut (alles Nötige steht im Command, Rechte statt Appelle, `mvn -q verify` entscheidet), aber ob Qwen in opencode zuverlässig Tools aufruft, Dateien per `edit` schreibt und Skills liest, weiß morgen erst der erste Versuch. Vor dem Training einmal `/spec 1` und `/akzeptanztest 1` mit Qwen fahren.
+   Wenn Qwen hängt:
+   - `/spec` liefert falsche oder zu viele Regeln: die Datei `specs/<nr>-<name>/spec.md` von Hand korrigieren, sie ist kurzes Markdown. Das ist der vorgesehene Prüfpunkt.
+   - `/akzeptanztest` schreibt Schritte, die nicht kompilieren: `mvn -q test -Dtest=RunCucumberTest` selbst laufen lassen, die Fehlermeldung in die Session geben ("Behebe nur diesen Fehler"). Schrittvorlagen stehen im Skill `akzeptanztest-regeln`, notfalls den Schritt von Hand schreiben.
+   - `/implementiere` dreht Runden: `scripts/bis-gruen.sh "<Szenario>"` (höchstens fünf Runden, dann Abbruch mit Log unter `target/bis-gruen.log`); Szenario kleiner schneiden; oder den roten Unit-Test in `VendingMachineTest.java` selbst schreiben und nur "Mache diesen Test grün" verlangen.
+   - Das Modell ignoriert `AGENTS.md` oder den Skill: die Commands tragen Skill, Spec, Glossar und Schritte schon im Prompt, die Rechte in `opencode.json` halten unabhängig vom Modell. Was trotzdem falsch ist, fängt `mvn -q verify`.
+   - Qwen ruft gar keine Tools auf: dann bleibt die Pipeline als Ablauf für Menschen (Spec, Szenarien, roter Test, Code, Review), das Modell liefert Text zum Einfügen.
+2. **Kontextgröße.** Jeder Command lädt alle Specs oder alle Feature-Dateien. Bei Story 7 sind das einige tausend Tokens, für Qwen mit 32k oder mehr unkritisch, bei kleineren Fenstern die Feature-Dateien im Command auf die aktuelle beschränken.
+3. **Story 4 hebt Story 1 auf.** Der Test-Autor darf dann das alte Szenario ändern (Iteration 6). Ob Qwen das tut, ist offen; sonst von Hand: Szenario "Ein Getränk wählen" bekommt ein Guthaben.
+4. **Story 7 braucht eine Uhr.** Der Implementierer muss ein Interface einführen und `Main` eine echte Uhr geben; `AGENTS.md` verlangt das, der Reviewer prüft es. TODO-STORY7
+5. **CI läuft nur auf `main`.** Der Branch `training-start` selbst hat keinen CI-Lauf; in den Team-Repos wird er zu `main` gepusht, dann läuft die CI, anfangs rot (ein Szenario wartet).
+6. **Commits macht der Mensch.** Keine Rolle darf `git add` oder `git commit` (Whitelist). Nach jedem grünen Szenario selbst committen, sonst frisst `/undo` oder ein Neustart Arbeit.
+7. **Der Reviewer meldet auch bei sauberem Code etwas.** In allen Läufen fand er ein bis drei Punkte, teils spekulativ (etwa "Bestand reduzieren", bevor die Story das verlangt). Die Teilnehmerinnen entscheiden, was sie annehmen; das ist Absicht und steht auf Folie 11.
 
 ## 6. Wo was liegt
 

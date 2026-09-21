@@ -1,0 +1,19 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich prüfe kurz die vorhandenen Spec-Verzeichnisse und lege dann nur die Story-2-Spec unter `specs/` an.
+✱ Glob "specs/*/spec.md" 1 match
+✱ Glob "specs/*" in . · 2 matches
+Ich orientiere mich am bestehenden Spec-Stil und schreibe dann die neue Datei im gleichen Format.
+→ Read specs/1-alles-umsonst/spec.md
+Die Story 2 hat genau ein Akzeptanzkriterium, daher schreibe ich eine kleine Spec mit einer einzigen EARS-Regel.
+% Patch 1 file
+Ich prüfe die neue Datei noch einmal auf saubere Zeichen und korrigiere sie bei Bedarf.
+✗ Read specs/2-preis-anzeigen/spec.md failed
+Error: Cannot read binary file: /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-3/specs/2-preis-anzeigen/spec.md
+% Patch 1 file
+→ Read specs/2-preis-anzeigen/spec.md
+`specs/2-preis-anzeigen/spec.md`
+
+Regel:
+- Der Automat SHALL an jedem Fach den Preis hinter dem Namen anzeigen.

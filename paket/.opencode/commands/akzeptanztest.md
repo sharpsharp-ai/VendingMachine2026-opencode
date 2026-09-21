@@ -24,6 +24,7 @@ Der Automat, so wie er heute ist:
 
 Vorgehen:
 1. Jede Regel der Spec bekommt mindestens ein Szenario: Normalfall, Grenzwert, Fehlerfall, wo es sie gibt.
+   Zahlen in den Beispielen kommen von der Karte oder aus der Spec. Steht eine Zahl nirgends, nimm sie nicht 0, sondern schreibe die Frage in die Antwort.
    WHILE wird Angenommen, WHEN wird Wenn, SHALL wird Dann. IF wird ein eigenes Fehlerfall-Szenario.
    Eine Regel ohne WHEN (Immer) bekommt ein Szenario ohne Wenn: Angenommen und Dann.
 2. Datei `src/test/resources/features/<kurzname>.feature`, erste Zeile `# language: de`. Gibt es die Datei, ergänze fehlende Szenarien. Vorhandene Szenarien bleiben, wie sie sind, auch ihr Titel.

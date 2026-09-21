@@ -1,0 +1,92 @@
+### Runde 1 von 5: /implementiere Ein Getränk wählen
+[0m
+> implementierer · gpt-5.4-mini
+[0m
+Ich prüfe zuerst die vorhandenen Unit-Tests und die aktuelle Maschinenlogik, dann baue ich nur die kleinste Regel für das freie Getränke-Szenario.
+[0m✗ [0mRead src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java failed
+[91m[1mError: [0mFile not found: /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-3/src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+[0m✱ [0mGlob "src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java"[90m 0 matches[0m
+Es gibt noch keine `VendingMachineTest.java`; ich lege dafür den kleinsten roten Test an und implementiere danach nur das Nötigste.
+[0m✱ [0mGlob "src/test/java/**/*.java"[90m 8 matches[0m
+[0m✱ [0mGlob "src/main/java/**/*.java"[90m 3 matches[0m
+[0m→ [0mRead src/main/java/de/sharpsharp/vendingmachine/Drink.java
+[0m→ [0mRead src/test/java/de/sharpsharp/vendingmachine/ArchitekturTest.java
+[0m→ [0mRead src/test/java/de/sharpsharp/vendingmachine/WebTest.java
+Ich habe genug Kontext: der freie Kauf braucht nur `selectDrink` plus einen echten Ausgabefach-Zustand. Ich schreibe jetzt den kleinsten Unit-Test und passe nur `VendingMachine` an.
+[0m→ [0mRead src/main/java/de/sharpsharp/vendingmachine/Main.java
+[0m% [0mPatch 2 files
+Der Test ist jetzt drin; ich lasse zuerst nur `VendingMachineTest` laufen, damit ich die kleinste Regel sauber grün bekomme, bevor ich das Szenario prüfe.
+[0m
+[0m$ [0mmvn -q test -Dtest=VendingMachineTest
+(no output)
+[0m
+[0m$ [0mmvn -q test -Dtest=RunCucumberTest
+Szenario: Ein Getränk wählen                    # classpath:features/freies_getraenk.feature:6
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenariogrundriss: Jedes Getränk fällt kostenlos # classpath:features/freies_getraenk.feature:18
+  ✔ Angenommen der Automat ist frisch gestartet  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                          # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach     # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenariogrundriss: Jedes Getränk fällt kostenlos # classpath:features/freies_getraenk.feature:19
+  ✔ Angenommen der Automat ist frisch gestartet  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Orange wähle                        # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Orange im Ausgabefach   # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenariogrundriss: Jedes Getränk fällt kostenlos # classpath:features/freies_getraenk.feature:20
+  ✔ Angenommen der Automat ist frisch gestartet  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Zitrone wähle                       # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Zitrone im Ausgabefach  # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenariogrundriss: Jedes Getränk fällt kostenlos # classpath:features/freies_getraenk.feature:21
+  ✔ Angenommen der Automat ist frisch gestartet  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Bier wähle                          # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Bier im Ausgabefach     # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+[0m
+Das Szenario ist grün. Ich mache noch den vorgeschriebenen Glossar-Schritt und dann `mvn -q verify`, um sicherzugehen, dass nichts anderes kaputtging.
+[0m$ [0mscripts/steps-glossar.sh
+specs/glossar.md erzeugt: 5 Einträge
+[0m
+[0m$ [0mmvn -q verify
+Szenario: Ein Getränk wählen                    # classpath:features/freies_getraenk.feature:6
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenariogrundriss: Jedes Getränk fällt kostenlos # classpath:features/freies_getraenk.feature:18
+  ✔ Angenommen der Automat ist frisch gestartet  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                          # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach     # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenariogrundriss: Jedes Getränk fällt kostenlos # classpath:features/freies_getraenk.feature:19
+  ✔ Angenommen der Automat ist frisch gestartet  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Orange wähle                        # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Orange im Ausgabefach   # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenariogrundriss: Jedes Getränk fällt kostenlos # classpath:features/freies_getraenk.feature:20
+  ✔ Angenommen der Automat ist frisch gestartet  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Zitrone wähle                       # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Zitrone im Ausgabefach  # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenariogrundriss: Jedes Getränk fällt kostenlos # classpath:features/freies_getraenk.feature:21
+  ✔ Angenommen der Automat ist frisch gestartet  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Bier wähle                          # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Bier im Ausgabefach     # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+[0m
+Alles grün. Ich prüfe jetzt nur noch die betroffenen Dateien im Git-Status und fasse dann exakt zusammen, was geändert wurde und was `mvn -q verify` zuletzt ausgegeben hat.
+[0m# [0mTodos
+[✓] Scenario Ein Getränk wählen grün machen
+[✓] Unit-Test für freie Getränke-Regel ergänzen
+[✓] VendingMachine minimal anpassen und verify laufen lassen
+[0m
+[0m$ [0mgit status --short
+M src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+?? src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+[0m
+Geändert: `src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java`, `src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java`
+`mvn -q verify`: grün; letzte Zeilen: `✔ Wenn ich Bier wähle` / `✔ Dann liegt eine Dose Bier im Ausgabefach`
+Offen: nichts
+### Grün nach Runde 1.

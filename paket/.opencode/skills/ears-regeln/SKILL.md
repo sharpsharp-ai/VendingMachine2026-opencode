@@ -24,3 +24,4 @@ EARS nennt die Regel, Gherkin das konkrete Beispiel mit Zahlen.
 5. Fachbegriffe aus dem Glossar.
 6. Jedes Akzeptanzkriterium der Karte hat eine Regel, keine Regel ohne Kriterium.
 7. Hebt die Story eine frühere Regel auf, steht das da: „Hebt auf: <Regel> aus specs/<nr>-<name>".
+8. Jede Zahl in einer Regel steht auf der Karte. Fehlt eine (ein Preis, eine Uhrzeit), steht die Frage unter „Offene Fragen"; niemand erfindet Werte.

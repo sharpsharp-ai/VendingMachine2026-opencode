@@ -1,0 +1,23 @@
+[0m
+> reviewer · gpt-5.4-mini
+[0m
+Ich prüfe die betroffene Klasse im Kontext, um konkrete Befunde mit Zeilenangaben zu liefern.
+[0m→ [0mRead src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+[0m→ [0mRead src/main/java/de/sharpsharp/vendingmachine/Main.java
+[0m→ [0mRead src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+[0m✱ [0mGlob "src/test/resources/features/*.feature"[90m in . · 1 match[0m
+Ich prüfe noch die Spezifikation und die vorhandenen Tests, damit ich Nebenbefunde wie fehlende Absicherung oder Regelverstöße nicht übersehe.
+[0m→ [0mRead src/test/resources/features/freies_getraenk.feature
+[0m→ [0mSkill "akzeptanztest-regeln"
+Ich prüfe noch, ob die neue Fachlogik mit den vorhandenen Stories kollidiert oder den Automat in einen unplausiblen Zustand bringt.
+[0m✱ [0mGrep "selectDrink\(|outputTray\(|takeDrinks\(|stock\("[90m in . · 11 matches[0m
+[0m✱ [0mGlob "specs/**/*.md"[90m in . · 3 matches[0m
+[0m→ [0mRead specs/stories.md
+[0m→ [0mRead specs/glossar.md
+[0m→ [0mRead specs/1-alles-umsonst/spec.md
+[0m→ [0mRead src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java
+Ich prüfe noch kurz, ob es bereits Tests oder Spezifikationsreste gibt, die ein Reduzieren des Bestands erwarten.
+[0m✱ [0mGrep "stock\("[90m in src/test · 0 matches[0m
+[0m✱ [0mGrep "Ausverkauft|Bestand|stock"[90m in src/test/resources/features · 0 matches[0m
+src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java:32, Misplaced Responsibility, `selectDrink` sollte eine Dose aus dem Fach entnehmen und den Bestand verringern, sonst kann derselbe Knopf unendlich viele Dosen ins Ausgabefach schreiben.  
+src/test/resources/features/freies_getraenk.feature:6, Bad Name, benenne das Szenario nach der Regel statt nach dem Ablauf, z. B. „Dose fällt ohne Bezahlung“.

@@ -12,6 +12,7 @@ JDK 17, Maven, git, opencode (`opencode --version`) mit einem konfigurierten Mod
 
 ```bash
 git clone -b training-start https://github.com/sharpsharp-ai/VendingMachine2026-Start.git getraenkeautomat
+# im Training: git clone <URL eures Team-Repos> getraenkeautomat
 git clone https://github.com/sharpsharp-ai/VendingMachine2026-opencode.git
 ./VendingMachine2026-opencode/install.sh getraenkeautomat
 cd getraenkeautomat

@@ -1,0 +1,24 @@
+[0m
+> spec-autor · gpt-5.4-mini
+[0m
+Ich prüfe kurz, ob die Spec schon existiert, und lege sie dann im passenden `specs/1-.../`-Ordner an.
+[0m# [0mTodos
+[✓] Story 1 in `specs/stories.md` identifizieren und Kurzname festlegen
+[•] `specs/1-alles-umsonst/spec.md` anlegen oder überarbeiten
+[ ] Inhalt gegen Vorgaben prüfen und Antwort vorbereiten
+[0m
+[0m✱ [0mGlob "specs/1-*/spec.md"[90m in . · 0 matches[0m
+Die Spec fehlt noch. Ich schreibe jetzt die neue Datei mit genau den drei geforderten Abschnitten.
+[0m% [0mPatch 1 file
+Die Datei ist angelegt. Ich prüfe noch kurz den Inhalt, damit er genau in die Vorgaben passt.
+[0m
+[0m# [0mTodos
+[✓] Story 1 in `specs/stories.md` identifizieren und Kurzname festlegen
+[✓] `specs/1-alles-umsonst/spec.md` anlegen oder überarbeiten
+[✓] Inhalt gegen Vorgaben prüfen und Antwort vorbereiten
+[0m
+[0m→ [0mRead specs/1-alles-umsonst/spec.md
+`specs/1-alles-umsonst/spec.md`
+
+Regel:
+`WHILE eine Dose im Fach ist, WHEN der Kunde ein Fach wählt, SHALL der Automat die Dose ohne Bezahlung ins Ausgabefach ausgeben.`
