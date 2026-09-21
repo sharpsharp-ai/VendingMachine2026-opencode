@@ -1,0 +1,15 @@
+
+> reviewer · gpt-5.4-mini
+
+Ich lese die betroffenen Dateien komplett und prüfe zusätzlich die benannten Nebenregeln gegen die übrigen relevanten Stellen.
+→ Read src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+→ Read src/main/java/de/sharpsharp/vendingmachine/Main.java
+✱ Glob "src/test/resources/features/*.feature" in . · 3 matches
+Ich prüfe jetzt die Szenarien selbst gegen die Akzeptanztest-Regeln, weil dort oft die eigentlichen Review-Funde liegen.
+→ Read src/test/resources/features/2-preis-anzeigen.feature
+→ Read src/test/resources/features/3-guthaben-anzeigen.feature
+→ Read src/test/resources/features/freies_getraenk.feature
+Ich ziehe noch die Akzeptanztest-Regeln heran, um die Feature-Dateien systematisch dagegen zu prüfen.
+→ Skill "akzeptanztest-regeln"
+Keine wesentlichen Befunde.

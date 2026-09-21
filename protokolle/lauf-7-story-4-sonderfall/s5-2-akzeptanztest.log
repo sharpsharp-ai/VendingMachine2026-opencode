@@ -1,0 +1,9 @@
+
+> test-autor · gpt-5.4-mini
+
+Ich prüfe zuerst die vorhandenen Feature-Dateien und die Step-Sprache, dann ergänze ich Story 5 mit den kleinsten passenden Szenarien.
+✱ Glob "src/test/resources/features/*.feature" 3 matches
+→ Read src/test/resources/features/2-preis-anzeigen.feature
+→ Read src/test/resources/features/3-guthaben-anzeigen.feature
+✱ Grep "coin return|Münzrückgabe|Abbruch|cancel|coinReturn|takeCoins" in . · 21 matches
+→ Read src/test/resources/features/4-getraenke-kosten-geld.feature

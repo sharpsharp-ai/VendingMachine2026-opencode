@@ -13,6 +13,9 @@ Skill clean-code-check, hier eingefügt:
 Die Szenarien:
 !`for f in src/test/resources/features/*.feature; do echo "=== $f"; cat "$f"; done`
 
+Was der Test-Autor zuletzt an den Szenarien geändert hat (gelöschte oder geänderte Szenarien heißen: die alte Regel gilt nicht mehr, ihre Unit-Tests sind veraltet):
+!`git show --stat --oneline HEAD -- src/test/resources/features | tail -n +2; git status --short -- src/test/resources/features`
+
 Die Schritte:
 @src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java
 

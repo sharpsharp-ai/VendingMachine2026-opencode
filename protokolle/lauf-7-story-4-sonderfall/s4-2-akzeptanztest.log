@@ -1,0 +1,202 @@
+
+> test-autor · gpt-5.4-mini
+
+Ich prüfe zuerst die vorhandenen Feature-Dateien, damit die neue Story sauber ergänzt und die alte Regel konsistent überschrieben wird.
+→ Read src/test/resources/features/2-preis-anzeigen.feature
+→ Read src/test/resources/features/3-guthaben-anzeigen.feature
+→ Read src/test/resources/features/freies_getraenk.feature
+Ich ergänze jetzt die neue Feature-Datei, entferne die überholte Gratis-Story und erweitere die Steps nur um die fehlenden Beobachtungen.
+% Patch 3 files
+Ich gleiche den neuen Leerfach-Check noch auf einen robusten Hamcrest-Matcher ab, damit die Steps sauber kompilieren.
+% Patch 1 file
+Ich generiere jetzt das Glossar neu und prüfe danach die Cucumber-Szenarien, um eventuelle fehlende Schritte sofort zu sehen.
+
+$ scripts/steps-glossar.sh
+specs/glossar.md erzeugt: 12 Einträge
+
+$ mvn -q test -Dtest=RunCucumberTest
+Szenariogrundriss: Der Preis steht hinter dem Namen # classpath:features/2-preis-anzeigen.feature:11
+  ✔ Angenommen der Automat ist frisch gestartet     # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Cola 1,00 €                         # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenariogrundriss: Der Preis steht hinter dem Namen # classpath:features/2-preis-anzeigen.feature:12
+  ✔ Angenommen der Automat ist frisch gestartet     # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Orange 1,00 €                       # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenariogrundriss: Der Preis steht hinter dem Namen # classpath:features/2-preis-anzeigen.feature:13
+  ✔ Angenommen der Automat ist frisch gestartet     # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Zitrone 1,00 €                      # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenariogrundriss: Der Preis steht hinter dem Namen # classpath:features/2-preis-anzeigen.feature:14
+  ✔ Angenommen der Automat ist frisch gestartet     # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Bier 1,00 €                         # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenariogrundriss: Jede Münze erhöht das Guthaben # classpath:features/3-guthaben-anzeigen.feature:12
+  ✔ Angenommen der Automat ist frisch gestartet   # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich eine Münze mit 50 ct einwerfe        # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertACoin(int)
+  ✔ Dann ist das Guthaben 50 ct                   # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenariogrundriss: Jede Münze erhöht das Guthaben # classpath:features/3-guthaben-anzeigen.feature:13
+  ✔ Angenommen der Automat ist frisch gestartet   # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich eine Münze mit 1 € einwerfe          # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertACoin(int)
+  ✔ Dann ist das Guthaben 1 €                     # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenariogrundriss: Jede Münze erhöht das Guthaben # classpath:features/3-guthaben-anzeigen.feature:14
+  ✔ Angenommen der Automat ist frisch gestartet   # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich eine Münze mit 2 € einwerfe          # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertACoin(int)
+  ✔ Dann ist das Guthaben 2 €                     # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenario: Guthaben wird addiert                 # classpath:features/3-guthaben-anzeigen.feature:16
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Angenommen ich habe 50 ct eingeworfen       # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveInsertedCoins(int)
+  ✔ Wenn ich 1 € einwerfe                       # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCoin(int)
+  ✔ Dann ist das Guthaben 1,50 €                # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenario: Zu wenig Geld gibt keine Dose frei    # classpath:features/4-getraenke-kosten-geld.feature:5
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Angenommen ich habe 50 ct eingeworfen       # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveInsertedCoins(int)
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✘ Dann ist das Ausgabefach leer               # de.sharpsharp.vendingmachine.VendingMachineSteps.theOutputTrayIsEmpty()
+        java.lang.AssertionError: 
+        Expected: an empty collection
+             but: <[COLA]>
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.theOutputTrayIsEmpty(VendingMachineSteps.java:64)
+        	at ✽.ist das Ausgabefach leer(classpath:features/4-getraenke-kosten-geld.feature:9)
+  ↷ Und der Automat meldet "Zu wenig Geld"      # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineSays(java.lang.String)
+  ↷ Und ist das Guthaben 50 ct                  # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenariogrundriss: Genug Geld gibt die Dose frei # classpath:features/4-getraenke-kosten-geld.feature:22
+  ✔ Angenommen der Automat ist frisch gestartet  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Angenommen ich habe 1 € eingeworfen          # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveInsertedCoins(int)
+  ✔ Wenn ich Cola wähle                          # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach     # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+  ✘ Und ist das Guthaben 0 €                     # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+        java.lang.AssertionError: 
+        Expected: is <0>
+             but: was <100>
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(VendingMachineSteps.java:54)
+        	at ✽.ist das Guthaben 0 €(classpath:features/4-getraenke-kosten-geld.feature:18)
+
+Szenariogrundriss: Genug Geld gibt die Dose frei # classpath:features/4-getraenke-kosten-geld.feature:23
+  ✔ Angenommen der Automat ist frisch gestartet  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Angenommen ich habe 2 € eingeworfen          # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveInsertedCoins(int)
+  ✔ Wenn ich Cola wähle                          # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach     # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+  ✘ Und ist das Guthaben 1 €                     # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+        java.lang.AssertionError: 
+        Expected: is <100>
+             but: was <200>
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(VendingMachineSteps.java:54)
+        	at ✽.ist das Guthaben 1 €(classpath:features/4-getraenke-kosten-geld.feature:18)
+
+Szenario: Ein Getränk wählen                    # classpath:features/freies_getraenk.feature:6
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenario: Einen anderen Knopf wählen            # classpath:features/freies_getraenk.feature:11
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Bier wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Bier im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+[ERROR] Tests run: 13, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 0.529 s <<< FAILURE! -- in de.sharpsharp.vendingmachine.RunCucumberTest
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Zu wenig Geld gibt keine Dose frei -- Time elapsed: 0.012 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: an empty collection
+     but: <[COLA]>
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.theOutputTrayIsEmpty(VendingMachineSteps.java:64)
+	at ✽.ist das Ausgabefach leer(classpath:features/4-getraenke-kosten-geld.feature:9)
+
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Genug Geld gibt die Dose frei #1 -- Time elapsed: 0.007 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: is <0>
+     but: was <100>
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(VendingMachineSteps.java:54)
+	at ✽.ist das Guthaben 0 €(classpath:features/4-getraenke-kosten-geld.feature:18)
+
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Genug Geld gibt die Dose frei #2 -- Time elapsed: 0.004 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: is <100>
+     but: was <200>
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(VendingMachineSteps.java:54)
+	at ✽.ist das Guthaben 1 €(classpath:features/4-getraenke-kosten-geld.feature:18)
+
+[ERROR] Failures: 
+[ERROR]   RunCucumberTest.Genug Geld gibt die Dose frei #1 
+Expected: is <0>
+     but: was <100>
+[ERROR]   RunCucumberTest.Genug Geld gibt die Dose frei #2 
+Expected: is <100>
+     but: was <200>
+[ERROR]   RunCucumberTest.Zu wenig Geld gibt keine Dose frei 
+Expected: an empty collection
+     but: <[COLA]>
+[ERROR] Tests run: 13, Failures: 3, Errors: 0, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.6.0:test (default-test) on project getraenkeautomat: There are test failures.
+[ERROR] 
+[ERROR] See /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-7/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+
+Die Szenarien und Steps sind drin; ich sammele jetzt noch den Stand für die Abschlussmeldung.
+# Todos
+[✓] Story 4 als Feature-Datei ergänzen
+[✓] Veraltete Gratis-Story entfernen oder anpassen
+[✓] Fehlende Steps für Meldung und leeres Ausgabefach ergänzen
+[✓] steps-glossar neu erzeugen und Cucumber prüfen
+
+$ git status --short
+M specs/glossar.md
+ M src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java
+ D src/test/resources/features/freies_getraenk.feature
+?? specs/4-getraenke-kosten-geld/
+?? src/test/resources/features/4-getraenke-kosten-geld.feature
+
+Beim Glossar-Lauf ist noch ein neuer Spec-Ordner aufgetaucht. Ich prüfe kurz, was da erzeugt wurde, damit ich ihn korrekt einordne.
+→ Read specs/glossar.md [offset=1, limit=80]
+✱ Glob "specs/4-getraenke-kosten-geld/**" in . · 1 match
+→ Read specs/4-getraenke-kosten-geld/spec.md
+Datei:
+- `src/test/resources/features/4-getraenke-kosten-geld.feature`
+- `src/test/resources/features/freies_getraenk.feature` gelöscht
+- `src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java`
+- `specs/glossar.md` neu erzeugt
+
+Szenarien:
+- `Zu wenig Geld gibt keine Dose frei`
+- `Genug Geld gibt die Dose frei` als `Szenariogrundriss` mit `1 €` und `2 €`
+
+Regeln:
+1. ja - einWenn
+2. ja - deklarativ
+3. ja - Namen
+4. ja - beobachtbar
+5. ja - Grenzwerte
+6. ja - Titel
+7. ja - unabhängig
+8. ja - Glossar
+9. ja - abgedeckt
+10. ja - knapp
+11. ja - Steps
+
+`mvn -q test -Dtest=RunCucumberTest`: rot, weil die neue Kauf-Logik im Produktcode noch fehlt.

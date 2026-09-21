@@ -1,0 +1,173 @@
+
+> test-autor · gpt-5.4-mini
+
+Ich prüfe zuerst die vorhandene Feature-Datei und die vorhandenen Szenarien, dann ergänze ich nur die fehlenden Regeln für Story 2.
+✱ Glob "src/test/resources/features/*.feature" 1 match
+
+# Todos
+[•] Feature-Datei für Story 2 prüfen und fehlende Szenarien ergänzen
+[ ] Falls nötig, fehlende Step-Definitionen für Preisanzeige ergänzen
+[ ] `scripts/steps-glossar.sh` ausführen
+[ ] `mvn -q test -Dtest=RunCucumberTest` ausführen
+
+→ Read src/test/resources/features/freies_getraenk.feature
+Ich ergänze jetzt die neue Story-Datei und die fehlende Preisschritt-Definition. Danach lasse ich das Glossar neu generieren und die Cucumber-Tests laufen.
+% Patch 2 files
+
+$ scripts/steps-glossar.sh
+specs/glossar.md erzeugt: 6 Einträge
+
+$ mvn -q test -Dtest=RunCucumberTest
+Szenariogrundriss: Der Preis steht hinter dem Namen # classpath:features/2-preis-anzeigen.feature:11
+  ✔ Angenommen der Automat ist frisch gestartet     # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✘ Dann kostet Cola 1,00 €                         # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+        java.lang.AssertionError: 
+        Expected: is <100>
+             but: was null
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(VendingMachineSteps.java:33)
+        	at ✽.kostet Cola 1,00 €(classpath:features/2-preis-anzeigen.feature:7)
+
+Szenariogrundriss: Der Preis steht hinter dem Namen # classpath:features/2-preis-anzeigen.feature:12
+  ✔ Angenommen der Automat ist frisch gestartet     # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✘ Dann kostet Orange 1,00 €                       # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+        java.lang.AssertionError: 
+        Expected: is <100>
+             but: was null
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(VendingMachineSteps.java:33)
+        	at ✽.kostet Orange 1,00 €(classpath:features/2-preis-anzeigen.feature:7)
+
+Szenariogrundriss: Der Preis steht hinter dem Namen # classpath:features/2-preis-anzeigen.feature:13
+  ✔ Angenommen der Automat ist frisch gestartet     # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✘ Dann kostet Zitrone 1,00 €                      # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+        java.lang.AssertionError: 
+        Expected: is <100>
+             but: was null
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(VendingMachineSteps.java:33)
+        	at ✽.kostet Zitrone 1,00 €(classpath:features/2-preis-anzeigen.feature:7)
+
+Szenariogrundriss: Der Preis steht hinter dem Namen # classpath:features/2-preis-anzeigen.feature:14
+  ✔ Angenommen der Automat ist frisch gestartet     # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✘ Dann kostet Bier 1,00 €                         # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+        java.lang.AssertionError: 
+        Expected: is <100>
+             but: was null
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(VendingMachineSteps.java:33)
+        	at ✽.kostet Bier 1,00 €(classpath:features/2-preis-anzeigen.feature:7)
+
+Szenario: Ein Getränk wählen                    # classpath:features/freies_getraenk.feature:6
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenario: Einen anderen Knopf wählen            # classpath:features/freies_getraenk.feature:11
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Bier wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Bier im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+[ERROR] Tests run: 6, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 0.493 s <<< FAILURE! -- in de.sharpsharp.vendingmachine.RunCucumberTest
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Der Preis steht hinter dem Namen #1 -- Time elapsed: 0.073 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: is <100>
+     but: was null
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(VendingMachineSteps.java:33)
+	at ✽.kostet Cola 1,00 €(classpath:features/2-preis-anzeigen.feature:7)
+
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Der Preis steht hinter dem Namen #2 -- Time elapsed: 0.006 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: is <100>
+     but: was null
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(VendingMachineSteps.java:33)
+	at ✽.kostet Orange 1,00 €(classpath:features/2-preis-anzeigen.feature:7)
+
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Der Preis steht hinter dem Namen #3 -- Time elapsed: 0.003 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: is <100>
+     but: was null
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(VendingMachineSteps.java:33)
+	at ✽.kostet Zitrone 1,00 €(classpath:features/2-preis-anzeigen.feature:7)
+
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Der Preis steht hinter dem Namen #4 -- Time elapsed: 0.003 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: is <100>
+     but: was null
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(VendingMachineSteps.java:33)
+	at ✽.kostet Bier 1,00 €(classpath:features/2-preis-anzeigen.feature:7)
+
+[ERROR] Failures: 
+[ERROR]   RunCucumberTest.Der Preis steht hinter dem Namen #1 
+Expected: is <100>
+     but: was null
+[ERROR]   RunCucumberTest.Der Preis steht hinter dem Namen #2 
+Expected: is <100>
+     but: was null
+[ERROR]   RunCucumberTest.Der Preis steht hinter dem Namen #3 
+Expected: is <100>
+     but: was null
+[ERROR]   RunCucumberTest.Der Preis steht hinter dem Namen #4 
+Expected: is <100>
+     but: was null
+[ERROR] Tests run: 6, Failures: 4, Errors: 0, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.6.0:test (default-test) on project getraenkeautomat: There are test failures.
+[ERROR] 
+[ERROR] See /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-7/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+
+Die neuen Szenarien sind drin; die ersten Tests laufen jetzt rot, weil der Automat die Preise noch nicht liefert. Ich prüfe noch kurz die betroffenen Dateien und räume den Status auf.
+# Todos
+[✓] Feature-Datei für Story 2 prüfen und fehlende Szenarien ergänzen
+[✓] Falls nötig, fehlende Step-Definitionen für Preisanzeige ergänzen
+[✓] `scripts/steps-glossar.sh` ausführen
+[✓] `mvn -q test -Dtest=RunCucumberTest` ausführen
+
+→ Read specs/glossar.md [offset=1, limit=80]
+
+$ git status --short
+M specs/glossar.md
+ M src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java
+?? specs/2-preis-anzeigen/
+?? src/test/resources/features/2-preis-anzeigen.feature
+
+Beim Glossar-Lauf ist noch ein neues `specs/2-preis-anzeigen/`-Verzeichnis entstanden; ich schaue kurz rein, damit ich dir exakt sagen kann, was jetzt geändert ist.
+✱ Glob "specs/2-preis-anzeigen/**" in . · 1 match
+→ Read src/test/resources/features/2-preis-anzeigen.feature
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java
+→ Read specs/2-preis-anzeigen/spec.md
+Datei:
+- `src/test/resources/features/2-preis-anzeigen.feature`
+- `src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java`
+- `specs/glossar.md` regeneriert
+
+Szenarien:
+- `Szenariogrundriss: Der Preis steht hinter dem Namen`
+
+Regeln:
+- Preis hinter dem Namen: ja, abgedeckt
+- Alle Getränke 1,00 €: ja, Beispiele
+
+`mvn -q test -Dtest=RunCucumberTest`: rot, `price()` liefert noch `null`

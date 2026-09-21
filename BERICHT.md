@@ -34,7 +34,24 @@ Wer opencode das Setup machen lassen will: Text aus `PROMPT.md` einfügen (Weg B
 
 ## 2. Stand der Abnahmekriterien
 
-TODO-ABNAHME
+| Kriterium | Stand |
+|---|---|
+| Zwei vollständige Läufe (Stories 1 bis 7) hintereinander, frischer Stand, ohne Änderung am Setup, jede Story erfüllt alle Bewertungspunkte | TODO-LAEUFE |
+| Teilnehmer-Probe ohne Improvisation | Erfüllt. `protokolle/probe-1/`: Weg A (README wörtlich, frische Clones von GitHub): Start rot wie angekündigt, `/spec 1`, `/akzeptanztest 1`, `scripts/bis-gruen.sh "Ein Getränk wählen"` grün in einer Runde, `mvn -q verify` Exit 0, `/review` mit zwei Befunden. Weg B (Text aus `PROMPT.md` in vanilla opencode, `--auto` steht für das Bestätigen im TUI): vier Befehle ausgeführt, `EXIT=1`, Paket identisch installiert, Schlusssatz wörtlich. TODO-PROBE2 |
+| Jedes Gate hat nachweislich ausgelöst | Erfüllt. `protokolle/gates/gates.log`: Methode mit 25 Zeilen (Checkstyle), Javalin-Import in `VendingMachine` (ArchUnit), roter Unit-Test (Surefire), ungetestete Klasse (JaCoCo unter 80 %); jedes Mal Exit 1, danach wieder grün |
+| H1 bis H4 getestet, Ergebnis im Bericht, Setup passt dazu | Erfüllt, Abschnitt 3 |
+| `training-start` enthält keine Story-Lösungen und baut grün | Erfüllt mit einer Absicht: kompiliert, alle Tests grün bis auf das eine Szenario „Ein Getränk wählen", das nach Sebastians Vorgabe rot wartet (`mvn -q verify` endet deshalb mit Exit 1, `mvn -q test -Dtest=WebTest` grün). Keine Story-Regel ist gebaut: `selectDrink`, `insertCoin`, `cancel` sind leer, `price` liefert null |
+| Folien, README, PROMPT, Bericht liegen vor, alles committet und gepusht | Erfüllt: `folien/folien.pdf` und `.pptx` (Kopien `~/Downloads/opencode-folien.*`), `README.md`, `PROMPT.md`, `BERICHT.md`; Paket-Repo öffentlich auf GitHub, `training-start` gepusht. Miro: TODO-MIRO |
+
+Bewertung je Story in den beiden Abnahmeläufen (Protokolle `protokolle/lauf-7/` und `protokolle/lauf-8/`, je Story Spec, Szenarien, Implementierung je Szenario, verify, Review, HTTP):
+
+TODO-STORYTABELLE
+
+Beobachtungen, die keine Bewertungspunkte verletzen, aber morgen Gesprächsstoff sind:
+- Der Implementierer schreibt Unit-Test und Code manchmal in einem Patch und lässt den Test dann erst laufen; das Szenario war davor immer rot (Log des Test-Autors). Nur in manchen Läufen steht der rote Unit-Test einzeln im Protokoll.
+- Story 5: die Szenarien verlangen nur „50 ct landet in der Münzrückgabe"; der Implementierer zahlt das Guthaben als einen Betrag aus, nicht als Münzen. Regel 5 (Grenzwerte, konkrete Beispiele) in Aktion: was das Szenario nicht verlangt, baut niemand.
+- Story 3: manche Läufe legen das Guthaben in die Meldung („Guthaben: 0,50 €" per `message()`), andere prüfen `credit()`. Die Karte sagt beides, das Glossar sagt `credit()`.
+- Der Reviewer meldet auch bei sauberem Code oft einen Punkt (Bestand reduzieren, `refused()` ungenutzt, Javadoc veraltet); bei eingebautem Smell fand er drei von vier (nicht das `System.out.println`), `protokolle/review-test/`.
 
 ## 3. Hypothesen H1 bis H4, opencode 1.18.30
 

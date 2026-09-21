@@ -1,0 +1,134 @@
+### Runde 1 von 5: /implementiere Der Preis steht hinter dem Namen
+[0m
+> implementierer · gpt-5.4-mini
+[0m
+Ich prüfe jetzt die vorhandenen Unit-Tests und baue dann nur die kleinste fehlende Preisregel für `price(...)`.
+[0m✱ [0mGlob "src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java"[90m 1 match[0m
+[0m✱ [0mGrep "class\s+VendingMachineTest|price\("[90m in . · 4 matches[0m
+[0m→ [0mRead src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+[0m→ [0mRead src/main/java/de/sharpsharp/vendingmachine/Drink.java
+[0m→ [0mRead src/main/java/de/sharpsharp/vendingmachine/Main.java[90m [offset=1, limit=170][0m
+[0m
+[0m# [0mTodos
+[•] Add the smallest failing unit test for drink price in VendingMachineTest
+[ ] Implement price reporting in VendingMachine so the price scenario turns green
+[ ] Run the targeted unit test and Cucumber scenario, then mvn -q verify
+[ ] Clean up with clean-code-check if needed
+[0m
+Ich schreibe jetzt den kleinsten roten Unit-Test und danach nur die Preisregel in `VendingMachine`.
+[0m% [0mPatch 1 file
+[0m% [0mPatch 1 file
+[0m
+[0m$ [0mmvn -q test -Dtest=VendingMachineTest
+(no output)
+[0m
+[0m$ [0mmvn -q test -Dtest=RunCucumberTest
+Szenariogrundriss: Der Preis steht hinter dem Namen # classpath:features/2-preis-anzeigen.feature:11
+  ✔ Angenommen der Automat ist frisch gestartet     # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Cola 1,00 €                         # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenariogrundriss: Der Preis steht hinter dem Namen # classpath:features/2-preis-anzeigen.feature:12
+  ✔ Angenommen der Automat ist frisch gestartet     # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Orange 1,00 €                       # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenariogrundriss: Der Preis steht hinter dem Namen # classpath:features/2-preis-anzeigen.feature:13
+  ✔ Angenommen der Automat ist frisch gestartet     # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Zitrone 1,00 €                      # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenariogrundriss: Der Preis steht hinter dem Namen # classpath:features/2-preis-anzeigen.feature:14
+  ✔ Angenommen der Automat ist frisch gestartet     # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Bier 1,00 €                         # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenario: Ein Getränk wählen                    # classpath:features/freies_getraenk.feature:6
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenario: Einen anderen Knopf wählen            # classpath:features/freies_getraenk.feature:11
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Bier wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Bier im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+[0m
+Die Zielstory ist jetzt grün. Ich mache noch den Pflichtlauf `mvn -q verify` und prüfe dabei, ob Aufräumen überhaupt nötig ist.
+[0m$ [0mmvn -q verify
+Szenariogrundriss: Der Preis steht hinter dem Namen # classpath:features/2-preis-anzeigen.feature:11
+  ✔ Angenommen der Automat ist frisch gestartet     # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Cola 1,00 €                         # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenariogrundriss: Der Preis steht hinter dem Namen # classpath:features/2-preis-anzeigen.feature:12
+  ✔ Angenommen der Automat ist frisch gestartet     # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Orange 1,00 €                       # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenariogrundriss: Der Preis steht hinter dem Namen # classpath:features/2-preis-anzeigen.feature:13
+  ✔ Angenommen der Automat ist frisch gestartet     # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Zitrone 1,00 €                      # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenariogrundriss: Der Preis steht hinter dem Namen # classpath:features/2-preis-anzeigen.feature:14
+  ✔ Angenommen der Automat ist frisch gestartet     # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Bier 1,00 €                         # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenario: Ein Getränk wählen                    # classpath:features/freies_getraenk.feature:6
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenario: Einen anderen Knopf wählen            # classpath:features/freies_getraenk.feature:11
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Bier wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Bier im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+[0m
+[0m$ [0mgit diff -- src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+diff --git a/src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java b/src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+index 8c401b1..81f712f 100644
+--- a/src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
++++ b/src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+@@ -15,6 +15,7 @@ import java.util.Map;
+ public class VendingMachine {
+ 
+     public static final int CANS_PER_SLOT = 5;
++    private static final int PRICE_CENTS = 100;
+ 
+     private final Map<Drink, Integer> stock = new EnumMap<>(Drink.class);
+     private final List<Drink> outputTray = new ArrayList<>();
+@@ -74,7 +75,7 @@ public class VendingMachine {
+ 
+     /** The price shown behind the name of the drink, in cents. Null: the machine knows no price yet. */
+     public synchronized Integer price(Drink drink) {
+-        return null;
++        return PRICE_CENTS;
+     }
+ 
+     /** The cans that dropped out and have not been taken yet. */
+diff --git a/src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java b/src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+index b9a1603..b1e11c4 100644
+--- a/src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
++++ b/src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+@@ -4,6 +4,7 @@ import org.junit.Test;
+ 
+ import static org.hamcrest.MatcherAssert.assertThat;
+ import static org.hamcrest.Matchers.contains;
++import static org.hamcrest.Matchers.is;
+ 
+ public class VendingMachineTest {
+ 
+@@ -15,4 +16,11 @@ public class VendingMachineTest {
+ 
+         assertThat(machine.outputTray(), contains(Drink.COLA));
+     }
++
++    @Test
++    public void colaCostsOneEuro() {
++        VendingMachine machine = new VendingMachine(new FakeClock());
++
++        assertThat(machine.price(Drink.COLA), is(100));
++    }
+ }
+[0m
+[0m$ [0mgit status --short
+M src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+ M src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+[0m
+Geändert: `src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java`, `src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java`
+`mvn -q verify`: grün, keine Ausgabe
+Offen: nichts
+### Grün nach Runde 1.

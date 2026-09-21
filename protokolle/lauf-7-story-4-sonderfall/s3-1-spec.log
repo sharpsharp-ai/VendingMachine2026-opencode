@@ -1,0 +1,22 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich prüfe kurz die vorhandenen Specs, damit die neue Story im selben Stil landet, und lege dann `specs/3-guthaben-anzeigen/spec.md` an.
+→ Read specs/1-alles-umsonst/spec.md
+→ Read specs/2-preis-anzeigen/spec.md
+✱ Glob "specs/3-*/spec.md" in . · 0 matches
+Ich habe die Form der vorhandenen Specs bestätigt. Jetzt schreibe ich die neue Datei mit genau den drei Abschnitten und nur Regeln aus den Akzeptanzkriterien der Story.
+
+# Todos
+[✓] Story 3 in specs/stories.md finden und nur diese Story verwenden
+[•] `specs/3-guthaben-anzeigen/spec.md` anlegen bzw. überarbeiten
+[ ] Inhalt kurz prüfen und Pfad plus Regeln ausgeben
+
+% Patch 1 file
+Die Spec ist angelegt. Ich prüfe noch kurz den Inhalt gegen die Vorgaben und gebe dir dann den Pfad plus Regeln zurück.
+→ Read specs/3-guthaben-anzeigen/spec.md
+`specs/3-guthaben-anzeigen/spec.md`
+
+Regeln:
+- Der Automat SHALL das eingeworfene Geld als `"Guthaben: x,xx €"` anzeigen.
+- Der Automat SHALL 50 ct, 1 € und 2 € annehmen und zum Guthaben addieren.

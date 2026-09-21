@@ -1,0 +1,19 @@
+
+> reviewer · gpt-5.4-mini
+
+Ich prüfe zuerst die betroffene Klasse im Volltext und gleiche sie dann gegen die Clean-Code- und Akzeptanztest-Regeln ab.
+→ Read .opencode/skills/akzeptanztest-regeln/SKILL.md
+→ Read src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+Ich prüfe jetzt die vorhandenen Tests und Regeln um die Änderung herum, damit ich nur echte Befunde melde und keine Spekulationen.
+✱ Grep "Scenario|Szenario|Funktionalität|feature:" in src/test/resources/features · 3 matches
+✱ Grep "assertThat|assertEquals|assertTrue|assertFalse|assertNull|assertNotNull" in src/test/java · 25 matches
+✱ Grep "outputTray|takeDrinks\(|selectDrink\(" in . · 20 matches
+Ich habe eine relevante Verhaltensänderung gefunden und lese jetzt die direkt betroffenen Tests und die eine Feature-Datei dazu im Volltext.
+→ Read src/test/resources/features/freies_getraenk.feature
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java
+→ Read src/main/java/de/sharpsharp/vendingmachine/Main.java
+Ich prüfe noch kurz die Story-/Feature-Struktur auf formale Regelverstöße, damit ich keine leeren Kritikpunkte erfinde.
+→ Read specs/stories.md
+✱ Glob "src/test/resources/features/*.feature" in . · 1 match
+Keine wesentlichen Befunde.

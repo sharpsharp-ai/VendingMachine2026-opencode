@@ -1,0 +1,28 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich prüfe kurz das Format der vorhandenen Specs und lege dann die neue Spec nur unter `specs/` an.
+→ Read specs/4-getraenke-kosten-geld/spec.md
+→ Read specs/3-guthaben-anzeigen/spec.md
+Ich habe das Format der bestehenden Specs geprüft. Jetzt lege ich `specs/5-wechselgeld/spec.md` im gleichen Stil an.
+
+# Todos
+[✓] Story 5 in `specs/stories.md` lesen und passende Kurzname ableiten
+[•] `specs/5-wechselgeld/spec.md` mit Story, Regeln und offenen Fragen anlegen
+[ ] Inhalt gegen EARS-Regeln prüfen und Antwort mit Pfad plus Regeln geben
+
+% Patch 1 file
+Die Spec ist angelegt. Ich prüfe noch kurz den Inhalt auf Form und Vollständigkeit, dann gebe ich dir nur den Pfad und die Regeln zurück.
+→ Read specs/5-wechselgeld/spec.md
+
+# Todos
+[✓] Story 5 in `specs/stories.md` lesen und passende Kurzname ableiten
+[✓] `specs/5-wechselgeld/spec.md` mit Story, Regeln und offenen Fragen anlegen
+[✓] Inhalt gegen EARS-Regeln prüfen und Antwort mit Pfad plus Regeln geben
+
+`specs/5-wechselgeld/spec.md`
+
+Regeln:
+- WHEN der Kunde Abbruch drückt, SHALL der Automat das gesamte Guthaben als Münzen in die Münzrückgabe ausgeben.
+- WHEN der Kunde Abbruch drückt, SHALL der Automat das Guthaben auf null setzen.
+- WHEN die Münzrückgabe geleert wird, SHALL der Automat keine Münzen mehr darin behalten.
