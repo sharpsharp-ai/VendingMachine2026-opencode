@@ -26,6 +26,6 @@ nur zwei Dokumente weit unterhalb (y ≈ 50 000), keine Überlappung.
 Link auf die erste Folie: https://miro.com/app/board/uXjVHnldClU=/?moveToWidget=3458764684509393595
 
 
-## Offen nach Iteration 14
+## Nach Iteration 14
 
-An der Stelle von Folie 8 liegen noch zwei Bilder von mir, die weg sollen, sobald Sebastian es freigibt: die alte Fassung `3458764684509393850` (Story-7-Beispiel) und ein kaputtes Bild `3458764684518951653` (Breite 0; entstand, als ich die erste neue Fassung per Layout-Update verschieben wollte und das Werkzeug dabei die Bildquelle überschrieb). Lehre: Bilder nur per `image_create` an die Zielposition legen, Position als Mittelpunkt rechnen, danach nicht mehr per SVG-Update anfassen.
+Folie 8 neu hochgeladen (06:04). Die alte Fassung `3458764684509393850` und ein kaputtes Zwischenbild `3458764684518951653` (entstanden, als ich die erste neue Fassung per Layout-Update verschob und das Werkzeug die Bildquelle überschrieb) hat Sebastian um 06:10 zum Löschen freigegeben; beide gelöscht, sonst nichts. Lehre: Bilder nur per `image_create` an die Zielposition legen (x/y ist der Mittelpunkt), danach nicht mehr per SVG-Update anfassen.
