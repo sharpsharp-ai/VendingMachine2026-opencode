@@ -18,9 +18,14 @@ nur zwei Dokumente weit unterhalb (y ≈ 50 000), keine Überlappung.
 | 5 | folie-05.png | 3458764684509393734 | 2000 | 5900 |
 | 6 | folie-06.png | 3458764684509393774 | 8400 | 5900 |
 | 7 | folie-07.png | 3458764684509393801 | 14800 | 5900 |
-| 8 | folie-08.png | 3458764684518951653 (Iteration 14, 06:01; die alte Fassung 3458764684509393850 mit dem Story-7-Beispiel liegt darunter, bis Sebastian das Löschen freigibt) | 21200 | 5900 |
+| 8 | folie-08.png | 3458764684519048218 (Iteration 14, 06:04, Ausverkauft-Beispiel) | 21200 | 5900 |
 | 9 | folie-09.png | 3458764684509393872 | 2000 | 9800 |
 | 10 | folie-10.png | 3458764684509393894 | 8400 | 9800 |
 | 11 | folie-11.png | 3458764684509393909 | 14800 | 9800 |
 
 Link auf die erste Folie: https://miro.com/app/board/uXjVHnldClU=/?moveToWidget=3458764684509393595
+
+
+## Offen nach Iteration 14
+
+An der Stelle von Folie 8 liegen noch zwei Bilder von mir, die weg sollen, sobald Sebastian es freigibt: die alte Fassung `3458764684509393850` (Story-7-Beispiel) und ein kaputtes Bild `3458764684518951653` (Breite 0; entstand, als ich die erste neue Fassung per Layout-Update verschieben wollte und das Werkzeug dabei die Bildquelle überschrieb). Lehre: Bilder nur per `image_create` an die Zielposition legen, Position als Mittelpunkt rechnen, danach nicht mehr per SVG-Update anfassen.
