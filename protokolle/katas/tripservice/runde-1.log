@@ -1,0 +1,5 @@
+
+> refactoring-coach · gpt-5.4-mini
+
+`TripService#getTripsByUser` hat den kürzesten Pfad schon direkt vor sich: `UserSession.getInstance().getLoggedUser()` kann `null` liefern und dann wirft der Code die `UserNotLoggedInException`. Dafür brauchen wir noch keine Naht; der erste Schritt ist ein Test für diesen Sonderfall, damit wir den kürzesten Weg zuerst absichern. Die Technik für den späteren Zugriff auf die Singleton-Abhängigkeit ist `Extract and Override Call`, aber noch nicht nötig. Welchen Test würdest du für den „nicht angemeldet“-Fall zuerst schreiben?
+exit=0

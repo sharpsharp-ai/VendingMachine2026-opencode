@@ -149,3 +149,21 @@ Skript und Ausgabe: `protokolle/h-tests/`.
 | Prüfgeschirr (Läufe und Proben wiederholen) | `protokolle/geschirr/` mit README |
 | Endstand der drei Abnahmeläufe | Branches `lauf-8`, `lauf-9`, `lauf-10` im Start-Repo, je mit Paket, Specs, Szenarien und Code aller sieben Stories |
 | Konzept Team-Repos | `taskforce/compax_csd_mit_opencode/trainings-repos.md` |
+
+## 7. Die drei Katas, 2026-09-22
+
+Von GitLab (`gitlab.com/sharpsharp/{stringcalculator,gildedrose,tripservice}`) nach GitHub übernommen, weil das Training sonst zwei Seiten bräuchte. Die GitLab-Stände bleiben unverändert liegen.
+
+Befund der GitLab-Repos: keine `pom.xml` (die IntelliJ-Dateien zeigten auf eine), Bibliotheken als Jars im Repo, Java-Level 1.8, beim StringCalculator der einzige Test unter `src/main`, keine README. Ohne Build-Werkzeug kann opencode kein `mvn test` als Gate nutzen.
+
+| Repo | Inhalt | opencode |
+|---|---|---|
+| [stringcalculator](https://github.com/sharpsharp-ai/stringcalculator) | leeres Maven-Projekt, Kanarienvogel-Test, Kata-Text und PDFs | keins |
+| [gildedrose](https://github.com/sharpsharp-ai/gildedrose) | Legacy-Code ohne Tests (nur der `foo`-Starttest), ApprovalTests und JaCoCo bereit, `scripts/unabgedeckt.sh` | Rolle `test-autor` (nur `src/test`), Command `/charakterisiere`, Skill mit zwölf Regeln |
+| [tripservice](https://github.com/sharpsharp-ai/tripservice) | Mancusos Kata mit leeren Testklassen, `TripService_Original` zum Vergleich | Rolle `refactoring-coach` (alles außer Original, pom, Konfiguration), Command `/coach`, Skill `legacy-seams` |
+
+Alle drei: Maven, Java 17, JUnit 4, Hamcrest 3, Mockito 5, Pakete `de.sharpsharp.*`, README mit „Loslegen", CI auf GitHub Actions, ein Commit als Startstand. Die alte Testsuite von Gilded Rose (Charakterisierung samt Golden Master) ist absichtlich nicht dabei, sie wäre die Lösung; sie liegt weiter auf GitLab.
+
+Verifiziert: `mvn -q verify` in jedem Repo lokal und im frischen Clone von GitHub, Exit 0; CI aller drei Repos grün; je eine Probe mit `gpt-5.4-mini` (`protokolle/katas/README.md`): `/charakterisiere` erreichte in einem Lauf 36 von 36 Zweigen mit 14 Tests ohne Änderung am Produktivcode, `/coach` machte in drei Runden je genau einen Schritt (Frage, roter Test, Naht mit grünem verify) und hielt `TripService_Original` unangetastet.
+
+Offen: Team-Kopien je Farbe gibt es für die Katas nicht; wenn Teams pushen sollen, geht das mit derselben Schleife wie in `trainings-repos.md`. Im Terminal muss opencode mit `--agent` gestartet werden, damit die Rolle im Dialog bleibt; `opencode run -c` ohne `--agent` fällt auf `build` zurück.

@@ -1,0 +1,23 @@
+
+> refactoring-coach · gpt-5.4-mini
+
+Ich ziehe jetzt genau eine Naht ein: `Extract and Override Call` für den Zugriff auf den angemeldeten Benutzer. Im Test ersetze ich den Singleton-Aufruf dann durch eine kleine Testsubklasse, die `null` liefert, damit der kürzeste Weg wirklich isoliert läuft.
+% Patch 1 file
+% Patch 1 file
+Naht ist drin: `TripService` fragt den eingeloggten Benutzer jetzt über eine überschreibbare Methode ab, und der Test steuert den Wert über `TestableTripService`. Ich verifiziere jetzt direkt, ob der kürzeste Pfad grün ist.
+
+$ mvn -q verify
+(no output)
+
+# Todos
+[✓] Add first test for unauthenticated user in TripServiceTest
+[✓] Verify with mvn -q verify
+
+Geändert:
+- `src/main/java/de/sharpsharp/tripservice/trip/TripService.java`: `getLoggedUser()` als überschreibbare Naht extrahiert.
+- `src/test/java/de/sharpsharp/tripservice/trip/TripServiceTest.java`: Testsubklasse `TestableTripService` liefert `null` für den eingeloggten Benutzer.
+
+`mvn -q verify`: grün.
+
+Nächster Schritt: der zweite Pfad unter Test, also „angemeldet, aber keine Freunde“ mit leerer Liste. Soll ich den jetzt als nächsten Test anlegen?
+exit=0

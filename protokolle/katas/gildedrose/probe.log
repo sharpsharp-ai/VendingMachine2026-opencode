@@ -1,0 +1,96 @@
+
+> test-autor · gpt-5.4-mini
+
+Ich lese jetzt die vorhandenen Tests und dann messe ich die aktuelle Abdeckung, damit ich die fehlenden Verzweigungen gezielt als Charakterisierungstests ergänzen kann.
+# Todos
+[•] Read existing tests and code to identify item types and boundary values
+[ ] Run `mvn -q verify` and capture uncovered branches for `GildedRose`
+[ ] Add characterization tests for uncovered branches and boundary values, grouped by item type
+[ ] Re-run verification until `scripts/unabgedeckt.sh GildedRose` is empty
+[ ] Report final test count, coverage summary, and observations
+
+→ Read src/test/java/de/sharpsharp/gildedrose/GildedRoseTest.java
+Ich hole jetzt die echte Abdeckung, damit ich die fehlenden Zweige nicht raten muss.
+
+$ scripts/unabgedeckt.sh GildedRose
+Kein Bericht. Erst mvn -q verify.
+
+$ mvn -q verify
+(no output)
+
+`verify` ist durchgelaufen. Ich prüfe jetzt, ob der Bericht unter `target/site/jacoco/` angekommen ist und welche Zweige noch offen sind.
+✱ Glob "target/site/jacoco/**" in . · 0 matches
+
+$ scripts/unabgedeckt.sh GildedRose
+== GildedRose
+Zeile 17, 2 von 4 Zweigen nicht erreicht: if ((!"Aged Brie".equals(items.get(i).getName())) && !"Backstage passes to a TAFKAL80ETC concert".equals(items.get(i).getName())) {
+Zeile 18, 1 von 2 Zweigen nicht erreicht: if (items.get(i).getQuality() > 0) {
+Zeile 19, alle 2 Zweige nicht erreicht: if (!"Sulfuras, Hand of Ragnaros".equals(items.get(i).getName())) {
+Zeile 20, nie erreicht: items.get(i).setQuality(items.get(i).getQuality() - 1);
+Zeile 24, alle 2 Zweige nicht erreicht: if (items.get(i).getQuality() < 50) {
+Zeile 25, nie erreicht: items.get(i).setQuality(items.get(i).getQuality() + 1);
+Zeile 27, alle 2 Zweige nicht erreicht: if ("Backstage passes to a TAFKAL80ETC concert".equals(items.get(i).getName())) {
+Zeile 28, alle 2 Zweige nicht erreicht: if (items.get(i).getSellIn() < 11) {
+Zeile 29, alle 2 Zweige nicht erreicht: if (items.get(i).getQuality() < 50) {
+Zeile 30, nie erreicht: items.get(i).setQuality(items.get(i).getQuality() + 1);
+Zeile 34, alle 2 Zweige nicht erreicht: if (items.get(i).getSellIn() < 6) {
+Zeile 35, alle 2 Zweige nicht erreicht: if (items.get(i).getQuality() < 50) {
+Zeile 36, nie erreicht: items.get(i).setQuality(items.get(i).getQuality() + 1);
+Zeile 43, 1 von 2 Zweigen nicht erreicht: if (!"Sulfuras, Hand of Ragnaros".equals(items.get(i).getName())) {
+Zeile 47, 1 von 2 Zweigen nicht erreicht: if (items.get(i).getSellIn() < 0) {
+Zeile 48, 1 von 2 Zweigen nicht erreicht: if (!"Aged Brie".equals(items.get(i).getName())) {
+Zeile 49, 1 von 2 Zweigen nicht erreicht: if (!"Backstage passes to a TAFKAL80ETC concert".equals(items.get(i).getName())) {
+Zeile 50, 1 von 2 Zweigen nicht erreicht: if (items.get(i).getQuality() > 0) {
+Zeile 51, alle 2 Zweige nicht erreicht: if (!"Sulfuras, Hand of Ragnaros".equals(items.get(i).getName())) {
+Zeile 52, nie erreicht: items.get(i).setQuality(items.get(i).getQuality() - 1);
+Zeile 56, nie erreicht: items.get(i).setQuality(items.get(i).getQuality() - items.get(i).getQuality());
+Zeile 59, alle 2 Zweige nicht erreicht: if (items.get(i).getQuality() < 50) {
+Zeile 60, nie erreicht: items.get(i).setQuality(items.get(i).getQuality() + 1);
+Zusammenfassung: Zweige nicht erreicht 26, erreicht 10; Zeilen nicht erreicht 16, erreicht 14
+
+Ich schreibe jetzt die item-spezifischen Charakterisierungstests und entferne den alten Sammeltest, damit die Struktur sauber nach Warenart ist.
+% Patch 5 files
+Die Tests sind drin. Ich führe jetzt `verify` aus und schaue, ob noch Zweige fehlen oder ein Erwartungswert falsch war.
+
+$ scripts/unabgedeckt.sh GildedRose
+== GildedRose
+Zeile 17, 2 von 4 Zweigen nicht erreicht: if ((!"Aged Brie".equals(items.get(i).getName())) && !"Backstage passes to a TAFKAL80ETC concert".equals(items.get(i).getName())) {
+Zeile 18, 1 von 2 Zweigen nicht erreicht: if (items.get(i).getQuality() > 0) {
+Zeile 19, alle 2 Zweige nicht erreicht: if (!"Sulfuras, Hand of Ragnaros".equals(items.get(i).getName())) {
+Zeile 20, nie erreicht: items.get(i).setQuality(items.get(i).getQuality() - 1);
+Zeile 24, alle 2 Zweige nicht erreicht: if (items.get(i).getQuality() < 50) {
+Zeile 25, nie erreicht: items.get(i).setQuality(items.get(i).getQuality() + 1);
+Zeile 27, alle 2 Zweige nicht erreicht: if ("Backstage passes to a TAFKAL80ETC concert".equals(items.get(i).getName())) {
+Zeile 28, alle 2 Zweige nicht erreicht: if (items.get(i).getSellIn() < 11) {
+Zeile 29, alle 2 Zweige nicht erreicht: if (items.get(i).getQuality() < 50) {
+Zeile 30, nie erreicht: items.get(i).setQuality(items.get(i).getQuality() + 1);
+Zeile 34, alle 2 Zweige nicht erreicht: if (items.get(i).getSellIn() < 6) {
+Zeile 35, alle 2 Zweige nicht erreicht: if (items.get(i).getQuality() < 50) {
+Zeile 36, nie erreicht: items.get(i).setQuality(items.get(i).getQuality() + 1);
+Zeile 43, 1 von 2 Zweigen nicht erreicht: if (!"Sulfuras, Hand of Ragnaros".equals(items.get(i).getName())) {
+Zeile 47, 1 von 2 Zweigen nicht erreicht: if (items.get(i).getSellIn() < 0) {
+Zeile 48, 1 von 2 Zweigen nicht erreicht: if (!"Aged Brie".equals(items.get(i).getName())) {
+Zeile 49, 1 von 2 Zweigen nicht erreicht: if (!"Backstage passes to a TAFKAL80ETC concert".equals(items.get(i).getName())) {
+Zeile 50, 1 von 2 Zweigen nicht erreicht: if (items.get(i).getQuality() > 0) {
+Zeile 51, alle 2 Zweige nicht erreicht: if (!"Sulfuras, Hand of Ragnaros".equals(items.get(i).getName())) {
+Zeile 52, nie erreicht: items.get(i).setQuality(items.get(i).getQuality() - 1);
+Zeile 56, nie erreicht: items.get(i).setQuality(items.get(i).getQuality() - items.get(i).getQuality());
+Zeile 59, alle 2 Zweige nicht erreicht: if (items.get(i).getQuality() < 50) {
+Zeile 60, nie erreicht: items.get(i).setQuality(items.get(i).getQuality() + 1);
+Zusammenfassung: Zweige nicht erreicht 26, erreicht 10; Zeilen nicht erreicht 16, erreicht 14
+
+$ mvn -q verify
+(no output)
+
+Die letzte Messung war zu früh parallel gestartet. Ich messe jetzt sauber nach dem Build, damit ich sehe, welche Zweige wirklich noch offen sind.
+$ mvn -q verify
+(no output)
+
+$ scripts/unabgedeckt.sh GildedRose
+== GildedRose
+Zusammenfassung: Zweige nicht erreicht 0, erreicht 36; Zeilen nicht erreicht 0, erreicht 30
+
+Geändert: `OrdinaryItemTest`, `AgedBrieTest`, `BackstagePassTest`, `SulfurasTest` ergänzt; `GildedRoseTest` entfernt; 14 Tests insgesamt.
+Ergebnis: `mvn -q verify` grün; `scripts/unabgedeckt.sh GildedRose` -> `Zusammenfassung: Zweige nicht erreicht 0, erreicht 36; Zeilen nicht erreicht 0, erreicht 30`.
+Beobachtungen: keine Abweichungen zu `GildedRoseKata.md` in den getesteten Fällen.
+exit=0
