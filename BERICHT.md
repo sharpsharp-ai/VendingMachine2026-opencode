@@ -5,7 +5,7 @@ näher an einem schwachen Modell). Alle Läufe nicht-interaktiv mit `opencode ru
 
 ## 1. Was Sebastian morgen sagt und tut
 
-Die drei Team-Repos sind angelegt (öffentlich, Stand `cdd6096` mit Paket): `VendingMachine2026-green`, `-blue`, `-orange` unter `github.com/sharpsharp-ai`. Zugang ohne GitHub-Konto über ein Fine-grained Token in der Clone-URL (nur die drei Repos, Contents: Read and write, 30 Tage; nach dem Training löschen): `https://<TOKEN>@github.com/sharpsharp-ai/VendingMachine2026-green.git`, entsprechend blue und orange. Das Token steht in keiner Datei. Konzept in `taskforce/compax_csd_mit_opencode/trainings-repos.md`.
+Die drei Team-Repos sind angelegt (öffentlich, Stand `e573923` mit Paket und Glas-Design der Weboberfläche, Iteration 16; orange trägt zusätzlich Sebastians Token-Test-Commit): `VendingMachine2026-green`, `-blue`, `-orange` unter `github.com/sharpsharp-ai`. Zugang ohne GitHub-Konto über ein Fine-grained Token in der Clone-URL (nur die drei Repos, Contents: Read and write, 30 Tage; nach dem Training löschen): `https://<TOKEN>@github.com/sharpsharp-ai/VendingMachine2026-green.git`, entsprechend blue und orange. Das Token steht in keiner Datei. Konzept in `taskforce/compax_csd_mit_opencode/trainings-repos.md`.
 Beim Kunden hängt hinter opencode Qwen 3.6; das Paket setzt kein Modell, es nimmt das konfigurierte.
 
 Für die Teilnehmerinnen, in dieser Reihenfolge (steht so im `README.md` des Pakets):
@@ -140,7 +140,7 @@ Skript und Ausgabe: `protokolle/h-tests/`.
 |---|---|
 | README, Folien, Baseline, Protokolle, Iterationen, dieser Bericht | `github.com/sharpsharp-ai/VendingMachine2026-opencode` (öffentlich), lokal `taskforce/compax_csd_mit_opencode/VendingMachine2026-opencode/` |
 | Das Paket selbst (`AGENTS.md`, `opencode.json`, `.opencode/`, `scripts/bis-gruen.sh`) | im Startstand, Branch `training-start`, seit Iteration 15; Pfade `paket/…` in den Iterationen 1 bis 14 meinen die frühere Kopie im Paket-Repo |
-| Startstand der Teams | `github.com/sharpsharp-ai/VendingMachine2026-Start`, Branch `training-start`; lokal Worktree `vending_machine_training_start/` |
+| Startstand der Teams | `github.com/sharpsharp-ai/VendingMachine2026-Start`, Branch `training-start` (e573923); lokal Worktree `vending_machine_training_start/`. Die Weboberfläche trägt seit Iteration 16 das Glas-Design, in allen Repos gleich |
 | Referenzlösung | `github.com/sharpsharp-ai/VendingMachine2026` (privat), lokal `vending_machine_1shot/` |
 | Folien | `folien/folien.pdf`, `folien/folien.pptx`, Quelle `folien/folien.py`; Kopien in `~/Downloads`; auf dem Miro-Board im Frame `3458764684499712615`, erste Folie: https://miro.com/app/board/uXjVHnldClU=/?moveToWidget=3458764684509393595 |
 | Baseline Story 1 ohne Paket | `baseline/` (Prompt, zwei Läufe, Diff) |
