@@ -1,0 +1,13 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich ermittle kurz die vorhandene Spec-Struktur und lege dann nur `specs/1-alles-umsonst/spec.md` an.
+✱ Glob "specs/1-alles-umsonst/spec.md" in . · 0 matches
+✱ Glob "specs/*/spec.md" in . · 0 matches
+Die Zielstruktur existiert noch nicht; ich schreibe die neue Spec-Datei jetzt an.
+→ Read specs
+% Patch 1 file
+`specs/1-alles-umsonst/spec.md`
+
+Regel:
+`WHILE ein Fach eine Dose enthält, WHEN das Getränk gewählt wird, SHALL der Automat die Dose ohne Bezahlung ins Ausgabefach fallen lassen.`

@@ -12,12 +12,10 @@ Beim Kunden hängt hinter opencode Qwen 3.6; das Paket setzt kein Modell, es nim
 Für die Teilnehmerinnen, in dieser Reihenfolge (steht so im `README.md` des Pakets):
 
 ```bash
-git clone <URL des Team-Repos> getraenkeautomat          # ohne Team-Repo: git clone -b training-start …/VendingMachine2026-Start.git getraenkeautomat
-git clone https://github.com/sharpsharp-ai/VendingMachine2026-opencode.git
-./VendingMachine2026-opencode/install.sh getraenkeautomat
+git clone <URL eures Team-Repos> getraenkeautomat     # oder in IntelliJ auschecken; zum Ausprobieren: -b training-start …/VendingMachine2026-Start.git
 cd getraenkeautomat
 mvn -q verify        # rot: ein Szenario wartet. Richtig so.
-opencode             # neu starten, falls es schon lief: erst dann kennt es die Commands
+opencode             # kennt /spec, /akzeptanztest, /implementiere, /review (Modell mit /models wählen)
 ```
 
 Dann je Story, jeder Command in einer neuen Session (`/new`), nach jedem Schritt lesen und entscheiden:
@@ -32,18 +30,17 @@ Dann je Story, jeder Command in einer neuen Session (`/new`), nach jedem Schritt
 Zwei Stellen, an denen `gpt-5.4-mini` in den Abnahmeläufen regelmäßig daneben lag und der Mensch gefragt ist: bei Story 6 ließ die Spec dreimal das „nur“ der Karte weg (kein Preis 2,00 €, kein Verbot darunter), bei Story 3 dreht `scripts/bis-gruen.sh` für das schon grüne erste Szenario fünf Leerrunden und meldet „nicht grün“, obwohl das Szenario grün ist. Beides steht in Abschnitt 2.
 
 Wer lieber tippt als klickt: `scripts/bis-gruen.sh "Ein Getränk wählen"` ruft den Implementierer bis zu fünfmal.
-Wer opencode das Setup machen lassen will: Text aus `PROMPT.md` einfügen (Weg B der Teilnehmer-Probe).
 
 ## 2. Stand der Abnahmekriterien
 
 | Kriterium | Stand |
 |---|---|
 | Zwei vollständige Läufe (Stories 1 bis 7) hintereinander, frischer Stand, ohne Änderung am Setup, jede Story erfüllt alle Bewertungspunkte | **Nicht erreicht.** Drei Läufe auf frischem Stand: Lauf 8 nach 12 Iterationen, Lauf 9 und 10 nach Iteration 13 ohne Änderung dazwischen. Fachlich liefen Story 1 bis 5 und 7 in Lauf 9 sauber durch (verify grün, HTTP richtig, `Main` unverändert). Was fehlt: Story 6 bleibt in Lauf 8 und 9 bei der Spec stehen (Bier kostet weiter 1,00 €), und der rote Unit-Test ist nicht in jeder Runde einzeln sichtbar (Lauf 8: 5 von 6 Runden, Lauf 9: 2 von 6). Lauf 10: Story 1 bis 5 und 7 sauber, roter Test in allen 6 Runden sichtbar, Story 6 wie zuvor, dazu fehlt in der Story-2-Spec die zweite Kartenregel. Am nächsten dran: Lauf 10 mit zwei roten Zellen von 56. Tabellen unten |
-| Teilnehmer-Probe ohne Improvisation | Erfüllt. `protokolle/probe-1/`: Weg A (README wörtlich, frische Clones von GitHub): Start rot wie angekündigt, `/spec 1`, `/akzeptanztest 1`, `scripts/bis-gruen.sh "Ein Getränk wählen"` grün in einer Runde, `mvn -q verify` Exit 0, `/review` mit zwei Befunden. Weg B (Text aus `PROMPT.md` in vanilla opencode, `--auto` steht für das Bestätigen im TUI): vier Befehle ausgeführt, `EXIT=1`, Paket identisch installiert, Schlusssatz wörtlich. Wiederholt auf dem Endstand (`protokolle/probe-2/`, 02:49 bis 02:54, frische Clones von GitHub mit Iteration 13): Weg A wieder ohne Improvisation durch, `bis-gruen.sh` grün nach Runde 1, `mvn -q verify` Exit 0, `/review` ohne Befund; Weg B Setup fertig, `EXIT=1`, Paket identisch |
+| Teilnehmer-Probe ohne Improvisation | Erfüllt, für zwei Setups. Seit Iteration 15 liegt das Paket im Startstand: frischer Clone von GitHub, Dateien da, `mvn -q verify` rot wie vorgesehen, `/spec 1` schreibt die Spec ohne einen Installationsschritt (`protokolle/probe-3/`). Davor, mit `install.sh`: `protokolle/probe-1/`: Weg A (README wörtlich, frische Clones von GitHub): Start rot wie angekündigt, `/spec 1`, `/akzeptanztest 1`, `scripts/bis-gruen.sh "Ein Getränk wählen"` grün in einer Runde, `mvn -q verify` Exit 0, `/review` mit zwei Befunden. Weg B (Text aus `PROMPT.md` in vanilla opencode, `--auto` steht für das Bestätigen im TUI): vier Befehle ausgeführt, `EXIT=1`, Paket identisch installiert, Schlusssatz wörtlich. Wiederholt auf dem Endstand (`protokolle/probe-2/`, 02:49 bis 02:54, frische Clones von GitHub mit Iteration 13): Weg A wieder ohne Improvisation durch, `bis-gruen.sh` grün nach Runde 1, `mvn -q verify` Exit 0, `/review` ohne Befund; Weg B Setup fertig, `EXIT=1`, Paket identisch |
 | Jedes Gate hat nachweislich ausgelöst | Erfüllt. `protokolle/gates/gates.log`: Methode mit 25 Zeilen (Checkstyle), Javalin-Import in `VendingMachine` (ArchUnit), roter Unit-Test (Surefire), ungetestete Klasse (JaCoCo unter 80 %); jedes Mal Exit 1, danach wieder grün |
 | H1 bis H4 getestet, Ergebnis im Bericht, Setup passt dazu | Erfüllt, Abschnitt 3 |
 | `training-start` enthält keine Story-Lösungen und baut grün | Erfüllt mit einer Absicht: kompiliert, alle Tests grün bis auf das eine Szenario „Ein Getränk wählen", das nach Sebastians Vorgabe rot wartet (`mvn -q verify` endet deshalb mit Exit 1, `mvn -q test -Dtest=WebTest` grün). Keine Story-Regel ist gebaut: `selectDrink`, `insertCoin`, `cancel` sind leer, `price` liefert null |
-| Folien, README, PROMPT, Bericht liegen vor, alles committet und gepusht | Erfüllt: `folien/folien.pdf` und `.pptx` (Kopien `~/Downloads/opencode-folien.*`), `README.md`, `PROMPT.md`, `BERICHT.md`; Paket-Repo öffentlich auf GitHub, `training-start` gepusht. Miro: die elf Folien liegen als Bilder im vorgegebenen Frame (Board `uXjVHnldClU=`, Frame `3458764684499712615`, drei Reihen), nichts Vorhandenes verändert; Bild-IDs und Positionen in `protokolle/miro/miro-upload.md` |
+| Folien, README, PROMPT, Bericht liegen vor, alles committet und gepusht | Erfüllt: `folien/folien.pdf` und `.pptx` (Kopien `~/Downloads/opencode-folien.*`), `README.md`, `BERICHT.md`; `PROMPT.md` und `install.sh` entfielen mit Iteration 15, das Paket liegt im Startstand; Paket-Repo öffentlich auf GitHub, `training-start` gepusht. Miro: die elf Folien liegen als Bilder im vorgegebenen Frame (Board `uXjVHnldClU=`, Frame `3458764684499712615`, drei Reihen), nichts Vorhandenes verändert; Bild-IDs und Positionen in `protokolle/miro/miro-upload.md` |
 
 Bewertung je Story (Protokolle `protokolle/lauf-8-story-4-geisterdatei/`, `protokolle/lauf-9-story-6-spec/`, `protokolle/lauf-10-story-6-spec/`; je Story Spec, Szenarien, Implementierung je Szenario, verify, Review, HTTP; `lauf.log` mit den Meilensteinen).
 Spalten: verify Exit 0 ohne Gate-Änderung; roter Unit-Test einzeln sichtbar, bevor Code kam; der Implementierer ließ Features, Specs, Schritte, `pom.xml`, `config/` unverändert; kein Testwert, kein Sonderfall, nichts in `Main`; Feature nach den elf Regeln; Spec in EARS passend zu den Szenarien; Review; Oberfläche per HTTP.
@@ -118,6 +115,7 @@ Skript und Ausgabe: `protokolle/h-tests/`.
 - Java 17, Mockito im Start, JUnit 4 (ArchUnit-JUnit-4-Runner, Cucumber-JUnit-4).
 - Verifikationsmodell `openai/gpt-5.4-mini` statt Sonnet 4.5: Sebastians Vorgabe, Budget.
 - Kein Ollama, kein lokales Qwen: Sebastians Vorgabe für heute.
+- Iteration 15, auch nach den Läufen: das Paket liegt im Startstand, kein `install.sh`, kein `PROMPT.md` mehr, eine Quelle. Klonen oder in IntelliJ auschecken reicht.
 - Iteration 14 kam nach den Läufen auf Sebastians Wunsch: Beispiele in Skills, Command, Glossar und Folie 8, die eine Story lösten (Kein Bier vor 4, Preise, Zu wenig Geld), sind durch Beispiele ohne Story ersetzt (leeres Fach meldet „Ausverkauft“, jedes Fach startet mit fünf Dosen). Die Läufe 8 bis 10 liefen noch mit den Story-Beispielen; die Skills haben Story 7 (Uhr) und Story 4 vermutlich erleichtert. Ein Lauf auf dem neuen Stand steht aus.
 - Iteration 13 liegt über dem Budget von 12, bewusst: die Ursache war ein Build-Problem (Geisterdatei in `target`), kein Prompt-Problem, die Änderung ist eine Zeile im Runner und mit einer gepflanzten Geisterdatei geprüft. Der Stand davor ist in beiden Repos als Tag `iteration-12` markiert; `git revert 740d047` auf `training-start` nimmt sie zurück. Danach keine weitere Iteration mehr, auch nicht für Story 6 und den roten Test.
 
@@ -141,7 +139,8 @@ Skript und Ausgabe: `protokolle/h-tests/`.
 
 | Was | Wo |
 |---|---|
-| Paket, Installer, README, PROMPT, Folien, Baseline, Protokolle, dieser Bericht | `github.com/sharpsharp-ai/VendingMachine2026-opencode` (öffentlich), lokal `taskforce/compax_csd_mit_opencode/VendingMachine2026-opencode/` |
+| README, Folien, Baseline, Protokolle, Iterationen, dieser Bericht | `github.com/sharpsharp-ai/VendingMachine2026-opencode` (öffentlich), lokal `taskforce/compax_csd_mit_opencode/VendingMachine2026-opencode/` |
+| Das Paket selbst (`AGENTS.md`, `opencode.json`, `.opencode/`, `scripts/bis-gruen.sh`) | im Startstand, Branch `training-start`, seit Iteration 15; Pfade `paket/…` in den Iterationen 1 bis 14 meinen die frühere Kopie im Paket-Repo |
 | Startstand der Teams | `github.com/sharpsharp-ai/VendingMachine2026-Start`, Branch `training-start`; lokal Worktree `vending_machine_training_start/` |
 | Referenzlösung | `github.com/sharpsharp-ai/VendingMachine2026` (privat), lokal `vending_machine_1shot/` |
 | Folien | `folien/folien.pdf`, `folien/folien.pptx`, Quelle `folien/folien.py`; Kopien in `~/Downloads`; auf dem Miro-Board im Frame `3458764684499712615`, erste Folie: https://miro.com/app/board/uXjVHnldClU=/?moveToWidget=3458764684509393595 |

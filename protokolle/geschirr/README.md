@@ -4,9 +4,9 @@ Die Skripte, mit denen die Läufe und Proben unter `protokolle/` entstanden sind
 
 | Skript | Was es tut |
 |---|---|
-| `lauf.sh N 7` | Frischer Worktree aus `training-start`, Paket installieren, dann je Story `/spec`, `/akzeptanztest`, Commit, je Szenario `scripts/bis-gruen.sh`, `mvn -q verify`, `/review`, `checks.sh`; Protokolle nach `protokolle/lauf-N/` |
+| `lauf.sh N 7` | Frischer Worktree aus `training-start` (das Paket liegt seit Iteration 15 darin), dann je Story `/spec`, `/akzeptanztest`, Commit, je Szenario `scripts/bis-gruen.sh`, `mvn -q verify`, `/review`, `checks.sh`; Protokolle nach `protokolle/lauf-N/` |
 | `checks.sh N STORY` | Startet `Main`, spricht die Oberfläche per HTTP an und prüft je Story das Verhalten (kumulativ) |
-| `probe.sh NAME` | Teilnehmer-Probe: Weg A folgt `README.md` wörtlich, Weg B fügt `PROMPT.md` in vanilla opencode ein |
+| `probe.sh NAME` | Teilnehmer-Probe des alten Setups (Weg A mit `install.sh`, Weg B mit `PROMPT.md`); seit Iteration 15 gibt es beides nicht mehr, das Skript bleibt als Protokoll-Erzeuger von `probe-1` und `probe-2` |
 | `tabelle.sh N` | Zieht aus `lauf-N.log` und den Implementierer-Protokollen eine Tabelle je Story |
 
 Die Pfade in Zeile 4 bis 10 zeigen auf Sebastians Rechner (`vending_machine_start`, dieses Repo) und den Scratch-Ordner der Session; vor dem Wiederverwenden anpassen.

@@ -1,0 +1,38 @@
+06:19:54 frischer Clone von GitHub, Branch training-start, kein Installationsschritt
+clone exit=0
+==== Dateien
+.opencode/commands/akzeptanztest.md
+.opencode/commands/implementiere.md
+.opencode/commands/review.md
+.opencode/commands/spec.md
+.opencode/skills/akzeptanztest-regeln/SKILL.md
+.opencode/skills/clean-code-check/SKILL.md
+.opencode/skills/ears-regeln/SKILL.md
+.opencode/skills/tdd-zyklus/SKILL.md
+AGENTS.md
+opencode.json
+scripts/bis-gruen.sh
+scripts/steps-glossar.sh
+specs/glossar.md
+src/test/resources/features/AGENTS.md
+==== mvn -q verify (erwartet 1)
+verify exit=1
+[ERROR] Tests run: 7, Failures: 1, Errors: 0, Skipped: 0
+==== opencode --command spec 1
+spec exit=0
+`specs/1-alles-umsonst/spec.md`
+
+Regel:
+`WHILE ein Fach eine Dose enthält, WHEN das Getränk gewählt wird, SHALL der Automat die Dose ohne Bezahlung ins Ausgabefach fallen lassen.`
+==== specs/1-*/spec.md
+## Story
+Als reisende Person mit wenig Geld und Koffeinunverträglichkeit
+möchte ich alle Getränke umsonst bekommen,
+damit ich meinen Durst stillen kann.
+
+## Regeln
+WHILE ein Fach eine Dose enthält, WHEN das Getränk gewählt wird, SHALL der Automat die Dose ohne Bezahlung ins Ausgabefach fallen lassen.
+
+## Offene Fragen
+keine
+06:20:18 === done

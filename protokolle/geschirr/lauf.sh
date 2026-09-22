@@ -9,7 +9,7 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
 export OPENCODE_MODEL="${OPENCODE_MODEL:-openai/gpt-5.4-mini}"
 if [ ! -d "$W" ]; then
   git -C "$ST" worktree add -q "$W" -b "lauf-$NAME" training-start || exit 1
-  cd "$W" && "$PK/install.sh" . > "$PROT/install.log" 2>&1 && git add -A && git commit -qm "Paket installiert"
+  cd "$W" && echo "Paket liegt seit Iteration 15 im Startstand, nichts zu installieren" > "$PROT/install.log"
 fi
 cd "$W" || exit 1
 oc() { local log="$PROT/$1.log"; shift; timeout 1200 opencode run -m "$OPENCODE_MODEL" "$@" < /dev/null 2>&1 | sed 's/\x1b\[[0-9;]*m//g' > "$log"; }
