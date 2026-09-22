@@ -5,8 +5,7 @@ näher an einem schwachen Modell). Alle Läufe nicht-interaktiv mit `opencode ru
 
 ## 1. Was Sebastian morgen sagt und tut
 
-Vorab, einmal: die drei Team-Repos aus `VendingMachine2026-Start`, Branch `training-start`, anlegen
-(Konzept in `taskforce/compax_csd_mit_opencode/trainings-repos.md`); die Teilnehmerinnen bekommen die Clone-URL mit Token.
+Die drei Team-Repos sind angelegt (öffentlich, Stand `cdd6096` mit Paket): `VendingMachine2026-green`, `-blue`, `-orange` unter `github.com/sharpsharp-ai`. Je Team die Mitglieder als Collaborator eintragen (`gh api -X PUT repos/sharpsharp-ai/VendingMachine2026-green/collaborators/<GitHub-Name> -f permission=push`), dann klonen sie ohne Branch-Angabe. Konzept in `taskforce/compax_csd_mit_opencode/trainings-repos.md`.
 Beim Kunden hängt hinter opencode Qwen 3.6; das Paket setzt kein Modell, es nimmt das konfigurierte.
 
 Für die Teilnehmerinnen, in dieser Reihenfolge (steht so im `README.md` des Pakets):
