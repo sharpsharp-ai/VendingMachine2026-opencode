@@ -10,7 +10,7 @@ Modell `openai/gpt-5.4-mini`, `opencode run` nicht-interaktiv, je in einer frisc
 
 ## tripservice: `/coach`, drei Runden
 - Runde 1 (`--command coach`): Lage in fünf Sätzen, Technik benannt, eine Frage, keine Änderung. Ausgesagt, der kürzeste Weg brauche noch keine Naht; das stellte sich in Runde 2 als falsch heraus, der Coach hat es dort selbst korrigiert.
-- Runde 2 (`-c "Ich würde testen, dass … Ja, mach den Schritt."`): ein Test `throwsWhenUserIsNotLoggedIn`, rot wegen `CollaboratorCallException`, nächster Schritt vorgeschlagen, Frage. Lief als Rolle `build`, weil `opencode run -c` ohne `--agent` die Rolle nicht hält; im TUI und in IntelliJ bleibt die Rolle, wenn opencode mit `--agent refactoring-coach` gestartet oder der Session-Modus gewählt ist. Steht so in der README.
+- Runde 2 (`-c "Ich würde testen, dass … Ja, mach den Schritt."`): ein Test `throwsWhenUserIsNotLoggedIn`, rot wegen `CollaboratorCallException`, nächster Schritt vorgeschlagen, Frage. Lief als Rolle `build`, weil `opencode run -c` ohne `--agent` die Rolle nicht hält; im TUI und in IntelliJ bleibt die Rolle, wenn opencode mit `--agent clean-code-coach` gestartet oder der Session-Modus gewählt ist. Steht so in der README.
 - Runde 3 (`--agent refactoring-coach -c "Ja, bau die Naht."`): Extract and Override Call in `TripService` (`protected User getLoggedUser()`), Testsubklasse `TestableTripService`, `mvn -q verify` grün, nächster Schritt vorgeschlagen, Frage. `TripService_Original.java` unverändert.
 - `runde-*.log`: Ausgaben. `diff-nach-runde-3.patch`: der Stand nach drei Runden.
 
