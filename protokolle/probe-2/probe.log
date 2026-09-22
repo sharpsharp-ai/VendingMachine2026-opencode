@@ -1,0 +1,19 @@
+02:49:44 === Weg A: README
+02:49:45 clone start exit=0
+02:49:46 clone paket exit=0
+02:49:47 install exit=0
+02:49:53 verify am Start exit=1 (erwartet 1)
+02:50:15 a-spec exit=0
+02:51:02 a-akzeptanztest exit=0
+02:51:02 commit szenarien exit=0
+02:52:07 bis-gruen exit=0
+02:52:13 verify am Ende exit=0 (erwartet 0)
+02:53:28 a-review exit=0
+02:53:28 === Weg B: PROMPT
+02:53:29 clone start exit=0
+02:53:29 PROMPT.md geholt exit=0
+02:53:56 opencode PROMPT exit=0
+02:53:56 ls nach Setup exit=0
+02:54:01 verify nach Setup exit=1 (erwartet 1)
+02:54:01 Paket identisch installiert: diff exit=0
+02:54:01 === done

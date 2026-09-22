@@ -1,0 +1,71 @@
+=== Story 1  02:20:13
+    Feature-Dateien: src/test/resources/features/freies_getraenk.feature
+    Szenario 1: Ein Getränk wählen  02:21:17
+    bis-gruen exit=0
+    Szenario 2: Jedes Getränk fällt kostenlos  02:22:50
+    bis-gruen exit=0
+    Implementierer hat Features/Specs/Schritte/Gates geändert: nein
+    mvn -q verify exit=0
+    Review: → Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java → Read src/test/resources/features/freies_getraenk.feature Keine wesentlichen Befunde
+    HTTP: RESULT OK
+=== Story 2  02:23:48
+    Feature-Dateien: src/test/resources/features/preis_anzeigen.feature
+    Szenario 1: Der Preis steht an jedem Fach  02:24:54
+    bis-gruen exit=0
+    Implementierer hat Features/Specs/Schritte/Gates geändert: nein
+    mvn -q verify exit=0
+    Review: → Read src/test/resources/features/freies_getraenk.feature → Read src/test/resources/features/preis_anzeigen.feature src/test/java/de/sharpsharp/vendingmachine/
+    HTTP: RESULT OK
+=== Story 3  02:26:33
+    Feature-Dateien: src/test/resources/features/guthaben_anzeigen.feature
+    Szenario 1: Das Guthaben startet bei null  02:28:15
+    bis-gruen exit=1
+    Szenario 2: Eine Münze erhöht das Guthaben  02:30:04
+    bis-gruen exit=0
+    Implementierer hat Features/Specs/Schritte/Gates geändert: nein
+    mvn -q verify exit=0
+    Review: → Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java → Read .opencode/skills/akzeptanztest-regeln/SKILL.md Keine wesentlichen Befunde. 
+    HTTP: RESULT OK
+=== Story 4  02:31:20
+    Feature-Dateien: src/test/resources/features/getraenke_kosten_geld.feature
+    Szenario 1: Zu wenig Guthaben gibt keine Dose  02:33:10
+    bis-gruen exit=0
+    Szenario 2: Genaues Guthaben gibt die Dose  02:34:11
+    bis-gruen exit=0
+    Szenario 3: Restguthaben bleibt nach dem Kauf  02:34:41
+    bis-gruen exit=0
+    Implementierer hat Features/Specs/Schritte/Gates geändert: nein
+    mvn -q verify exit=0
+    Review: → Read src/test/resources/features/guthaben_anzeigen.feature → Read src/test/resources/smoke/automat_im_browser.feature - `src/main/java/de/sharpsharp/vendingma
+    HTTP: RESULT OK
+=== Story 5  02:37:05
+    Feature-Dateien: src/test/resources/features/wechselgeld.feature
+    Szenario 1: Abbruch legt das Guthaben in die Münzrückgabe  02:39:36
+    bis-gruen exit=0
+    Szenario 2: Die Münzrückgabe wird geleert  02:40:55
+    bis-gruen exit=0
+    Implementierer hat Features/Specs/Schritte/Gates geändert: nein
+    mvn -q verify exit=0
+    Review: → Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java → Read specs/5-wechselgeld/spec.md Keine wesentlichen Befunde. 
+    HTTP: RESULT OK
+=== Story 6  02:41:59
+    Feature-Dateien: src/test/resources/features/bier_kostet_mehr.feature
+    Szenario 1: Genau 2,00 € geben Bier aus  02:43:10
+    bis-gruen exit=0
+    Implementierer hat Features/Specs/Schritte/Gates geändert: nein
+    mvn -q verify exit=0
+    Review: → Read specs/5-wechselgeld/spec.md → Read src/test/resources/features/wechselgeld.feature Keine wesentlichen Befunde. 
+    HTTP: RESULT FAIL
+On branch lauf-10
+nothing to commit, working tree clean
+=== Story 7  02:44:48
+    Feature-Dateien: src/test/resources/features/kein_bier_vor_4.feature
+    Szenario 1: Vor 16 Uhr fällt kein Bier  02:46:00
+    bis-gruen exit=0
+    Szenario 2: Ab 16 Uhr fällt Bier  02:47:02
+    bis-gruen exit=0
+    Implementierer hat Features/Specs/Schritte/Gates geändert: nein
+    mvn -q verify exit=0
+    Review: Ich prüfe noch das Glossar, weil die neue Feature-Datei nur dann sauber ist, wenn die Formulierungen dort wiederverwendet werden. → Read specs/glossar.md Keine 
+    HTTP: RESULT FAIL
+=== done 02:48:43

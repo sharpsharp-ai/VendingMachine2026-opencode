@@ -1,0 +1,77 @@
+
+> reviewer · gpt-5.4-mini
+
+Ich prüfe zuerst, ob es überhaupt eine Working-Tree-Diff gibt, und lese dann die betroffenen Dateien vollständig plus die relevanten Regeln für die Szenarien.
+$ git diff --name-only
+(no output)
+
+$ git status --short
+(no output)
+
+Es gibt offenbar keinen Arbeitsbaum-Diff. Ich prüfe deshalb den letzten Commit und die darin geänderten Dateien vollständig.
+→ Read .opencode/skills/akzeptanztest-regeln/SKILL.md
+
+$ git show --stat --name-only --oneline HEAD
+590e71a Story 6: Spec und Szenarien
+specs/6-bier-kostet-mehr/spec.md
+src/test/resources/features/bier_kostet_mehr.feature
+
+→ Read specs/6-bier-kostet-mehr/spec.md
+→ Read src/test/resources/features/bier_kostet_mehr.feature
+Ich gleiche die Änderungen jetzt gegen den Parent-Commit ab, damit die Fundstellen mit belastbaren Zeilennummern im geänderten Stand referenziert sind.
+
+$ git show --unified=20 HEAD -- src/test/resources/features/bier_kostet_mehr.feature
+commit 590e71a29fad005341165d18bc78fbbab4857e5c
+Author: seb <seb@improuv.com>
+Date:   Tue Sep 22 02:43:10 2026 +0200
+
+    Story 6: Spec und Szenarien
+
+diff --git a/src/test/resources/features/bier_kostet_mehr.feature b/src/test/resources/features/bier_kostet_mehr.feature
+new file mode 100644
+index 0000000..d91fc1f
+--- /dev/null
++++ b/src/test/resources/features/bier_kostet_mehr.feature
+@@ -0,0 +1,9 @@
++# language: de
++Funktionalität: Bier kostet mehr
++  Bier kostet 2,00 €.
++
++  Szenario: Genau 2,00 € geben Bier aus
++    Angenommen der Automat ist frisch gestartet
++    Und ich die Münze 2 € eingeworfen habe
++    Wenn ich Bier wähle
++    Dann liegt eine Dose Bier im Ausgabefach
+
+$ git show --unified=20 HEAD -- specs/6-bier-kostet-mehr/spec.md
+commit 590e71a29fad005341165d18bc78fbbab4857e5c
+Author: seb <seb@improuv.com>
+Date:   Tue Sep 22 02:43:10 2026 +0200
+
+    Story 6: Spec und Szenarien
+
+diff --git a/specs/6-bier-kostet-mehr/spec.md b/specs/6-bier-kostet-mehr/spec.md
+new file mode 100644
+index 0000000..83d3aa5
+--- /dev/null
++++ b/specs/6-bier-kostet-mehr/spec.md
+@@ -0,0 +1,10 @@
++## Story
++Als cleverer Automatenbetreiber
++möchte ich Bier für 2,00 € verkaufen,
++damit ich an durstigen Studenten mehr verdiene.
++
++## Regeln
++- WHEN der Kunde Bier wählt und das Guthaben mindestens 2,00 € beträgt, SHALL der Automat eine Dose Bier ausgeben.
++
++## Offene Fragen
++keine
+
+✱ Grep "ich .*2 ?€ eingeworfen" in . · 0 matches
+✱ Grep "eingeworfen" in . · 1 match
+Ich gleiche noch kurz mit vorhandenen Story-/Feature-Dateien ab, um die Benennung und Struktur konsistent zu bewerten.
+✱ Glob "src/test/resources/features/*.feature" in . · 5 matches
+✱ Glob "specs/*/spec.md" in . · 6 matches
+→ Read specs/5-wechselgeld/spec.md
+→ Read src/test/resources/features/wechselgeld.feature
+Keine wesentlichen Befunde.

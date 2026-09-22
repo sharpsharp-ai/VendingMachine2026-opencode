@@ -1,0 +1,14 @@
+
+> reviewer · gpt-5.4-mini
+
+Ich prüfe zuerst die betroffenen Dateien vollständig und gleiche sie dann mit den Checklisten aus den Skills ab.
+→ Read src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+→ Read .opencode/skills/akzeptanztest-regeln/SKILL.md
+Ich prüfe noch, ob die vorhandenen Szenarien im Projekt gegen die Akzeptanztest-Regeln verstoßen, damit ich nichts übersehe.
+✱ Glob "src/test/resources/features/*.feature" 2 matches
+✱ Grep "Scenario|Szenario|Szenariogrundriss" in . · 6 matches
+→ Read src/test/resources/features/freies_getraenk.feature
+→ Read src/test/resources/features/preis_anzeigen.feature
+- `src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java:80`, `Hardcoded Test Data`, die Preisregel nicht als harte Zahl `100` zurückgeben, sondern als echte Fachlogik bzw. benannte Konstante aus der Spezifikation modellieren.
+- `src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java:21`, `Bad Name`, den Test entweder auf `colaCostsOneEuro` umbenennen oder ihn so parametrisieren, dass er wirklich alle Getränke prüft.

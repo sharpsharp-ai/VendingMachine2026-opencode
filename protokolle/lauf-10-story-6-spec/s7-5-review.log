@@ -1,0 +1,16 @@
+
+> reviewer · gpt-5.4-mini
+
+Ich lese die betroffenen Dateien vollständig und prüfe zusätzlich die Akzeptanztest-Regeln und `Main` gegen die neuen Änderungen.
+→ Read src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+→ Read .opencode/skills/akzeptanztest-regeln/SKILL.md
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+→ Read src/main/java/de/sharpsharp/vendingmachine/Main.java
+Ich prüfe noch die betroffenen Feature-Dateien, ob die neue Regel als Akzeptanzszenario sauber modelliert ist.
+✱ Glob "src/test/resources/features/*.feature" in . · 6 matches
+✱ Grep "Bier|beer|16:00|15:59|Kein Bier vor 4" in . · 16 matches
+→ Read src/test/resources/features/bier_kostet_mehr.feature
+→ Read src/test/resources/features/kein_bier_vor_4.feature
+Ich prüfe noch das Glossar, weil die neue Feature-Datei nur dann sauber ist, wenn die Formulierungen dort wiederverwendet werden.
+→ Read specs/glossar.md
+Keine wesentlichen Befunde.

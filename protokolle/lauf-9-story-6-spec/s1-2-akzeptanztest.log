@@ -1,0 +1,354 @@
+
+> test-autor · gpt-5.4-mini
+
+Ich prüfe zuerst die vorhandene Feature-Datei und die Szenarien, damit ich nur die fehlenden Story-1-Fälle ergänze.
+→ Read src/test/resources/features/freies_getraenk.feature
+✱ Grep "^\s*(Szenario|Szenariogrundriss|Beispiele|Wenn|Dann|Angenommen)" in src/test/resources/features · 4 matches
+Ich ergänze die Feature-Datei um eine allgemeine Story-1-Abdeckung für alle Getränke, ohne an bestehenden Szenarien etwas zu ändern.
+% Patch 1 file
+Ich aktualisiere jetzt das Glossar und prüfe danach die Cucumber-Szenarien gegen die vorhandenen Schritte.
+
+$ scripts/steps-glossar.sh
+specs/glossar.md erzeugt: 5 Einträge
+
+$ mvn -q test -Dtest=RunCucumberTest
+Szenario: Ein Getränk wählen                    # src/test/resources/features/freies_getraenk.feature:6
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✘ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+        java.lang.AssertionError: 
+        Expected: iterable containing [<COLA>]
+             but: no item was <COLA>
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(VendingMachineSteps.java:33)
+        	at ✽.liegt eine Dose Cola im Ausgabefach(file:///private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-9/src/test/resources/features/freies_getraenk.feature:9)
+
+Szenariogrundriss: Jedes Getränk ist umsonst    # src/test/resources/features/freies_getraenk.feature:18
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✘ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+        java.lang.AssertionError: 
+        Expected: iterable containing [<COLA>]
+             but: no item was <COLA>
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(VendingMachineSteps.java:33)
+        	at ✽.liegt eine Dose Cola im Ausgabefach(file:///private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-9/src/test/resources/features/freies_getraenk.feature:14)
+
+Szenariogrundriss: Jedes Getränk ist umsonst    # src/test/resources/features/freies_getraenk.feature:19
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Orange wähle                       # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✘ Dann liegt eine Dose Orange im Ausgabefach  # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+        java.lang.AssertionError: 
+        Expected: iterable containing [<ORANGE>]
+             but: no item was <ORANGE>
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(VendingMachineSteps.java:33)
+        	at ✽.liegt eine Dose Orange im Ausgabefach(file:///private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-9/src/test/resources/features/freies_getraenk.feature:14)
+
+Szenariogrundriss: Jedes Getränk ist umsonst    # src/test/resources/features/freies_getraenk.feature:20
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Zitrone wähle                      # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✘ Dann liegt eine Dose Zitrone im Ausgabefach # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+        java.lang.AssertionError: 
+        Expected: iterable containing [<LEMON>]
+             but: no item was <LEMON>
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(VendingMachineSteps.java:33)
+        	at ✽.liegt eine Dose Zitrone im Ausgabefach(file:///private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-9/src/test/resources/features/freies_getraenk.feature:14)
+
+Szenariogrundriss: Jedes Getränk ist umsonst    # src/test/resources/features/freies_getraenk.feature:21
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Bier wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✘ Dann liegt eine Dose Bier im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+        java.lang.AssertionError: 
+        Expected: iterable containing [<BEER>]
+             but: no item was <BEER>
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(VendingMachineSteps.java:33)
+        	at ✽.liegt eine Dose Bier im Ausgabefach(file:///private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-9/src/test/resources/features/freies_getraenk.feature:14)
+[ERROR] Tests run: 5, Failures: 5, Errors: 0, Skipped: 0, Time elapsed: 0.525 s <<< FAILURE! -- in de.sharpsharp.vendingmachine.RunCucumberTest
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Ein Getränk wählen -- Time elapsed: 0.076 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: iterable containing [<COLA>]
+     but: no item was <COLA>
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(VendingMachineSteps.java:33)
+	at ✽.liegt eine Dose Cola im Ausgabefach(file:///private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-9/src/test/resources/features/freies_getraenk.feature:9)
+
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Jedes Getränk ist umsonst #1 -- Time elapsed: 0.008 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: iterable containing [<COLA>]
+     but: no item was <COLA>
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(VendingMachineSteps.java:33)
+	at ✽.liegt eine Dose Cola im Ausgabefach(file:///private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-9/src/test/resources/features/freies_getraenk.feature:14)
+
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Jedes Getränk ist umsonst #2 -- Time elapsed: 0.006 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: iterable containing [<ORANGE>]
+     but: no item was <ORANGE>
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(VendingMachineSteps.java:33)
+	at ✽.liegt eine Dose Orange im Ausgabefach(file:///private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-9/src/test/resources/features/freies_getraenk.feature:14)
+
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Jedes Getränk ist umsonst #3 -- Time elapsed: 0.004 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: iterable containing [<LEMON>]
+     but: no item was <LEMON>
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(VendingMachineSteps.java:33)
+	at ✽.liegt eine Dose Zitrone im Ausgabefach(file:///private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-9/src/test/resources/features/freies_getraenk.feature:14)
+
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Jedes Getränk ist umsonst #4 -- Time elapsed: 0.003 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: iterable containing [<BEER>]
+     but: no item was <BEER>
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(VendingMachineSteps.java:33)
+	at ✽.liegt eine Dose Bier im Ausgabefach(file:///private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-9/src/test/resources/features/freies_getraenk.feature:14)
+
+[ERROR] Failures: 
+[ERROR]   RunCucumberTest.Ein Getränk wählen 
+Expected: iterable containing [<COLA>]
+     but: no item was <COLA>
+[ERROR]   RunCucumberTest.Jedes Getränk ist umsonst #1 
+Expected: iterable containing [<COLA>]
+     but: no item was <COLA>
+[ERROR]   RunCucumberTest.Jedes Getränk ist umsonst #2 
+Expected: iterable containing [<ORANGE>]
+     but: no item was <ORANGE>
+[ERROR]   RunCucumberTest.Jedes Getränk ist umsonst #3 
+Expected: iterable containing [<LEMON>]
+     but: no item was <LEMON>
+[ERROR]   RunCucumberTest.Jedes Getränk ist umsonst #4 
+Expected: iterable containing [<BEER>]
+     but: no item was <BEER>
+[ERROR] Tests run: 5, Failures: 5, Errors: 0, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.6.0:test (default-test) on project getraenkeautomat: There are test failures.
+[ERROR] 
+[ERROR] See /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-9/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+
+Die neuen Szenarien sind bewusst rot, weil der Automat die Regel noch nicht umsetzt. Ich prüfe kurz die betroffenen Dateien, damit ich sauber zusammenfasse, was geändert wurde.
+→ Read specs/glossar.md
+
+$ git status --short
+M src/test/resources/features/freies_getraenk.feature
+?? specs/1-alles-umsonst/
+
+Ich gleiche noch den Funktionalitäts-Titel an die Story an. Die vorhandenen Szenarien lasse ich unverändert.
+% Patch 1 file
+Ich führe den Cucumber-Lauf nach dem letzten Feinschliff noch einmal aus, damit das Ergebnis zur aktuellen Datei passt.
+
+$ mvn -q test -Dtest=RunCucumberTest
+Szenario: Ein Getränk wählen                    # src/test/resources/features/freies_getraenk.feature:6
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✘ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+        java.lang.AssertionError: 
+        Expected: iterable containing [<COLA>]
+             but: no item was <COLA>
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(VendingMachineSteps.java:33)
+        	at ✽.liegt eine Dose Cola im Ausgabefach(file:///private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-9/src/test/resources/features/freies_getraenk.feature:9)
+
+Szenariogrundriss: Jedes Getränk ist umsonst    # src/test/resources/features/freies_getraenk.feature:18
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✘ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+        java.lang.AssertionError: 
+        Expected: iterable containing [<COLA>]
+             but: no item was <COLA>
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(VendingMachineSteps.java:33)
+        	at ✽.liegt eine Dose Cola im Ausgabefach(file:///private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-9/src/test/resources/features/freies_getraenk.feature:14)
+
+Szenariogrundriss: Jedes Getränk ist umsonst    # src/test/resources/features/freies_getraenk.feature:19
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Orange wähle                       # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✘ Dann liegt eine Dose Orange im Ausgabefach  # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+        java.lang.AssertionError: 
+        Expected: iterable containing [<ORANGE>]
+             but: no item was <ORANGE>
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(VendingMachineSteps.java:33)
+        	at ✽.liegt eine Dose Orange im Ausgabefach(file:///private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-9/src/test/resources/features/freies_getraenk.feature:14)
+
+Szenariogrundriss: Jedes Getränk ist umsonst    # src/test/resources/features/freies_getraenk.feature:20
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Zitrone wähle                      # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✘ Dann liegt eine Dose Zitrone im Ausgabefach # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+        java.lang.AssertionError: 
+        Expected: iterable containing [<LEMON>]
+             but: no item was <LEMON>
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(VendingMachineSteps.java:33)
+        	at ✽.liegt eine Dose Zitrone im Ausgabefach(file:///private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-9/src/test/resources/features/freies_getraenk.feature:14)
+
+Szenariogrundriss: Jedes Getränk ist umsonst    # src/test/resources/features/freies_getraenk.feature:21
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich Bier wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✘ Dann liegt eine Dose Bier im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+        java.lang.AssertionError: 
+        Expected: iterable containing [<BEER>]
+             but: no item was <BEER>
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(VendingMachineSteps.java:33)
+        	at ✽.liegt eine Dose Bier im Ausgabefach(file:///private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-9/src/test/resources/features/freies_getraenk.feature:14)
+[ERROR] Tests run: 5, Failures: 5, Errors: 0, Skipped: 0, Time elapsed: 0.505 s <<< FAILURE! -- in de.sharpsharp.vendingmachine.RunCucumberTest
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Ein Getränk wählen -- Time elapsed: 0.076 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: iterable containing [<COLA>]
+     but: no item was <COLA>
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(VendingMachineSteps.java:33)
+	at ✽.liegt eine Dose Cola im Ausgabefach(file:///private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-9/src/test/resources/features/freies_getraenk.feature:9)
+
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Jedes Getränk ist umsonst #1 -- Time elapsed: 0.006 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: iterable containing [<COLA>]
+     but: no item was <COLA>
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(VendingMachineSteps.java:33)
+	at ✽.liegt eine Dose Cola im Ausgabefach(file:///private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-9/src/test/resources/features/freies_getraenk.feature:14)
+
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Jedes Getränk ist umsonst #2 -- Time elapsed: 0.003 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: iterable containing [<ORANGE>]
+     but: no item was <ORANGE>
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(VendingMachineSteps.java:33)
+	at ✽.liegt eine Dose Orange im Ausgabefach(file:///private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-9/src/test/resources/features/freies_getraenk.feature:14)
+
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Jedes Getränk ist umsonst #3 -- Time elapsed: 0.004 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: iterable containing [<LEMON>]
+     but: no item was <LEMON>
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(VendingMachineSteps.java:33)
+	at ✽.liegt eine Dose Zitrone im Ausgabefach(file:///private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-9/src/test/resources/features/freies_getraenk.feature:14)
+
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Jedes Getränk ist umsonst #4 -- Time elapsed: 0.003 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: iterable containing [<BEER>]
+     but: no item was <BEER>
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(VendingMachineSteps.java:33)
+	at ✽.liegt eine Dose Bier im Ausgabefach(file:///private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-9/src/test/resources/features/freies_getraenk.feature:14)
+
+[ERROR] Failures: 
+[ERROR]   RunCucumberTest.Ein Getränk wählen 
+Expected: iterable containing [<COLA>]
+     but: no item was <COLA>
+[ERROR]   RunCucumberTest.Jedes Getränk ist umsonst #1 
+Expected: iterable containing [<COLA>]
+     but: no item was <COLA>
+[ERROR]   RunCucumberTest.Jedes Getränk ist umsonst #2 
+Expected: iterable containing [<ORANGE>]
+     but: no item was <ORANGE>
+[ERROR]   RunCucumberTest.Jedes Getränk ist umsonst #3 
+Expected: iterable containing [<LEMON>]
+     but: no item was <LEMON>
+[ERROR]   RunCucumberTest.Jedes Getränk ist umsonst #4 
+Expected: iterable containing [<BEER>]
+     but: no item was <BEER>
+[ERROR] Tests run: 5, Failures: 5, Errors: 0, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.6.0:test (default-test) on project getraenkeautomat: There are test failures.
+[ERROR] 
+[ERROR] See /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-9/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+
+Ich ziehe noch den Diff, damit ich die Änderung präzise und knapp zusammenfassen kann.
+$ git diff -- src/test/resources/features/freies_getraenk.feature
+diff --git a/src/test/resources/features/freies_getraenk.feature b/src/test/resources/features/freies_getraenk.feature
+index 1c64edf..4d1264b 100644
+--- a/src/test/resources/features/freies_getraenk.feature
++++ b/src/test/resources/features/freies_getraenk.feature
+@@ -1,5 +1,5 @@
+ # language: de
+-Funktionalität: Freies Getränk
++Funktionalität: Alles umsonst
+   Der erste Schritt: ein Getränk ohne Bezahlung.
+   Wer ein Fach wählt, bekommt die Dose.
+ 
+@@ -7,3 +7,15 @@ Funktionalität: Freies Getränk
+     Angenommen der Automat ist frisch gestartet
+     Wenn ich Cola wähle
+     Dann liegt eine Dose Cola im Ausgabefach
++
++  Szenariogrundriss: Jedes Getränk ist umsonst
++    Angenommen der Automat ist frisch gestartet
++    Wenn ich <Getränk> wähle
++    Dann liegt eine Dose <Getränk> im Ausgabefach
++
++    Beispiele:
++      | Getränk |
++      | Cola    |
++      | Orange  |
++      | Zitrone |
++      | Bier    |
+
+Datei: `src/test/resources/features/freies_getraenk.feature`
+
+Szenarien:
+- `Ein Getränk wählen`
+- `Jedes Getränk ist umsonst` als `Szenariogrundriss` für `Cola`, `Orange`, `Zitrone`, `Bier`
+
+Regeln:
+1. ja: genau
+2. ja: deklarativ
+3. ja: Fachsprache
+4. ja: sichtbar
+5. ja: konkret
+6. ja: passend
+7. ja: unabhängig
+8. ja: wiederverwendet
+9. ja: abgedeckt
+10. ja: sparsam
+11. ja: VendingMachine
+
+`mvn -q test -Dtest=RunCucumberTest`: rot, weil die kostenlose Ausgabe im Automaten noch nicht implementiert ist.

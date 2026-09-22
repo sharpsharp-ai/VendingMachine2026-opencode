@@ -1,0 +1,8 @@
+
+> reviewer · gpt-5.4-mini
+
+Ich lese die betroffenen Dateien vollständig und gleiche sie gegen die Review-Regeln ab.
+→ Read src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+→ Read .opencode/skills/akzeptanztest-regeln/SKILL.md
+Keine wesentlichen Befunde.

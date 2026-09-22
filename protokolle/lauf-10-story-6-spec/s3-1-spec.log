@@ -1,0 +1,13 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich prüfe kurz die bestehenden Specs, damit die neue Datei im gleichen Stil und mit passendem Kurzname angelegt wird.
+→ Read specs/1-alles-umsonst/spec.md
+→ Read specs/2-preis-anzeigen/spec.md
+Ich lege jetzt `specs/3-guthaben-anzeigen/spec.md` an und formuliere die beiden Akzeptanzkriterien als EARS-Regeln.
+% Patch 1 file
+`specs/3-guthaben-anzeigen/spec.md`
+
+Regeln:
+- Der Automat SHALL das Guthaben als `"Guthaben: x,xx €"` anzeigen.
+- WHEN der Kunde eine zulässige Münze einwirft, SHALL der Automat das Guthaben um den Münzwert erhöhen.

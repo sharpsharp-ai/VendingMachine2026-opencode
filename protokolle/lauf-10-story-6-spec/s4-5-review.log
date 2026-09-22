@@ -1,0 +1,17 @@
+
+> reviewer · gpt-5.4-mini
+
+Ich prüfe die betroffenen Dateien vollständig und gleiche sie gegen die beiden Skills ab.
+→ Read src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+→ Read .opencode/skills/akzeptanztest-regeln/SKILL.md
+Ich prüfe noch, ob die neue Zustandsänderung Nebenwirkungen auf vorhandene Regeln hat.
+✱ Glob "src/test/resources/features/*.feature" in . · 3 matches
+✱ Grep "Zu wenig Geld|Bitte Münzen einwerfen|Ausverkauft" in . · 2 matches
+✱ Grep "message\(" in . · 4 matches
+Ich lese die betroffenen Feature-Dateien mit, weil die Review-Regeln auch auf Akzeptanzszenarien zielen.
+→ Read src/test/resources/features/getraenke_kosten_geld.feature
+→ Read src/test/resources/features/preis_anzeigen.feature
+→ Read src/test/resources/features/guthaben_anzeigen.feature
+→ Read src/test/resources/smoke/automat_im_browser.feature
+- `src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java:24-49`, `Magic String`, zieh die Display-Texte in benannte Konstanten bzw. einen Meldungszustand und setze die Fehlermeldung nach einem erfolgreichen Kauf wieder zurück.

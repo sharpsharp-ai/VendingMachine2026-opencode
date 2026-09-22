@@ -1,0 +1,15 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich prüfe kurz die bestehenden Specs, damit die neue Story im selben Stil und mit passender Kürze formuliert ist.
+→ Read specs/1-alles-umsonst/spec.md
+→ Read specs/2-preis-anzeigen/spec.md
+→ Read specs/3-guthaben-anzeigen/spec.md
+Ich schreibe jetzt die Spec-Datei für Story 4 mit drei EARS-Regeln und ohne Änderungen außerhalb von `specs/`.
+% Patch 1 file
+`specs/4-getraenke-kosten-geld/spec.md`
+
+Regeln:
+- IF das Guthaben unter dem Preis liegt, THEN SHALL der Automat keine Dose ausgeben und "Zu wenig Geld" melden.
+- WHEN das Guthaben mindestens den Preis erreicht und ein Fach gewählt wird, SHALL der Automat die Dose ausgeben und den Preis vom Guthaben abziehen.
+- WHEN ein Kauf gelingt, SHALL der Automat das Restguthaben anzeigen.

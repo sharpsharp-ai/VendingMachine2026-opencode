@@ -1,0 +1,14 @@
+
+> reviewer · gpt-5.4-mini
+
+Ich prüfe die betroffenen Dateien komplett und gleiche sie gegen die Clean-Code- und Akzeptanztest-Regeln ab.
+→ Read src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+→ Read .opencode/skills/akzeptanztest-regeln/SKILL.md
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+→ Read src/main/java/de/sharpsharp/vendingmachine/Main.java
+Ich gleiche noch die zugehörigen Szenarien gegen die Akzeptanztest-Regeln ab und suche nach einem echten Verstoß in den neuen Änderungen.
+✱ Glob "src/test/resources/features/*.feature" in . · 2 matches
+✱ Grep "price\(|kostet|Preis|100" in . · 4 matches
+→ Read src/test/resources/features/freies_getraenk.feature
+→ Read src/test/resources/features/preis_anzeigen.feature
+src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java:20-24, Bad Name, benenne den Test in einen konkreten Fall um oder mache daraus einen parametrisierten Test, der wirklich alle Getränke prüft.

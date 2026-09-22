@@ -1,0 +1,17 @@
+[0m
+> spec-autor · gpt-5.4-mini
+[0m
+Ich prüfe kurz den vorhandenen `specs/`-Aufbau und lege dann nur die neue Story-Spec an.
+[0m# [0mTodos
+[✓] Story 1 in `specs/stories.md` prüfen und Kurzname festlegen
+[•] `specs/1-alles-umsonst/spec.md` anlegen oder überarbeiten
+[ ] Inhalt gegen Story und EARS-Regeln abgleichen
+[0m
+[0m✱ [0mGlob "specs/1-*"[90m in . · 0 matches[0m
+Ich schreibe die Spec jetzt minimal und nur mit den geforderten drei Abschnitten.
+[0m% [0mPatch 1 file
+Die Datei ist angelegt; ich prüfe den Inhalt einmal gegen die formalen Vorgaben.
+[0m→ [0mRead specs/1-alles-umsonst/spec.md
+`specs/1-alles-umsonst/spec.md`
+
+- WHILE eine Dose im Fach ist, WHEN der Kunde ein Fach wählt, SHALL der Automat die Dose ins Ausgabefach ausgeben.

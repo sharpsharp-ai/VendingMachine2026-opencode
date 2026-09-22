@@ -1,0 +1,11 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich ziehe nur Story 1 aus `stories.md` heran und lege die neue Spec unter `specs/1-alles-umsonst/spec.md` an.
+✱ Glob "specs/1-*" in . · 0 matches
+✱ Glob "specs/*" in . · 2 matches
+Die Story hat nur ein Akzeptanzkriterium; ich formuliere daraus eine EARS-Regel mit Zustand + Ereignis und halte die Spec knapp.
+% Patch 1 file
+`specs/1-alles-umsonst/spec.md`
+
+- `WHILE eine Dose im Fach ist, WHEN der Kunde ein Fach wählt, SHALL der Automat die Dose ohne Bezahlung ins Ausgabefach fallen lassen.`

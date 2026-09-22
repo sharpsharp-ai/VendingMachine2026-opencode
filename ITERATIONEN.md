@@ -13,7 +13,7 @@ Eine Zeile je Änderung am Setup, mit Grund. Produktcode und Tests werden nie vo
 | 7 | 2026-09-21 | Skill ears-regeln Punkt 3 und `/spec`: Regel allgemein mit Schwelle („unter dem Preis"), Beispielwerte nur ins Szenario | Lauf 2, Story 4: Regeln wie „IF das Guthaben 0,99 € beträgt und der Preis 1,00 € ist" waren Beispiele, keine Regeln |
 | 8 | 2026-09-21 | Karte Story 2 in `specs/stories.md`: „Alle Getränke kosten 1,00 €"; Skill ears-regeln Punkt 8 und `/akzeptanztest`: fehlende Zahlen werden offene Fragen, nie erfundene Werte | Lauf 3, Story 2: die Karte nannte nur „z. B. Cola 1,00 €", der Test-Autor setzte alle Preise auf 0,00 €, die Spec meldete keine offene Frage |
 
-Änderungen am Prüfgeschirr (kein Teil des Pakets, `scratchpad/lauf.sh` und `checks.sh`), der Vollständigkeit halber:
+Änderungen am Prüfgeschirr (kein Teil des Pakets, Skripte jetzt unter `protokolle/geschirr/`), der Vollständigkeit halber:
 
 | Datum | Änderung | Grund |
 |---|---|---|

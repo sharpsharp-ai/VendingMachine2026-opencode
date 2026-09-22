@@ -1,0 +1,4 @@
+ M src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+?? src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+ src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)

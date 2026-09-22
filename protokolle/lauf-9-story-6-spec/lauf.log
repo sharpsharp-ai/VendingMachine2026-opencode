@@ -1,0 +1,71 @@
+=== Story 1  01:50:36
+    Feature-Dateien: src/test/resources/features/freies_getraenk.feature
+    Szenario 1: Ein Getränk wählen  01:52:00
+    bis-gruen exit=0
+    Szenario 2: Jedes Getränk ist umsonst  01:53:06
+    bis-gruen exit=0
+    Implementierer hat Features/Specs/Schritte/Gates geändert: nein
+    mvn -q verify exit=0
+    Review: → Read specs/glossar.md → Read src/test/java/de/sharpsharp/vendingmachine/FakeClock.java Keine wesentlichen Befunde. 
+    HTTP: RESULT OK
+=== Story 2  01:54:14
+    Feature-Dateien: src/test/resources/features/preis_anzeigen.feature
+    Szenario 1: Der Preis steht hinter dem Namen  01:55:15
+    bis-gruen exit=0
+    Szenario 2: Alle Getränke kosten 1,00 €  01:56:11
+    bis-gruen exit=0
+    Implementierer hat Features/Specs/Schritte/Gates geändert: nein
+    mvn -q verify exit=0
+    Review: → Read src/test/resources/features/preis_anzeigen.feature - `src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java:80`, `Hardcoded Test Data`, die Prei
+    HTTP: RESULT OK
+=== Story 3  01:57:30
+    Feature-Dateien: src/test/resources/features/guthaben_anzeigen.feature
+    Szenario 1: Das Guthaben steht im Display  01:59:17
+    bis-gruen exit=0
+    Szenario 2: Zulässige Münzen erhöhen das Guthaben  02:00:10
+    bis-gruen exit=0
+    Implementierer hat Features/Specs/Schritte/Gates geändert: nein
+    mvn -q verify exit=0
+    Review: → Read src/test/resources/features/guthaben_anzeigen.feature → Read src/test/resources/features/freies_getraenk.feature Keine wesentlichen Befunde. 
+    HTTP: RESULT OK
+=== Story 4  02:01:05
+    Feature-Dateien: src/test/resources/features/getraenke_kosten_geld.feature
+    Szenario 1: Zu wenig Geld reicht nicht  02:03:27
+    bis-gruen exit=0
+    Szenario 2: Bei ausreichendem Guthaben kommt die Dose  02:05:00
+    bis-gruen exit=0
+    Implementierer hat Features/Specs/Schritte/Gates geändert: nein
+    mvn -q verify exit=0
+    Review: → Read src/test/resources/features/getraenke_kosten_geld.feature → Read specs/4-getraenke-kosten-geld/spec.md Keine wesentlichen Befunde. 
+    HTTP: RESULT OK
+=== Story 5  02:07:00
+    Feature-Dateien: src/test/resources/features/wechselgeld.feature
+    Szenario 1: Abbruch zahlt das Guthaben in die Münzrückgabe  02:09:58
+    bis-gruen exit=0
+    Szenario 2: Die Münzrückgabe wird geleert  02:10:46
+    bis-gruen exit=0
+    Implementierer hat Features/Specs/Schritte/Gates geändert: nein
+    mvn -q verify exit=0
+    Review: → Read src/test/resources/features/wechselgeld.feature → Read src/test/resources/features/getraenke_kosten_geld.feature Keine wesentlichen Befunde. 
+    HTTP: RESULT OK
+=== Story 6  02:13:02
+    Feature-Dateien: src/test/resources/features/bier_kostet_mehr.feature
+    Szenario 1: Ab 2 Euro gibt es Bier  02:14:29
+    bis-gruen exit=0
+    Implementierer hat Features/Specs/Schritte/Gates geändert: nein
+    mvn -q verify exit=0
+    Review: → Read specs/6-bier-kostet-mehr/spec.md → Read src/test/resources/features/bier_kostet_mehr.feature Keine wesentlichen Befunde. 
+    HTTP: RESULT FAIL
+On branch lauf-9
+nothing to commit, working tree clean
+=== Story 7  02:15:42
+    Feature-Dateien: src/test/resources/features/kein_bier_vor_4.feature
+    Szenario 1: Vor 16 Uhr fällt kein Bier  02:17:01
+    bis-gruen exit=0
+    Szenario 2: Ab 16 Uhr fällt Bier  02:18:03
+    bis-gruen exit=0
+    Implementierer hat Features/Specs/Schritte/Gates geändert: nein
+    mvn -q verify exit=0
+    Review: Ich habe die Änderung in der Fachklasse und den Unit-Test gelesen; jetzt prüfe ich die passende Feature-Datei gegen die elf Akzeptanztest-Regeln. → Read src/tes
+    HTTP: RESULT FAIL
+=== done 02:19:48

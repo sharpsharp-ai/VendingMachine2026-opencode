@@ -1,0 +1,5 @@
+OK   ohne Guthaben: Zu wenig Geld
+OK   mit 2 €: Cola fällt, Rest 1,00 €
+OK   Abbruch: Guthaben 0, Münzen in Rückgabe
+OK   Münzrückgabe leer nach Entnahme
+RESULT OK

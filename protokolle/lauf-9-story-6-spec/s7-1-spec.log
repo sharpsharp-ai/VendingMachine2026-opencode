@@ -1,0 +1,29 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich prüfe kurz die vorhandenen Specs, damit Format und Benennung exakt zum Projekt passen, und lege dann nur `specs/7-.../spec.md` an bzw. überarbeite sie.
+→ Read specs/6-bier-kostet-mehr/spec.md
+→ Read specs/5-wechselgeld/spec.md
+✱ Glob "specs/7-*/spec.md" 0 matches
+Ich habe das Format der bestehenden Specs geprüft. Für Story 7 ist die naheliegende Benennung `7-kein-bier-vor-4`, und ich schreibe die drei Akzeptanzkriterien als drei EARS-Regeln ohne Beispielwerte.
+→ Read specs/4-getraenke-kosten-geld/spec.md
+
+$ ls specs
+1-alles-umsonst
+2-preis-anzeigen
+3-guthaben-anzeigen
+4-getraenke-kosten-geld
+5-wechselgeld
+6-bier-kostet-mehr
+glossar.md
+stories.md
+
+Ich schreibe jetzt die neue Spec-Datei unter `specs/7-kein-bier-vor-4/spec.md` und halte mich an die vorhandene knappe Form.
+% Patch 1 file
+→ Read specs/7-kein-bier-vor-4/spec.md
+`specs/7-kein-bier-vor-4/spec.md`
+
+Regeln:
+- `WHILE es vor 16:00 Uhr ist, WHEN der Kunde Bier wählt, SHALL der Automat keine Dose Bier ausgeben und "Kein Bier vor 4" melden.`
+- `WHILE es vor 16:00 Uhr ist, WHEN der Kunde Bier wählt, SHALL der Automat das Guthaben unverändert lassen.`
+- `WHILE es ab 16:00 Uhr ist, WHEN der Kunde Bier wählt, SHALL der Automat eine Dose Bier ausgeben.`

@@ -1,0 +1,249 @@
+
+> test-autor · gpt-5.4-mini
+
+Ich prüfe zuerst die vorhandenen Feature-Dateien und den Glossar-Stand, dann schreibe ich nur die neue Story-5-Datei und verifiziere sie mit Glossar- und Cucumber-Run.
+✱ Glob "src/test/resources/features/*.feature" 3 matches
+→ Read src/test/resources/features/getraenke_kosten_geld.feature
+→ Read src/test/resources/features/guthaben_anzeigen.feature
+→ Read src/test/resources/features/preis_anzeigen.feature
+Ich prüfe noch, ob es schon Schritte für die Münzrückgabe gibt. Wenn nicht, schreibe ich die Szenarien so, dass sie nur vorhandene Schritte und Wörter nutzen, ohne Produktivcode anzufassen.
+✱ Grep "coinReturn|takeCoins|Münzrückgabe|Münzen entnimmt|leert die Münzrückgabe" in . · 11 matches
+✱ Grep "@Dann|@Wenn|@Angenommen" in src/test/java · 22 matches
+Die fehlenden Wörter sind identifiziert: `Abbruch` und die Münzrückgabe. Ich ergänze dafür nur Testschritte und die Story-5-Feature-Datei, ohne Produktionscode anzufassen.
+% Patch 1 file
+% Patch 1 file
+Ich lasse jetzt zuerst den Glossar-Generator laufen, dann die Story-5-Szenarien mit Cucumber.
+
+$ scripts/steps-glossar.sh
+specs/glossar.md erzeugt: 16 Einträge
+
+$ mvn -q test -Dtest=RunCucumberTest
+io.cucumber.core.runner.DuplicateStepDefinitionException: Duplicate step definitions in de.sharpsharp.vendingmachine.smoke.WebSmokeSteps.nothingIsLeftInTheCoinReturn() and de.sharpsharp.vendingmachine.VendingMachineSteps.theCoinReturnIsEmpty()
+	at io.cucumber.core.runner.CachingGlue.lambda$prepareGlue$3(CachingGlue.java:313)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at io.cucumber.core.runner.CachingGlue.prepareGlue(CachingGlue.java:307)
+	at io.cucumber.core.runner.Runner.runPickle(Runner.java:71)
+	at io.cucumber.junit.PickleRunners$NoStepDescriptions.lambda$run$0(PickleRunners.java:151)
+	at io.cucumber.core.runtime.CucumberExecutionContext.lambda$runTestCase$5(CucumberExecutionContext.java:136)
+	at io.cucumber.core.runtime.RethrowingThrowableCollector.executeAndThrow(RethrowingThrowableCollector.java:23)
+	at io.cucumber.core.runtime.CucumberExecutionContext.runTestCase(CucumberExecutionContext.java:136)
+	at io.cucumber.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:148)
+	at io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:144)
+	at io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:28)
+	at io.cucumber.junit.FeatureRunner.run(FeatureRunner.java:137)
+	at io.cucumber.junit.Cucumber.runChild(Cucumber.java:202)
+	at io.cucumber.junit.Cucumber.runChild(Cucumber.java:91)
+	at io.cucumber.core.runtime.CucumberExecutionContext.lambda$runFeatures$6(CucumberExecutionContext.java:147)
+	at io.cucumber.core.runtime.CucumberExecutionContext.execute(CucumberExecutionContext.java:162)
+	at io.cucumber.core.runtime.CucumberExecutionContext.runFeatures(CucumberExecutionContext.java:145)
+	at io.cucumber.junit.Cucumber$StartAndFinishTestRun.evaluate(Cucumber.java:232)
+[ERROR] Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.491 s <<< FAILURE! -- in de.sharpsharp.vendingmachine.RunCucumberTest
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Zu wenig Guthaben gibt keine Dose -- Time elapsed: 0.047 s <<< ERROR!
+io.cucumber.core.runner.DuplicateStepDefinitionException: Duplicate step definitions in de.sharpsharp.vendingmachine.smoke.WebSmokeSteps.nothingIsLeftInTheCoinReturn() and de.sharpsharp.vendingmachine.VendingMachineSteps.theCoinReturnIsEmpty()
+	at io.cucumber.core.runner.CachingGlue.lambda$prepareGlue$3(CachingGlue.java:313)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at io.cucumber.core.runner.CachingGlue.prepareGlue(CachingGlue.java:307)
+	at io.cucumber.core.runner.Runner.runPickle(Runner.java:71)
+	at io.cucumber.junit.PickleRunners$NoStepDescriptions.lambda$run$0(PickleRunners.java:151)
+	at io.cucumber.core.runtime.CucumberExecutionContext.lambda$runTestCase$5(CucumberExecutionContext.java:136)
+	at io.cucumber.core.runtime.RethrowingThrowableCollector.executeAndThrow(RethrowingThrowableCollector.java:23)
+	at io.cucumber.core.runtime.CucumberExecutionContext.runTestCase(CucumberExecutionContext.java:136)
+	at io.cucumber.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:148)
+	at io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:144)
+	at io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:28)
+	at io.cucumber.junit.FeatureRunner.run(FeatureRunner.java:137)
+	at io.cucumber.junit.Cucumber.runChild(Cucumber.java:202)
+	at io.cucumber.junit.Cucumber.runChild(Cucumber.java:91)
+	at io.cucumber.core.runtime.CucumberExecutionContext.lambda$runFeatures$6(CucumberExecutionContext.java:147)
+	at io.cucumber.core.runtime.CucumberExecutionContext.execute(CucumberExecutionContext.java:162)
+	at io.cucumber.core.runtime.CucumberExecutionContext.runFeatures(CucumberExecutionContext.java:145)
+	at io.cucumber.junit.Cucumber$StartAndFinishTestRun.evaluate(Cucumber.java:232)
+
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.initializationError -- Time elapsed: 0.491 s <<< ERROR!
+io.cucumber.core.runner.DuplicateStepDefinitionException: Duplicate step definitions in de.sharpsharp.vendingmachine.smoke.WebSmokeSteps.nothingIsLeftInTheCoinReturn() and de.sharpsharp.vendingmachine.VendingMachineSteps.theCoinReturnIsEmpty()
+	at io.cucumber.core.runner.CachingGlue.lambda$prepareGlue$3(CachingGlue.java:313)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at io.cucumber.core.runner.CachingGlue.prepareGlue(CachingGlue.java:307)
+	at io.cucumber.core.runner.Runner.runPickle(Runner.java:71)
+	at io.cucumber.junit.PickleRunners$NoStepDescriptions.lambda$run$0(PickleRunners.java:151)
+	at io.cucumber.core.runtime.CucumberExecutionContext.lambda$runTestCase$5(CucumberExecutionContext.java:136)
+	at io.cucumber.core.runtime.RethrowingThrowableCollector.executeAndThrow(RethrowingThrowableCollector.java:23)
+	at io.cucumber.core.runtime.CucumberExecutionContext.runTestCase(CucumberExecutionContext.java:136)
+	at io.cucumber.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:148)
+	at io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:144)
+	at io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:28)
+	at io.cucumber.junit.FeatureRunner.run(FeatureRunner.java:137)
+	at io.cucumber.junit.Cucumber.runChild(Cucumber.java:202)
+	at io.cucumber.junit.Cucumber.runChild(Cucumber.java:91)
+	at io.cucumber.core.runtime.CucumberExecutionContext.lambda$runFeatures$6(CucumberExecutionContext.java:147)
+	at io.cucumber.core.runtime.CucumberExecutionContext.execute(CucumberExecutionContext.java:162)
+	at io.cucumber.core.runtime.CucumberExecutionContext.runFeatures(CucumberExecutionContext.java:145)
+	at io.cucumber.junit.Cucumber$StartAndFinishTestRun.evaluate(Cucumber.java:232)
+
+[ERROR] Errors: 
+[ERROR]   RunCucumberTest.initializationError » DuplicateStepDefinition Duplicate step definitions in de.sharpsharp.vendingmachine.smoke.WebSmokeSteps.nothingIsLeftInTheCoinReturn() and de.sharpsharp.vendingmachine.VendingMachineSteps.theCoinReturnIsEmpty()
+[ERROR]   RunCucumberTest.Zu wenig Guthaben gibt keine Dose » DuplicateStepDefinition Duplicate step definitions in de.sharpsharp.vendingmachine.smoke.WebSmokeSteps.nothingIsLeftInTheCoinReturn() and de.sharpsharp.vendingmachine.VendingMachineSteps.theCoinReturnIsEmpty()
+[ERROR] Tests run: 2, Failures: 0, Errors: 2, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.6.0:test (default-test) on project getraenkeautomat: 
+[ERROR] 
+[ERROR] See /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-10/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+
+Die Cucumber-Discovery zieht auch die Web-Smoke-Schritte ein. Ich ändere nur die neuen Münzrückgabe-Formulierungen so, dass sie nicht mit den vorhandenen Smoke-Schritten kollidieren.
+% Patch 1 file
+% Patch 1 file
+Ich habe die Kollisionsstellen umbenannt. Jetzt nochmal Glossar und Cucumber, um zu prüfen, dass die neuen Formulierungen sauber geladen werden.
+
+$ scripts/steps-glossar.sh
+specs/glossar.md erzeugt: 16 Einträge
+
+$ mvn -q test -Dtest=RunCucumberTest
+Szenario: Zu wenig Guthaben gibt keine Dose     # src/test/resources/features/getraenke_kosten_geld.feature:6
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich die Münze 50 ct einwerfe            # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCoin(int)
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann ist das Ausgabefach leer               # de.sharpsharp.vendingmachine.VendingMachineSteps.theOutputTrayIsEmpty()
+  ✔ Und der Automat meldet "Zu wenig Geld"      # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineReports(java.lang.String)
+  ✔ Und beträgt das Guthaben 50 ct              # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenario: Genaues Guthaben gibt die Dose        # src/test/resources/features/getraenke_kosten_geld.feature:14
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich die Münze 1 € einwerfe              # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCoin(int)
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+  ✔ Und beträgt das Guthaben 0,00 €             # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenario: Restguthaben bleibt nach dem Kauf     # src/test/resources/features/getraenke_kosten_geld.feature:21
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich die Münze 2 € einwerfe              # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCoin(int)
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+  ✔ Und beträgt das Guthaben 1,00 €             # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenario: Das Guthaben startet bei null         # src/test/resources/features/guthaben_anzeigen.feature:6
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann beträgt das Guthaben 0,00 €            # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenariogrundriss: Eine Münze erhöht das Guthaben # src/test/resources/features/guthaben_anzeigen.feature:17
+  ✔ Angenommen der Automat ist frisch gestartet   # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich die Münze 50 ct einwerfe             # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCoin(int)
+  ✔ Dann beträgt das Guthaben 50 ct               # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenariogrundriss: Eine Münze erhöht das Guthaben # src/test/resources/features/guthaben_anzeigen.feature:18
+  ✔ Angenommen der Automat ist frisch gestartet   # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich die Münze 1 € einwerfe               # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCoin(int)
+  ✔ Dann beträgt das Guthaben 1,00 €              # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenariogrundriss: Eine Münze erhöht das Guthaben # src/test/resources/features/guthaben_anzeigen.feature:19
+  ✔ Angenommen der Automat ist frisch gestartet   # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich die Münze 2 € einwerfe               # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCoin(int)
+  ✔ Dann beträgt das Guthaben 2,00 €              # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenariogrundriss: Der Preis steht an jedem Fach # src/test/resources/features/preis_anzeigen.feature:12
+  ✔ Angenommen der Automat ist frisch gestartet  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Cola 1,00 €                      # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenariogrundriss: Der Preis steht an jedem Fach # src/test/resources/features/preis_anzeigen.feature:13
+  ✔ Angenommen der Automat ist frisch gestartet  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Orange 1,00 €                    # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenariogrundriss: Der Preis steht an jedem Fach # src/test/resources/features/preis_anzeigen.feature:14
+  ✔ Angenommen der Automat ist frisch gestartet  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Zitrone 1,00 €                   # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenariogrundriss: Der Preis steht an jedem Fach # src/test/resources/features/preis_anzeigen.feature:15
+  ✔ Angenommen der Automat ist frisch gestartet  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Bier 1,00 €                      # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenario: Abbruch legt das Guthaben in die Münzrückgabe # src/test/resources/features/wechselgeld.feature:6
+  ✔ Angenommen der Automat ist frisch gestartet         # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich die Münze 1 € eingeworfen habe              # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveInsertedCoin(int)
+  ✔ Wenn ich Abbruch drücke                             # de.sharpsharp.vendingmachine.VendingMachineSteps.iCancel()
+  ✘ Dann befindet sich 1 € in der Münzrückgabe          # de.sharpsharp.vendingmachine.VendingMachineSteps.theCoinReturnContains(int)
+        java.lang.AssertionError: 
+        Expected: iterable containing [<100>]
+             but: no item was <100>
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.theCoinReturnContains(VendingMachineSteps.java:84)
+        	at ✽.befindet sich 1 € in der Münzrückgabe(file:///private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-10/src/test/resources/features/wechselgeld.feature:10)
+  ↷ Und beträgt das Guthaben 0,00 €                     # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenario: Die Münzrückgabe wird geleert         # src/test/resources/features/wechselgeld.feature:13
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich die Münze 1 € eingeworfen habe      # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveInsertedCoin(int)
+  ✔ Und ich Abbruch gedrückt habe               # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveCancelled()
+  ✔ Wenn ich die Münzrückgabe leere             # de.sharpsharp.vendingmachine.VendingMachineSteps.iEmptyTheCoinReturn()
+  ✔ Dann ist die Münzrückgabe leer              # de.sharpsharp.vendingmachine.VendingMachineSteps.theCoinReturnIsEmpty()
+[ERROR] Tests run: 13, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.515 s <<< FAILURE! -- in de.sharpsharp.vendingmachine.RunCucumberTest
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Abbruch legt das Guthaben in die Münzrückgabe -- Time elapsed: 0.009 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: iterable containing [<100>]
+     but: no item was <100>
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.theCoinReturnContains(VendingMachineSteps.java:84)
+	at ✽.befindet sich 1 € in der Münzrückgabe(file:///private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-10/src/test/resources/features/wechselgeld.feature:10)
+
+[ERROR] Failures: 
+[ERROR]   RunCucumberTest.Abbruch legt das Guthaben in die Münzrückgabe 
+Expected: iterable containing [<100>]
+     but: no item was <100>
+[ERROR] Tests run: 13, Failures: 1, Errors: 0, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.6.0:test (default-test) on project getraenkeautomat: There are test failures.
+[ERROR] 
+[ERROR] See /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-10/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+
+Der rote Test ist erwartbar: `cancel()` füllt die Münzrückgabe noch nicht. Ich lese die geänderten Stellen einmal mit Zeilennummern aus, damit ich die Änderung sauber zusammenfassen kann.
+→ Read src/test/resources/features/wechselgeld.feature
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java
+
+$ git status --short
+M specs/glossar.md
+ M src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java
+?? specs/5-wechselgeld/
+?? src/test/resources/features/wechselgeld.feature
+
+Der Glossar-Generator hat noch einen neuen `specs/5-wechselgeld/`-Ordner angelegt. Ich prüfe kurz, was da drin ist, damit ich dir nur die relevanten Dateien nenne.
+→ Read specs/5-wechselgeld
+Dateien:
+- `src/test/resources/features/wechselgeld.feature`
+- `src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java`
+- `specs/glossar.md` wurde per `scripts/steps-glossar.sh` regeneriert
+
+Szenarien:
+- `Abbruch legt das Guthaben in die Münzrückgabe`
+- `Die Münzrückgabe wird geleert`
+
+Regeln:
+1. ja - ein
+2. ja - fachlich
+3. ja - Namen
+4. ja - sichtbar
+5. ja - konkret
+6. ja - Regel
+7. ja - isoliert
+8. ja - Glossar
+9. ja - abgedeckt
+10. ja - knapp
+11. ja - direkt
+
+`mvn -q test -Dtest=RunCucumberTest`: rot, weil `cancel()` die Münzrückgabe im Produktivcode noch nicht befüllt.
+
+Offen: Wechselgeld-Logik im Automaten.

@@ -1,0 +1,31 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich prüfe kurz die vorhandenen Specs, damit die neue Datei denselben Aufbau und Namensstil hat.
+✱ Glob "specs/*/spec.md" 6 matches
+→ Read specs/6-bier-kostet-mehr/spec.md
+Ich lege jetzt die neue Spec unter `specs/7-kein-bier-vor-4/spec.md` an und halte mich dabei an die drei geforderten Abschnitte.
+
+# Todos
+[✓] Story 7 in `specs/stories.md` finden und passenden Kurzname bestimmen
+[•] `specs/7-kein-bier-vor-4/spec.md` anlegen oder überarbeiten
+[ ] Inhalt gegen Vorgaben prüfen und Antwort vorbereiten
+
+% Patch 1 file
+Die Datei ist angelegt. Ich prüfe kurz den Inhalt gegen die Vorgaben und schließe dann ab.
+→ Read specs/7-kein-bier-vor-4/spec.md
+
+# Todos
+[✓] Story 7 in `specs/stories.md` finden und passenden Kurzname bestimmen
+[✓] `specs/7-kein-bier-vor-4/spec.md` anlegen oder überarbeiten
+[✓] Inhalt gegen Vorgaben prüfen und Antwort vorbereiten
+
+`specs/7-kein-bier-vor-4/spec.md`
+
+- WHILE es vor 16:00 Uhr ist, WHEN der Kunde Bier wählt, SHALL der Automat keine Dose Bier ausgeben und die Meldung "Kein Bier vor 4" anzeigen.
+- WHILE es vor 16:00 Uhr ist, WHEN der Kunde Bier wählt, SHALL das Guthaben unverändert bleiben.
+- WHEN es 16:00 Uhr oder später ist und der Kunde Bier wählt, SHALL der Automat eine Dose Bier ausgeben.
+
+Geändert: nur `specs/7-kein-bier-vor-4/spec.md`
+Ergebnis von `mvn -q verify`: nicht ausgeführt
+Offen: keine

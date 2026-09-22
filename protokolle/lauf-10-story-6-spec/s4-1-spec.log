@@ -1,0 +1,20 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich prüfe kurz die vorhandenen `specs/`-Ordner und lege dann nur die Story-4-Spec an.
+✱ Glob "specs/*" in . · 2 matches
+✱ Glob "specs/*/spec.md" in . · 3 matches
+Ich orientiere mich kurz an den vorhandenen Specs, damit die neue Datei stilistisch gleich bleibt.
+→ Read specs/1-alles-umsonst/spec.md
+→ Read specs/2-preis-anzeigen/spec.md
+→ Read specs/3-guthaben-anzeigen/spec.md
+Ich lege jetzt `specs/4-getraenke-kosten-geld/spec.md` an, nur mit der Story und drei EARS-Regeln.
+% Patch 1 file
+Die Datei ist angelegt; ich prüfe noch kurz den Inhalt gegen die Vorgaben.
+→ Read specs/4-getraenke-kosten-geld/spec.md
+`specs/4-getraenke-kosten-geld/spec.md`
+
+Regeln:
+- IF das Guthaben unter dem Preis liegt, THEN SHALL der Automat keine Dose ausgeben und "Zu wenig Geld" melden.
+- WHEN das Guthaben mindestens dem Preis entspricht, SHALL der Automat die Dose ausgeben und den Preis vom Guthaben abziehen.
+- WHEN nach einem Kauf Guthaben übrig bleibt, SHALL der Automat das Restguthaben anzeigen.

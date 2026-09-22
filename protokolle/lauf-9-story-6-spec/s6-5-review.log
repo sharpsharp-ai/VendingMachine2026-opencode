@@ -1,0 +1,29 @@
+
+> reviewer · gpt-5.4-mini
+
+Ich prüfe zuerst den aktuellen Diff und lade dann die betroffenen Dateien komplett, um die Änderungen gegen die Clean-Code- und Akzeptanztest-Regeln zu bewerten.
+→ Read .opencode/skills/akzeptanztest-regeln/SKILL.md
+
+$ git status --short && git diff --name-only --cached && git diff --name-only
+(no output)
+
+Der Arbeitsbaum scheint aktuell leer zu sein. Ich prüfe deshalb den letzten Commit direkt und lese die betroffenen Dateien vollständig.
+$ git show --stat --name-only --format=fuller HEAD
+commit 255d8775910896ee4ef30b5dab864adb81541517
+Author:     seb <seb@improuv.com>
+AuthorDate: Tue Sep 22 02:14:29 2026 +0200
+Commit:     seb <seb@improuv.com>
+CommitDate: Tue Sep 22 02:14:29 2026 +0200
+
+    Story 6: Spec und Szenarien
+
+specs/6-bier-kostet-mehr/spec.md
+src/test/resources/features/bier_kostet_mehr.feature
+
+✱ Glob "src/main/java/**/*.java" in . · 4 matches
+✱ Glob "src/test/java/**/*.java" in . · 10 matches
+✱ Glob "src/test/resources/features/*.feature" in . · 5 matches
+Ich lese jetzt die beiden geänderten Dateien komplett und prüfe das neue Szenario gegen die Akzeptanztest-Regeln.
+→ Read specs/6-bier-kostet-mehr/spec.md
+→ Read src/test/resources/features/bier_kostet_mehr.feature
+Keine wesentlichen Befunde.

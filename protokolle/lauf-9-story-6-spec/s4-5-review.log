@@ -1,0 +1,20 @@
+
+> reviewer · gpt-5.4-mini
+
+Ich lese die betroffenen Dateien vollständig und prüfe danach die Änderungsrisiken gegen die Skill-Checklisten.
+→ Read .opencode/skills/akzeptanztest-regeln/SKILL.md
+→ Read src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+Ich prüfe kurz, ob es außerhalb der beiden Dateien noch relevante Änderungen gibt, damit der Review nichts übersieht.
+
+$ git status --short
+M src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+ M src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+
+Ich prüfe noch, ob der neue Meldungstext schon in den Stories oder Tests vorgesehen ist oder gegen vorhandene Spezifikation läuft.
+✱ Glob "src/test/resources/features/*.feature" in . · 3 matches
+✱ Grep "Zu wenig Geld|Ausverkauft|Bitte Münzen einwerfen" in . · 14 matches
+Die Spec bestätigt den Fall bereits. Ich lese das betroffene Feature, um zu sehen, ob die Änderung dort sauber abgebildet ist oder ob die Regression nur im Code liegt.
+→ Read src/test/resources/features/getraenke_kosten_geld.feature
+→ Read specs/4-getraenke-kosten-geld/spec.md
+Keine wesentlichen Befunde.

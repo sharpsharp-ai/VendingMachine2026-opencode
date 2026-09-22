@@ -1,0 +1,182 @@
+
+> test-autor · gpt-5.4-mini
+
+Ich prüfe zuerst die vorhandenen Feature-Dateien und den aktuellen Stand von Story 7, dann ergänze ich nur die fehlenden Szenarien und verifiziere die Schritte/Tests.
+✱ Glob "specs/*/spec.md" 7 matches
+✱ Glob "src/test/resources/features/*.feature" 5 matches
+→ Skill "akzeptanztest-regeln"
+Ich habe die vorhandenen Schritte geprüft; für Story 7 fehlt noch ein Zeit-Schritt für die FakeClock. Jetzt kläre ich, ob es ihn schon irgendwo gibt, und formuliere dann die neue Feature-Datei minimal passend zur Spec.
+✱ Grep "es ist .* Uhr|FakeClock|clock\.set|LocalTime.of" in src/test/java · 8 matches
+→ Read src/test/resources/features/getraenke_kosten_geld.feature
+→ Read src/test/resources/features/bier_kostet_mehr.feature
+→ Read src/test/java/de/sharpsharp/vendingmachine/FakeClock.java
+Ich ergänze jetzt die neue Feature-Datei für Story 7 und den fehlenden Zeit-Schritt in `VendingMachineSteps.java`. Danach lasse ich den Glossar-Generator und die Cucumber-Szenarien laufen, ohne am Produktivcode zu drehen.
+
+# Todos
+[✓] Vorhandene Story-7-Regeln und Schritte prüfen
+[•] Feature-Datei für Story 7 anlegen und Zeit-Schritt ergänzen
+[ ] Glossar neu erzeugen und Cucumber-Szenarien ausführen
+
+% Patch 2 files
+
+$ scripts/steps-glossar.sh
+specs/glossar.md erzeugt: 17 Einträge
+
+$ mvn -q test -Dtest=RunCucumberTest
+Szenario: Genau 2,00 € geben Bier aus           # src/test/resources/features/bier_kostet_mehr.feature:5
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich die Münze 2 € eingeworfen habe      # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveInsertedCoin(int)
+  ✔ Wenn ich Bier wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Bier im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenario: Zu wenig Guthaben gibt keine Dose     # src/test/resources/features/getraenke_kosten_geld.feature:6
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich die Münze 50 ct einwerfe            # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCoin(int)
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann ist das Ausgabefach leer               # de.sharpsharp.vendingmachine.VendingMachineSteps.theOutputTrayIsEmpty()
+  ✔ Und der Automat meldet "Zu wenig Geld"      # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineReports(java.lang.String)
+  ✔ Und beträgt das Guthaben 50 ct              # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenario: Genaues Guthaben gibt die Dose        # src/test/resources/features/getraenke_kosten_geld.feature:14
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich die Münze 1 € einwerfe              # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCoin(int)
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+  ✔ Und beträgt das Guthaben 0,00 €             # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenario: Restguthaben bleibt nach dem Kauf     # src/test/resources/features/getraenke_kosten_geld.feature:21
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich die Münze 2 € einwerfe              # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCoin(int)
+  ✔ Wenn ich Cola wähle                         # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Cola im Ausgabefach    # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+  ✔ Und beträgt das Guthaben 1,00 €             # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenario: Das Guthaben startet bei null         # src/test/resources/features/guthaben_anzeigen.feature:6
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann beträgt das Guthaben 0,00 €            # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenariogrundriss: Eine Münze erhöht das Guthaben # src/test/resources/features/guthaben_anzeigen.feature:17
+  ✔ Angenommen der Automat ist frisch gestartet   # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich die Münze 50 ct einwerfe             # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCoin(int)
+  ✔ Dann beträgt das Guthaben 50 ct               # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenariogrundriss: Eine Münze erhöht das Guthaben # src/test/resources/features/guthaben_anzeigen.feature:18
+  ✔ Angenommen der Automat ist frisch gestartet   # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich die Münze 1 € einwerfe               # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCoin(int)
+  ✔ Dann beträgt das Guthaben 1,00 €              # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenariogrundriss: Eine Münze erhöht das Guthaben # src/test/resources/features/guthaben_anzeigen.feature:19
+  ✔ Angenommen der Automat ist frisch gestartet   # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Wenn ich die Münze 2 € einwerfe               # de.sharpsharp.vendingmachine.VendingMachineSteps.iInsertCoin(int)
+  ✔ Dann beträgt das Guthaben 2,00 €              # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenario: Vor 16 Uhr fällt kein Bier         # src/test/resources/features/kein_bier_vor_4.feature:5
+  ✔ Angenommen es ist 15:59 Uhr              # de.sharpsharp.vendingmachine.VendingMachineSteps.itIs(int,int)
+  ✔ Und ich die Münze 2 € eingeworfen habe   # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveInsertedCoin(int)
+  ✔ Wenn ich Bier wähle                      # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✘ Dann ist das Ausgabefach leer            # de.sharpsharp.vendingmachine.VendingMachineSteps.theOutputTrayIsEmpty()
+        java.lang.AssertionError: 
+        Expected: is an empty collection
+             but: <[BEER]>
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+        	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+        	at de.sharpsharp.vendingmachine.VendingMachineSteps.theOutputTrayIsEmpty(VendingMachineSteps.java:71)
+        	at ✽.ist das Ausgabefach leer(file:///private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-10/src/test/resources/features/kein_bier_vor_4.feature:9)
+  ↷ Und der Automat meldet "Kein Bier vor 4" # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineReports(java.lang.String)
+  ↷ Und beträgt das Guthaben 2,00 €          # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenario: Ab 16 Uhr fällt Bier               # src/test/resources/features/kein_bier_vor_4.feature:13
+  ✔ Angenommen es ist 16:00 Uhr              # de.sharpsharp.vendingmachine.VendingMachineSteps.itIs(int,int)
+  ✔ Und ich die Münze 2 € eingeworfen habe   # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveInsertedCoin(int)
+  ✔ Wenn ich Bier wähle                      # de.sharpsharp.vendingmachine.VendingMachineSteps.iSelect(de.sharpsharp.vendingmachine.Drink)
+  ✔ Dann liegt eine Dose Bier im Ausgabefach # de.sharpsharp.vendingmachine.VendingMachineSteps.oneCanLiesInTheOutputTray(de.sharpsharp.vendingmachine.Drink)
+
+Szenariogrundriss: Der Preis steht an jedem Fach # src/test/resources/features/preis_anzeigen.feature:12
+  ✔ Angenommen der Automat ist frisch gestartet  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Cola 1,00 €                      # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenariogrundriss: Der Preis steht an jedem Fach # src/test/resources/features/preis_anzeigen.feature:13
+  ✔ Angenommen der Automat ist frisch gestartet  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Orange 1,00 €                    # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenariogrundriss: Der Preis steht an jedem Fach # src/test/resources/features/preis_anzeigen.feature:14
+  ✔ Angenommen der Automat ist frisch gestartet  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Zitrone 1,00 €                   # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenariogrundriss: Der Preis steht an jedem Fach # src/test/resources/features/preis_anzeigen.feature:15
+  ✔ Angenommen der Automat ist frisch gestartet  # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Dann kostet Bier 1,00 €                      # de.sharpsharp.vendingmachine.VendingMachineSteps.theDrinkCosts(de.sharpsharp.vendingmachine.Drink,int)
+
+Szenario: Abbruch legt das Guthaben in die Münzrückgabe # src/test/resources/features/wechselgeld.feature:6
+  ✔ Angenommen der Automat ist frisch gestartet         # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich die Münze 1 € eingeworfen habe              # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveInsertedCoin(int)
+  ✔ Wenn ich Abbruch drücke                             # de.sharpsharp.vendingmachine.VendingMachineSteps.iCancel()
+  ✔ Dann befindet sich 1 € in der Münzrückgabe          # de.sharpsharp.vendingmachine.VendingMachineSteps.theCoinReturnContains(int)
+  ✔ Und beträgt das Guthaben 0,00 €                     # de.sharpsharp.vendingmachine.VendingMachineSteps.theCreditIs(int)
+
+Szenario: Die Münzrückgabe wird geleert         # src/test/resources/features/wechselgeld.feature:13
+  ✔ Angenommen der Automat ist frisch gestartet # de.sharpsharp.vendingmachine.VendingMachineSteps.theMachineIsFreshlyStarted()
+  ✔ Und ich die Münze 1 € eingeworfen habe      # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveInsertedCoin(int)
+  ✔ Und ich Abbruch gedrückt habe               # de.sharpsharp.vendingmachine.VendingMachineSteps.iHaveCancelled()
+  ✔ Wenn ich die Münzrückgabe leere             # de.sharpsharp.vendingmachine.VendingMachineSteps.iEmptyTheCoinReturn()
+  ✔ Dann ist die Münzrückgabe leer              # de.sharpsharp.vendingmachine.VendingMachineSteps.theCoinReturnIsEmpty()
+[ERROR] Tests run: 16, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.547 s <<< FAILURE! -- in de.sharpsharp.vendingmachine.RunCucumberTest
+[ERROR] de.sharpsharp.vendingmachine.RunCucumberTest.Vor 16 Uhr fällt kein Bier -- Time elapsed: 0.009 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: is an empty collection
+     but: <[BEER]>
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:6)
+	at de.sharpsharp.vendingmachine.VendingMachineSteps.theOutputTrayIsEmpty(VendingMachineSteps.java:71)
+	at ✽.ist das Ausgabefach leer(file:///private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-10/src/test/resources/features/kein_bier_vor_4.feature:9)
+
+[ERROR] Failures: 
+[ERROR]   RunCucumberTest.Vor 16 Uhr fällt kein Bier 
+Expected: is an empty collection
+     but: <[BEER]>
+[ERROR] Tests run: 16, Failures: 1, Errors: 0, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.6.0:test (default-test) on project getraenkeautomat: There are test failures.
+[ERROR] 
+[ERROR] See /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-10/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+
+Die neue Szenario-Datei ist drin, und der Lauf zeigt genau den erwarteten roten Randfall: vor 16 Uhr wird noch Bier ausgegeben, weil der Automat die Uhrzeit aktuell nicht berücksichtigt. Ich sammele jetzt die exakten Änderungen und formuliere die Abgabe knapp.
+→ Read src/test/resources/features/kein_bier_vor_4.feature
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java [offset=1, limit=95]
+
+# Todos
+[✓] Vorhandene Story-7-Regeln und Schritte prüfen
+[✓] Feature-Datei für Story 7 anlegen und Zeit-Schritt ergänzen
+[✓] Glossar neu erzeugen und Cucumber-Szenarien ausführen
+
+Geändert:
+- `src/test/resources/features/kein_bier_vor_4.feature`
+- `src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java`
+
+Szenarien:
+- Vor 16 Uhr fällt kein Bier
+- Ab 16 Uhr fällt Bier
+
+`mvn -q test -Dtest=RunCucumberTest`:
+- rot, weil `Vor 16 Uhr fällt kein Bier` noch mit `BEER` durchläuft
+
+Regeln:
+1. ja - genau
+2. ja - deklarativ
+3. ja - namen
+4. ja - sichtbar
+5. ja - konkret
+6. ja - passend
+7. ja - isoliert
+8. ja - wiederverwendet
+9. ja - abgedeckt
+10. ja - sparsam
+11. ja - VendingMachine

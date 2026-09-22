@@ -1,0 +1,26 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich prüfe kurz die bestehende Spec-Struktur und schreibe dann nur die neue Story-2-Spec unter `specs/`.
+→ Read specs/1-alles-umsonst/spec.md
+✱ Glob "specs/**/spec.md" 1 match
+Die Story 2 hat genau ein Akzeptanzkriterium, also wird die Spec entsprechend schlank. Ich lege jetzt `specs/2-preis-anzeigen/spec.md` an.
+
+# Todos
+[✓] Story 2 in `specs/stories.md` identifizieren und Kurzname ableiten
+[•] `specs/2-preis-anzeigen/spec.md` anlegen oder überarbeiten
+[ ] Inhalt gegen Story und Glossar prüfen
+
+% Patch 1 file
+Die Spec ist angelegt. Ich prüfe nur noch kurz den Inhalt gegen die Vorgaben und schließe dann ab.
+
+# Todos
+[✓] Story 2 in `specs/stories.md` identifizieren und Kurzname ableiten
+[✓] `specs/2-preis-anzeigen/spec.md` anlegen oder überarbeiten
+[✓] Inhalt gegen Story und Glossar prüfen
+
+→ Read specs/2-preis-anzeigen/spec.md
+`specs/2-preis-anzeigen/spec.md`
+
+Regel:
+- Der Automat SHALL an jedem Fach den Preis hinter dem Namen zeigen.

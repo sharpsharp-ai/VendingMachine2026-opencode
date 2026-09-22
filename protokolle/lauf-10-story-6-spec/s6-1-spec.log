@@ -1,0 +1,20 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich prüfe kurz die bestehenden Specs für Aufbau und Namen und lege dann nur `specs/6-bier-kostet-mehr/spec.md` an.
+→ Read specs/5-wechselgeld/spec.md
+✱ Glob "specs/*/spec.md" 5 matches
+Die Story 6 hat genau ein Akzeptanzkriterium, daher formuliere ich eine einzelne EARS-Regel mit der Schwelle `2,00 €` und lasse den Rest unverändert.
+% Patch 1 file
+Ich korrigiere noch die Zeichenkodierung, damit die Spec normal lesbar ist.
+% Patch 1 file
+✗ Read specs/6-bier-kostet-mehr/spec.md failed
+Error: Cannot read binary file: /private/tmp/claude-501/-Users-seb-Desktop-Claude-Arbeitsfolder-sharp-sharp-AI-taskforce-compax-csd-mit-opencode-vending-machine-1shot/2c7dcd54-741d-4d20-95fd-7cb3f5f99a67/scratchpad/lauf-10/specs/6-bier-kostet-mehr/spec.md
+Die Datei ist beim letzten Patch kaputtgegangen; ich setze sie sauber neu auf.
+% Patch 1 file
+% Patch 1 file
+→ Read specs/6-bier-kostet-mehr/spec.md
+`specs/6-bier-kostet-mehr/spec.md`
+
+Regeln:
+- WHEN der Kunde Bier wählt und das Guthaben mindestens 2,00 € beträgt, SHALL der Automat eine Dose Bier ausgeben.

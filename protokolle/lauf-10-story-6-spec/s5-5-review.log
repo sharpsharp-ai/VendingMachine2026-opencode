@@ -1,0 +1,15 @@
+
+> reviewer · gpt-5.4-mini
+
+Ich lese die betroffenen Dateien komplett und gleiche die Änderung gegen die Clean-Code- und Testregeln ab.
+→ Read src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+→ Read .opencode/skills/akzeptanztest-regeln/SKILL.md
+Ich prüfe noch, ob es bereits ein Vokabular oder bestehende Regeln zur Münzrückgabe gibt, damit ich keine Scheinschwäche melde.
+✱ Grep "coinReturn|takeCoins|Münzrückgabe|Münzen zurück|cancel\(" in . · 60 matches
+✱ Grep "cancel|coin return|return.*coin|Münze" in specs · 11 matches
+Ich prüfe die betroffene Story und die zugehörigen Schritte auf Regelverstöße, weil die Anforderung ausdrücklich auch die Szenarien einschließt.
+→ Read src/test/resources/features/wechselgeld.feature
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineSteps.java
+→ Read specs/5-wechselgeld/spec.md
+Keine wesentlichen Befunde.

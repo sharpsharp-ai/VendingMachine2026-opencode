@@ -1,0 +1,16 @@
+
+> reviewer · gpt-5.4-mini
+
+Ich prüfe jetzt die beiden geänderten Dateien vollständig plus die Gherkin-Regeln, um die Änderung gegen die Review-Checkliste und die Story-Regeln zu halten.
+→ Read src/main/java/de/sharpsharp/vendingmachine/VendingMachine.java
+→ Read .opencode/skills/akzeptanztest-regeln/SKILL.md
+→ Read src/test/java/de/sharpsharp/vendingmachine/VendingMachineTest.java
+Ich prüfe noch, ob die Änderung unbeabsichtigt an Szenarien oder `Main` vorbeigeht, weil die Review-Regeln das explizit verlangen.
+✱ Glob "src/test/resources/features/*.feature" 4 matches
+→ Read src/main/java/de/sharpsharp/vendingmachine/Main.java
+Ich ziehe die aktuellen Feature-Dateien kurz gegen die Akzeptanztest-Regeln, um sicherzugehen, dass der Review nichts übersieht.
+→ Read src/test/resources/features/preis_anzeigen.feature
+→ Read src/test/resources/features/guthaben_anzeigen.feature
+→ Read src/test/resources/features/wechselgeld.feature
+→ Read src/test/resources/features/getraenke_kosten_geld.feature
+Keine wesentlichen Befunde.

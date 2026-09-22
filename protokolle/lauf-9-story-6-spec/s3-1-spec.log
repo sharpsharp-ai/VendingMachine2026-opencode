@@ -1,0 +1,16 @@
+
+> spec-autor · gpt-5.4-mini
+
+Ich prüfe kurz die vorhandenen Specs, damit die neue Datei stilistisch und inhaltlich dazu passt, dann lege ich `specs/3-guthaben-anzeigen/spec.md` an.
+→ Read specs/1-alles-umsonst/spec.md
+→ Read specs/2-preis-anzeigen/spec.md
+✱ Glob "specs/*/spec.md" in . · 2 matches
+Die Story hat zwei Akzeptanzkriterien, also formuliere ich zwei EARS-Regeln und lege die neue Spec jetzt an.
+% Patch 1 file
+Die Datei ist angelegt. Ich prüfe noch kurz den Inhalt, damit ich dir nur den Pfad und die Regeln zurückgebe.
+→ Read specs/3-guthaben-anzeigen/spec.md
+`specs/3-guthaben-anzeigen/spec.md`
+
+Regeln:
+- `Der Automat SHALL das Guthaben im Display als "Guthaben: x,xx €" anzeigen.`
+- `WHEN eine zulässige Münze eingeworfen wird, SHALL der Automat sie dem Guthaben hinzufügen.`

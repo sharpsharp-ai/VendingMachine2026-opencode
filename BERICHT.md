@@ -29,6 +29,8 @@ Dann je Story, jeder Command in einer neuen Session (`/new`), nach jedem Schritt
 /review                              Befunde annehmen oder verwerfen
 ```
 
+Zwei Stellen, an denen `gpt-5.4-mini` in den Abnahmeläufen regelmäßig daneben lag und der Mensch gefragt ist: bei Story 6 ließ die Spec dreimal das „nur“ der Karte weg (kein Preis 2,00 €, kein Verbot darunter), bei Story 3 dreht `scripts/bis-gruen.sh` für das schon grüne erste Szenario fünf Leerrunden und meldet „nicht grün“, obwohl das Szenario grün ist. Beides steht in Abschnitt 2.
+
 Wer lieber tippt als klickt: `scripts/bis-gruen.sh "Ein Getränk wählen"` ruft den Implementierer bis zu fünfmal.
 Wer opencode das Setup machen lassen will: Text aus `PROMPT.md` einfügen (Weg B der Teilnehmer-Probe).
 
@@ -36,22 +38,61 @@ Wer opencode das Setup machen lassen will: Text aus `PROMPT.md` einfügen (Weg B
 
 | Kriterium | Stand |
 |---|---|
-| Zwei vollständige Läufe (Stories 1 bis 7) hintereinander, frischer Stand, ohne Änderung am Setup, jede Story erfüllt alle Bewertungspunkte | TODO-LAEUFE |
-| Teilnehmer-Probe ohne Improvisation | Erfüllt. `protokolle/probe-1/`: Weg A (README wörtlich, frische Clones von GitHub): Start rot wie angekündigt, `/spec 1`, `/akzeptanztest 1`, `scripts/bis-gruen.sh "Ein Getränk wählen"` grün in einer Runde, `mvn -q verify` Exit 0, `/review` mit zwei Befunden. Weg B (Text aus `PROMPT.md` in vanilla opencode, `--auto` steht für das Bestätigen im TUI): vier Befehle ausgeführt, `EXIT=1`, Paket identisch installiert, Schlusssatz wörtlich. TODO-PROBE2 |
+| Zwei vollständige Läufe (Stories 1 bis 7) hintereinander, frischer Stand, ohne Änderung am Setup, jede Story erfüllt alle Bewertungspunkte | **Nicht erreicht.** Drei Läufe auf frischem Stand: Lauf 8 nach 12 Iterationen, Lauf 9 und 10 nach Iteration 13 ohne Änderung dazwischen. Fachlich liefen Story 1 bis 5 und 7 in Lauf 9 sauber durch (verify grün, HTTP richtig, `Main` unverändert). Was fehlt: Story 6 bleibt in Lauf 8 und 9 bei der Spec stehen (Bier kostet weiter 1,00 €), und der rote Unit-Test ist nicht in jeder Runde einzeln sichtbar (Lauf 8: 5 von 6 Runden, Lauf 9: 2 von 6). Lauf 10: Story 1 bis 5 und 7 sauber, roter Test in allen 6 Runden sichtbar, Story 6 wie zuvor, dazu fehlt in der Story-2-Spec die zweite Kartenregel. Am nächsten dran: Lauf 10 mit zwei roten Zellen von 56. Tabellen unten |
+| Teilnehmer-Probe ohne Improvisation | Erfüllt. `protokolle/probe-1/`: Weg A (README wörtlich, frische Clones von GitHub): Start rot wie angekündigt, `/spec 1`, `/akzeptanztest 1`, `scripts/bis-gruen.sh "Ein Getränk wählen"` grün in einer Runde, `mvn -q verify` Exit 0, `/review` mit zwei Befunden. Weg B (Text aus `PROMPT.md` in vanilla opencode, `--auto` steht für das Bestätigen im TUI): vier Befehle ausgeführt, `EXIT=1`, Paket identisch installiert, Schlusssatz wörtlich. Wiederholt auf dem Endstand (`protokolle/probe-2/`, 02:49 bis 02:54, frische Clones von GitHub mit Iteration 13): Weg A wieder ohne Improvisation durch, `bis-gruen.sh` grün nach Runde 1, `mvn -q verify` Exit 0, `/review` ohne Befund; Weg B Setup fertig, `EXIT=1`, Paket identisch |
 | Jedes Gate hat nachweislich ausgelöst | Erfüllt. `protokolle/gates/gates.log`: Methode mit 25 Zeilen (Checkstyle), Javalin-Import in `VendingMachine` (ArchUnit), roter Unit-Test (Surefire), ungetestete Klasse (JaCoCo unter 80 %); jedes Mal Exit 1, danach wieder grün |
 | H1 bis H4 getestet, Ergebnis im Bericht, Setup passt dazu | Erfüllt, Abschnitt 3 |
 | `training-start` enthält keine Story-Lösungen und baut grün | Erfüllt mit einer Absicht: kompiliert, alle Tests grün bis auf das eine Szenario „Ein Getränk wählen", das nach Sebastians Vorgabe rot wartet (`mvn -q verify` endet deshalb mit Exit 1, `mvn -q test -Dtest=WebTest` grün). Keine Story-Regel ist gebaut: `selectDrink`, `insertCoin`, `cancel` sind leer, `price` liefert null |
 | Folien, README, PROMPT, Bericht liegen vor, alles committet und gepusht | Erfüllt: `folien/folien.pdf` und `.pptx` (Kopien `~/Downloads/opencode-folien.*`), `README.md`, `PROMPT.md`, `BERICHT.md`; Paket-Repo öffentlich auf GitHub, `training-start` gepusht. Miro: die elf Folien liegen als Bilder im vorgegebenen Frame (Board `uXjVHnldClU=`, Frame `3458764684499712615`, drei Reihen), nichts Vorhandenes verändert; Bild-IDs und Positionen in `protokolle/miro/miro-upload.md` |
 
-Bewertung je Story in den beiden Abnahmeläufen (Protokolle `protokolle/lauf-7/` und `protokolle/lauf-8/`, je Story Spec, Szenarien, Implementierung je Szenario, verify, Review, HTTP):
+Bewertung je Story (Protokolle `protokolle/lauf-8-story-4-geisterdatei/`, `protokolle/lauf-9-story-6-spec/`, `protokolle/lauf-10-story-6-spec/`; je Story Spec, Szenarien, Implementierung je Szenario, verify, Review, HTTP; `lauf.log` mit den Meilensteinen).
+Spalten: verify Exit 0 ohne Gate-Änderung; roter Unit-Test einzeln sichtbar, bevor Code kam; der Implementierer ließ Features, Specs, Schritte, `pom.xml`, `config/` unverändert; kein Testwert, kein Sonderfall, nichts in `Main`; Feature nach den elf Regeln; Spec in EARS passend zu den Szenarien; Review; Oberfläche per HTTP.
 
-TODO-STORYTABELLE
+**Lauf 8**, Stand nach 12 Iterationen (Start `ba00527`, Paket `221cb21`), 01:23 bis 01:50:
+
+| Story | verify | Test zuerst rot | keine Fremdänderung | kein Hack | Feature | Spec | Review | HTTP | Anmerkung |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 Alles umsonst | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | keine Befunde | ✓ | |
+| 2 Preis anzeigen | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | keine Befunde | ✓ | Konstante `PRICE = 100` |
+| 3 Guthaben anzeigen | ✓ | ✗ | ✓ | ✓ | ✓ | ✓ | keine Befunde | ✓ | Szenario 2: Test und Code in einem Patch. Szenario 1 war schon grün, `bis-gruen.sh` drehte trotzdem fünf Runden, weil sein Kriterium der ganze Build ist |
+| 4 Getränke kosten Geld | ✓ | ✓ | ✓ | ✗ | ✓ | ✓ | fand den Sonderfall | ✗ | Test-Autor löschte die Story-1-Datei, ihre Kopie in `target` lief weiter: `if (credit == 0)` gibt die Dose umsonst. Ursache von Iteration 13 |
+| 5 Wechselgeld | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | keine Befunde | (✗) | Story-5-Punkte grün, rot nur die Folge aus Story 4 |
+| 6 Bier kostet mehr | ✓ | – | ✓ | ✓ | ✗ | ✗ | keine Befunde | ✗ | Spec: nur „WHEN Guthaben ≥ 2,00 € SHALL ausgeben“, weder Preis noch Verbot darunter; ein Szenario; kein Code nötig, Bier kostet weiter 1,00 € |
+| 7 Kein Bier vor 4 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Magic Number 16:00 | ✓ | `clock.now()`, `FakeClock` im Schritt, `Main` unverändert; HTTP rot nur aus 4 und 6 |
+
+**Lauf 9**, Stand nach Iteration 13 (Start `740d047`, Paket `221cb21`), 01:50 bis 02:20:
+
+| Story | verify | Test zuerst rot | keine Fremdänderung | kein Hack | Feature | Spec | Review | HTTP | Anmerkung |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 Alles umsonst | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | keine Befunde | ✓ | Bestand wird mit abgezogen |
+| 2 Preis anzeigen | ✓ | ✗ | ✓ | ✓ | ✓ | ✓ | zwei berechtigte | ✓ | `return 100` statt Konstante; Reviewer: „benannte Konstante“, Testname |
+| 3 Guthaben anzeigen | ✓ | ✗ | ✓ | ✓ | ✓ | ✓ | keine Befunde | ✓ | Test- und Code-Patch nacheinander, erst dann Maven |
+| 4 Getränke kosten Geld | ✓ | ✗ | ✓ | ✓ | ✓ | ✓ | keine Befunde | ✓ | Kein Sonderfall mehr: `credit < price(drink)`; veralteter Test angepasst und benannt. Rot war nur der veraltete Test, nicht ein neuer |
+| 5 Wechselgeld | ✓ | ✗ | ✓ | ✓ | ✓ | ✓ | keine Befunde | ✓ | Test und Code in einem Patch |
+| 6 Bier kostet mehr | ✓ | – | ✓ | ✓ | ✗ | ✗ | keine Befunde | ✗ | Wie Lauf 8, diesmal ohne Geisterdatei: das „nur“ der Karte fällt in der Spec weg |
+| 7 Kein Bier vor 4 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | keine Befunde | ✓ | HTTP rot nur aus Story 6 |
+
+**Lauf 10**, gleicher Stand wie Lauf 9, ohne Änderung dazwischen, 02:20 bis 02:49:
+
+| Story | verify | Test zuerst rot | keine Fremdänderung | kein Hack | Feature | Spec | Review | HTTP | Anmerkung |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 Alles umsonst | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | keine Befunde | ✓ | |
+| 2 Preis anzeigen | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | keine Befunde | ✓ | Spec hat nur „Preis hinter dem Namen“, die Kartenregel „alle 1,00 €“ fehlt; der Szenariogrundriss prüft sie trotzdem für alle vier Getränke |
+| 3 Guthaben anzeigen | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | keine Befunde | ✓ | Szenario 1 schon grün, wieder fünf Leerrunden von `bis-gruen.sh` |
+| 4 Getränke kosten Geld | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ein berechtigter | ✓ | Kein Sonderfall, Preise aus einer Map; Reviewer: Meldungstexte als Konstanten, Meldung nach Kauf zurücksetzen |
+| 5 Wechselgeld | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | keine Befunde | ✓ | |
+| 6 Bier kostet mehr | ✓ | – | ✓ | ✓ | ✗ | ✗ | keine Befunde | ✗ | Wie Lauf 8 und 9 |
+| 7 Kein Bier vor 4 | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | keine Befunde | ✓ | `beerIsNotAllowedYet` über `clock.now()`, `Main` unverändert; HTTP rot nur aus Story 6 |
+
+Was in allen drei Läufen stand: `mvn -q verify` war nach jeder Story grün, kein Implementierer änderte Feature, Schritt, Spec oder Gate (Whitelist), `Main` blieb in allen drei Läufen unangetastet, Story 7 lief jedes Mal über die Uhr aus dem Konstruktor. Story 6 scheiterte dreimal an derselben Stelle, der Spec.
 
 Beobachtungen, die keine Bewertungspunkte verletzen, aber morgen Gesprächsstoff sind:
-- Der Implementierer schreibt Unit-Test und Code manchmal in einem Patch und lässt den Test dann erst laufen; das Szenario war davor immer rot (Log des Test-Autors). Nur in manchen Läufen steht der rote Unit-Test einzeln im Protokoll.
+- Der rote Unit-Test hängt an der Disziplin des Modells. Über die Läufe 4 bis 10 stand er in 26 von 36 Implementierer-Runden einzeln im Protokoll (Lauf 8: 5 von 6, Lauf 9: 2 von 6, Lauf 10: 6 von 6; über die Läufe 4 bis 10: 26 von 36); sonst schrieb der Implementierer Test und Code in einem Patch oder in zwei Patches ohne Testlauf dazwischen. Die Vorgabe steht dreimal im Paket (Command Schritt 3, Skill Schleife 1, Checkliste 1). Das Szenario selbst war jedes Mal rot, bevor Code kam (Log des Test-Autors). Ein Zaun statt Appell: den Implementierer in zwei Rollen teilen, eine darf nur `VendingMachineTest.java` schreiben, `bis-gruen.sh` prüft dazwischen, dass der Test rot ist, dann erst die Code-Rolle. Das ändert das Rollenmodell des Trainings, deshalb nicht gebaut.
+- `scripts/bis-gruen.sh` nimmt als Kriterium den ganzen Build. Ist das erste Szenario einer Story schon grün und ein späteres rot, dreht es fünf Leerrunden und meldet „nicht grün“ (Lauf 8, Story 3). Besser: erst prüfen, ob das benannte Szenario grün ist, dann anhalten. Nicht mehr geändert.
 - Story 5: die Szenarien verlangen nur „50 ct landet in der Münzrückgabe"; der Implementierer zahlt das Guthaben als einen Betrag aus, nicht als Münzen. Regel 5 (Grenzwerte, konkrete Beispiele) in Aktion: was das Szenario nicht verlangt, baut niemand.
 - Story 3: manche Läufe legen das Guthaben in die Meldung („Guthaben: 0,50 €" per `message()`), andere prüfen `credit()`. Die Karte sagt beides, das Glossar sagt `credit()`.
-- Der Reviewer meldet auch bei sauberem Code oft einen Punkt (Bestand reduzieren, `refused()` ungenutzt, Javadoc veraltet); bei eingebautem Smell fand er drei von vier (nicht das `System.out.println`), `protokolle/review-test/`.
+- Der Reviewer meldet auch bei sauberem Code manchmal einen Punkt (Bestand reduzieren, `refused()` ungenutzt, Javadoc veraltet); in Lauf 8 und 9 meist „keine wesentlichen Befunde“, und die Befunde, die kamen, waren berechtigt: der Sonderfall in Story 4 (Lauf 8), `return 100` ohne Konstante (Lauf 9), Magic Number 16:00. Bei eingebautem Smell fand er drei von vier (nicht das `System.out.println`), `protokolle/review-test/`. Er prüft Code gegen Spec, nicht Spec gegen Karte: die Lücke in Story 6 sah er nicht.
+- Story 6 bleibt in drei Läufen (8, 9, 10) bei der Spec stehen: aus „Bier fällt nur bei einem Guthaben von mindestens 2,00 €“ wird eine Erlaubnis, das Verbot darunter und der Preis 2,00 € fehlen, das eine Szenario ist mit dem alten Code grün. In Lauf 4 und 5 hatte der Spec-Autor beides. Der Prüfpunkt dafür ist der Mensch nach `/spec` („Stimmen die Regeln?“, Folie 7). Wer es dem Modell leichter machen will: die Karte wie bei Story 2 ausschreiben („Bier kostet 2,00 €“, „unter 2,00 € fällt kein Bier: Zu wenig Geld“) oder im Skill ears-regeln: „nur wenn X“ sind zwei Regeln, Erlaubnis und Verbot.
 
 ## 3. Hypothesen H1 bis H4, opencode 1.18.30
 
@@ -77,6 +118,7 @@ Skript und Ausgabe: `protokolle/h-tests/`.
 - Java 17, Mockito im Start, JUnit 4 (ArchUnit-JUnit-4-Runner, Cucumber-JUnit-4).
 - Verifikationsmodell `openai/gpt-5.4-mini` statt Sonnet 4.5: Sebastians Vorgabe, Budget.
 - Kein Ollama, kein lokales Qwen: Sebastians Vorgabe für heute.
+- Iteration 13 liegt über dem Budget von 12, bewusst: die Ursache war ein Build-Problem (Geisterdatei in `target`), kein Prompt-Problem, die Änderung ist eine Zeile im Runner und mit einer gepflanzten Geisterdatei geprüft. Der Stand davor ist in beiden Repos als Tag `iteration-12` markiert; `git revert 740d047` auf `training-start` nimmt sie zurück. Danach keine weitere Iteration mehr, auch nicht für Story 6 und den roten Test.
 
 ## 5. Offene Risiken
 
@@ -88,7 +130,7 @@ Skript und Ausgabe: `protokolle/h-tests/`.
    - Das Modell ignoriert `AGENTS.md` oder den Skill: die Commands tragen Skill, Spec, Glossar und Schritte schon im Prompt, die Rechte in `opencode.json` halten unabhängig vom Modell. Was trotzdem falsch ist, fängt `mvn -q verify`.
    - Qwen ruft gar keine Tools auf: dann bleibt die Pipeline als Ablauf für Menschen (Spec, Szenarien, roter Test, Code, Review), das Modell liefert Text zum Einfügen.
 2. **Kontextgröße.** Jeder Command lädt alle Specs oder alle Feature-Dateien. Bei Story 7 sind das einige tausend Tokens, für Qwen mit 32k oder mehr unkritisch, bei kleineren Fenstern die Feature-Dateien im Command auf die aktuelle beschränken.
-3. **Story 4 hebt Story 1 auf.** Der Test-Autor darf dann das alte Szenario ändern (Iteration 6). Ob Qwen das tut, ist offen; sonst von Hand: Szenario "Ein Getränk wählen" bekommt ein Guthaben.
+3. **Story 4 hebt Story 1 auf.** Der Test-Autor darf das alte Szenario ändern oder löschen (Iteration 6); `gpt-5.4-mini` löschte in Lauf 7 bis 10 jedes Mal die ganze Datei und sagte das. Bis Iteration 13 lief die gelöschte Datei aus `target/test-classes` weiter (Maven räumt gelöschte Ressourcen nicht ab), seither liest der Runner aus `src`. Ob Qwen das Szenario anpasst, ist offen; sonst von Hand: Szenario „Ein Getränk wählen“ bekommt ein Guthaben.
 4. **Story 7 braucht eine Uhr.** Seit Iteration 10 steckt sie im Startstand: `VendingMachine(Clock)`, `Main` gibt `LocalTime::now` hinein, die Schritte eine `FakeClock`. In Lauf 8 stellte der Test-Autor die Zeit mit `clock.set(LocalTime.of(15, 59))`, der Implementierer fragte `clock.now()`, `Main` blieb unverändert. Ohne diese Naht (Lauf 4 und 5) erfand der Test-Autor einen Setter am Automaten oder verweigerte den Zeitschritt.
 5. **CI läuft nur auf `main`.** Der Branch `training-start` selbst hat keinen CI-Lauf; in den Team-Repos wird er zu `main` gepusht, dann läuft die CI, anfangs rot (ein Szenario wartet).
 6. **Commits macht der Mensch.** Keine Rolle darf `git add` oder `git commit` (Whitelist). Nach jedem grünen Szenario selbst committen, sonst frisst `/undo` oder ein Neustart Arbeit.
@@ -104,5 +146,7 @@ Skript und Ausgabe: `protokolle/h-tests/`.
 | Folien | `folien/folien.pdf`, `folien/folien.pptx`, Quelle `folien/folien.py`; Kopien in `~/Downloads`; auf dem Miro-Board im Frame `3458764684499712615`, erste Folie: https://miro.com/app/board/uXjVHnldClU=/?moveToWidget=3458764684509393595 |
 | Baseline Story 1 ohne Paket | `baseline/` (Prompt, zwei Läufe, Diff) |
 | Verifikationsläufe | `protokolle/lauf-*/` (je Story: Spec, Szenarien, Implementierung je Szenario, verify, Review, HTTP-Prüfung), `protokolle/probe-*/` (Teilnehmer-Probe) |
-| Iterationen am Setup | `ITERATIONEN.md` |
+| Iterationen am Setup | `ITERATIONEN.md`; Tag `iteration-12` in beiden Repos markiert den Stand vor der 13. |
+| Prüfgeschirr (Läufe und Proben wiederholen) | `protokolle/geschirr/` mit README |
+| Endstand der drei Abnahmeläufe | Branches `lauf-8`, `lauf-9`, `lauf-10` im Start-Repo, je mit Paket, Specs, Szenarien und Code aller sieben Stories |
 | Konzept Team-Repos | `taskforce/compax_csd_mit_opencode/trainings-repos.md` |
