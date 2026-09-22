@@ -18,7 +18,7 @@ nur zwei Dokumente weit unterhalb (y ≈ 50 000), keine Überlappung.
 | 5 | folie-05.png | 3458764684509393734 | 2000 | 5900 |
 | 6 | folie-06.png | 3458764684509393774 | 8400 | 5900 |
 | 7 | folie-07.png | 3458764684509393801 | 14800 | 5900 |
-| 8 | folie-08.png | 3458764684509393850 | 21200 | 5900 |
+| 8 | folie-08.png | 3458764684518951653 (Iteration 14, 06:01; die alte Fassung 3458764684509393850 mit dem Story-7-Beispiel liegt darunter, bis Sebastian das Löschen freigibt) | 21200 | 5900 |
 | 9 | folie-09.png | 3458764684509393872 | 2000 | 9800 |
 | 10 | folie-10.png | 3458764684509393894 | 8400 | 9800 |
 | 11 | folie-11.png | 3458764684509393909 | 14800 | 9800 |
