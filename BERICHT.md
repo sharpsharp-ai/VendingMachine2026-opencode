@@ -118,6 +118,7 @@ Skript und Ausgabe: `protokolle/h-tests/`.
 - Java 17, Mockito im Start, JUnit 4 (ArchUnit-JUnit-4-Runner, Cucumber-JUnit-4).
 - Verifikationsmodell `openai/gpt-5.4-mini` statt Sonnet 4.5: Sebastians Vorgabe, Budget.
 - Kein Ollama, kein lokales Qwen: Sebastians Vorgabe für heute.
+- Iteration 14 kam nach den Läufen auf Sebastians Wunsch: Beispiele in Skills, Command, Glossar und Folie 8, die eine Story lösten (Kein Bier vor 4, Preise, Zu wenig Geld), sind durch Beispiele ohne Story ersetzt (leeres Fach meldet „Ausverkauft“, jedes Fach startet mit fünf Dosen). Die Läufe 8 bis 10 liefen noch mit den Story-Beispielen; die Skills haben Story 7 (Uhr) und Story 4 vermutlich erleichtert. Ein Lauf auf dem neuen Stand steht aus.
 - Iteration 13 liegt über dem Budget von 12, bewusst: die Ursache war ein Build-Problem (Geisterdatei in `target`), kein Prompt-Problem, die Änderung ist eine Zeile im Runner und mit einer gepflanzten Geisterdatei geprüft. Der Stand davor ist in beiden Repos als Tag `iteration-12` markiert; `git revert 740d047` auf `training-start` nimmt sie zurück. Danach keine weitere Iteration mehr, auch nicht für Story 6 und den roten Test.
 
 ## 5. Offene Risiken

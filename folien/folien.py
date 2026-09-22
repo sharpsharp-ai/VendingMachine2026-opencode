@@ -53,14 +53,13 @@ FOLIEN = [
     dict(titel="Spec Driven Development", art="code", text=(
         "Erst die Regel, dann das Beispiel, dann der Code.\n"
         "Die Feature-Datei ist der ausführbare Teil der Spec.\n\n"
-        "EARS      WHILE es vor 16:00 Uhr ist, WHEN der Kunde Bier wählt,\n"
-        "          SHALL der Automat keine Dose ausgeben und \"Kein Bier vor 4\" melden.\n\n"
-        "Gherkin   Szenario: Vor 16 Uhr fällt kein Bier\n"
-        "            Angenommen es ist 15:59 Uhr\n"
-        "            Und ich habe 2 € eingeworfen\n"
-        "            Wenn ich Bier wähle\n"
+        "EARS      WHILE das Fach leer ist, WHEN der Kunde es wählt,\n"
+        "          SHALL der Automat keine Dose ausgeben und \"Ausverkauft\" melden.\n\n"
+        "Gherkin   Szenario: Aus einem leeren Fach fällt nichts\n"
+        "            Angenommen das Fach Cola ist leer\n"
+        "            Wenn ich Cola wähle\n"
         "            Dann ist das Ausgabefach leer\n"
-        "            Und der Automat meldet \"Kein Bier vor 4\"")),
+        "            Und der Automat meldet \"Ausverkauft\"")),
     dict(titel="Elf Regeln für Akzeptanztests", art="nummern", punkte=[
         "Ein Szenario, ein Verhalten: genau ein Wenn, keins bei einer Regel ohne Auslöser.",
         "Deklarativ: was, nicht wie. Keine Knöpfe, Klicks, IDs, HTTP.",

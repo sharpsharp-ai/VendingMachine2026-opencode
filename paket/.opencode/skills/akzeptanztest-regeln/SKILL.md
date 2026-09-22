@@ -20,35 +20,32 @@ description: Die elf Regeln für gute Akzeptanztests in Gherkin, mit Beispiel un
 
 ```gherkin
 # language: de
-Funktionalität: Kein Bier vor 4
-  Bier gibt es erst ab 16:00 Uhr.
+Funktionalität: Ausverkauft
+  Ein leeres Fach gibt nichts her und sagt das.
 
-  Szenario: Vor 16 Uhr fällt kein Bier
-    Angenommen es ist 15:59 Uhr
-    Und ich habe 2 € eingeworfen
-    Wenn ich Bier wähle
+  Szenario: Aus einem leeren Fach fällt nichts
+    Angenommen das Fach Cola ist leer
+    Wenn ich Cola wähle
     Dann ist das Ausgabefach leer
-    Und der Automat meldet "Kein Bier vor 4"
-    Und das Guthaben ist 2,00 €
+    Und der Automat meldet "Ausverkauft"
 
-  Szenario: Ab 16 Uhr fällt Bier
-    Angenommen es ist 16:00 Uhr
-    Und ich habe 2 € eingeworfen
-    Wenn ich Bier wähle
-    Dann liegt eine Dose Bier im Ausgabefach
+  Szenario: Aus einem vollen Fach fällt die Dose
+    Angenommen der Automat ist frisch gestartet
+    Wenn ich Cola wähle
+    Dann liegt eine Dose Cola im Ausgabefach
 ```
 
 Eine Regel ohne Auslöser, als Szenariogrundriss mit Beispielen:
 
 ```gherkin
-  Szenariogrundriss: Der Preis steht am Fach
+  Szenariogrundriss: Jedes Fach startet voll
     Angenommen der Automat ist frisch gestartet
-    Dann kostet <Getränk> <Preis>
+    Dann liegen im Fach <Getränk> 5 Dosen
 
     Beispiele:
-      | Getränk | Preis  |
-      | Cola    | 1,00 € |
-      | Bier    | 2,00 € |
+      | Getränk |
+      | Cola    |
+      | Bier    |
 ```
 
 Schritte dazu, in `VendingMachineSteps.java`. Angenommen bedient den Automaten und stellt so den Zustand her,
@@ -76,9 +73,9 @@ public void theMachineSays(String text) {
     assertThat(machine.message(), is(text));
 }
 
-@Dann("kostet {drink} {betrag}")
-public void theDrinkCosts(Drink drink, int cents) {
-    assertThat(machine.price(drink), is(cents));
+@Dann("liegen im Fach {drink} {int} Dosen")
+public void theSlotHolds(Drink drink, int cans) {
+    assertThat(machine.stock(drink), is(cans));
 }
 ```
 

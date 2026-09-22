@@ -28,7 +28,7 @@ Vorgehen:
    WHILE wird Angenommen, WHEN wird Wenn, SHALL wird Dann. IF wird ein eigenes Fehlerfall-Szenario.
    Eine Regel ohne WHEN (Immer) bekommt ein Szenario ohne Wenn: Angenommen und Dann.
 2. Datei `src/test/resources/features/<kurzname>.feature`, erste Zeile `# language: de`. Gibt es die Datei, ergänze fehlende Szenarien. Vorhandene Szenarien bleiben, wie sie sind, auch ihr Titel.
-   Ausnahme: Hebt die neue Story eine alte Regel auf (Story 4 hebt das freie Getränk auf), dann gilt das alte Szenario nicht mehr. Ändere es so, dass es zur neuen Regel passt, oder lösche es, und schreibe das in die Antwort.
+   Ausnahme: Hebt die neue Story eine alte Regel auf, dann gilt das alte Szenario nicht mehr. Ändere es so, dass es zur neuen Regel passt, oder lösche es, und schreibe das in die Antwort.
 3. Schritte: erst die aus dem Glossar wiederverwenden. Fehlt ein Wort, schreibe den neuen Schritt in `VendingMachineSteps.java`. Fehlt dafür eine Methode am Automaten, benutze sie so, wie sie heißen soll; der Implementierer baut sie.
    Zeit und Zufall kommen von außen in den Konstruktor (`Clock`, Beispiel im Skill mit `FakeClock`), nie über einen Setter am Automaten.
    Angenommen-Schritte stellen den Zustand her, indem sie den Automaten bedienen. Sie prüfen nichts. Beispiel im Skill: ein leeres Fach.

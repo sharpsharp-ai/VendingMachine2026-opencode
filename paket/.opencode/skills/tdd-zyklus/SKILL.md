@@ -13,13 +13,13 @@ description: Rot, Grün, Aufräumen: ein Szenario mit Unit-Tests in kleinen Schr
 5. Fertig: `mvn -q verify` ohne Ausgabe.
 
 ## Regeln
-- Ein Test prüft eine Regel. Sein Name nennt die Regel: `zuWenigGeldGibtKeineDose`.
+- Ein Test prüft eine Regel. Sein Name nennt die Regel: `leeresFachGibtKeineDose`.
 - Kompiliert das Projekt nicht, verlangen die Schritte eine Methode oder ein Interface, das fehlt. Erst das bauen, dann Rot.
-- Keine Testwerte im Produktivcode. Wer `if (drink == COLA) return 100` schreibt, statt Preise zu speichern, rät.
+- Keine Testwerte im Produktivcode. Wer `if (drink == COLA) return 3` schreibt, statt den Bestand zu führen, rät.
 - Zeit, Zufall, Mechanik: Interface im Produktivcode, Mock oder Fake im Test. Mockito ist da.
 - Meldungen wörtlich aus der Story.
 - Tests, die grün waren, bleiben grün. Bricht einer, ist der Code falsch, nicht der Test.
-  Einzige Ausnahme, der veraltete Test: die Story hebt eine alte Regel auf (der Test-Autor hat das alte Szenario gelöscht oder geändert, etwa das freie Getränk), oder ein Test schreibt das Fehlen von etwas fest, das die Story einführt (etwa „noch kein Preis").
+  Einzige Ausnahme, der veraltete Test: die Story hebt eine alte Regel auf (der Test-Autor hat das alte Szenario gelöscht oder geändert), oder ein Test schreibt das Fehlen von etwas fest, das die Story einführt.
   Dann gilt der alte Unit-Test nicht mehr: ändere oder lösche ihn und nenne das in der Antwort. Nie einen Sonderfall im Code bauen, nur damit er grün bleibt, und nie einen Wert in `Main` festnageln.
 
 ## Checkliste vor "fertig", je Punkt ja oder nein
